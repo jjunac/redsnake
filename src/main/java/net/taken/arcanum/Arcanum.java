@@ -1,7 +1,7 @@
 package net.taken.arcanum;
 
-import net.taken.arcanum.parser.ArcanumLexer;
-import net.taken.arcanum.parser.ArcanumParser;
+import net.taken.arcacum.parser.ArcanumLexer;
+import net.taken.arcacum.parser.ArcanumParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
