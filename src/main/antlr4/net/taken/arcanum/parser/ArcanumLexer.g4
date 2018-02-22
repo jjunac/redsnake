@@ -9,7 +9,9 @@ ENDL
     | '\n'
     ;
 
+POW: '**';
 MULT: '*';
 DIV: '/';
 PLUS: '+';
 MINUS: '-';
+MOD: '%';

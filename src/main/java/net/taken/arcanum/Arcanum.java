@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Arcanum {
 
     public static void main(String[] args) throws IOException {
-        CharStream inputStream = CharStreams.fromString("1+2");
+        CharStream inputStream = CharStreams.fromString("1+2**2*-3");
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
