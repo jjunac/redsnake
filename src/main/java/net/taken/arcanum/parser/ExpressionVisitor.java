@@ -2,33 +2,25 @@ package net.taken.arcanum.parser;
 
 import net.taken.arcacum.parser.ArcanumParser;
 import net.taken.arcacum.parser.ArcanumParserBaseVisitor;
-import org.antlr.v4.runtime.tree.ErrorNode;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.RuleNode;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class ExpressionVisitor extends ArcanumParserBaseVisitor {
-    public Object visitExpression(ArcanumParser.ExpressionContext ctx) {
-        return null;
+public class ExpressionVisitor extends ArcanumParserBaseVisitor<Integer> {
+
+    @Override
+    public Integer visitNumber(ArcanumParser.NumberContext ctx) {
+        return Integer.valueOf(ctx.NUMBER().getText());
     }
 
-    public Object visitOperator(ArcanumParser.OperatorContext ctx) {
-        return null;
+    @Override
+    public Integer visitBinaryExpr(ArcanumParser.BinaryExprContext ctx) {
+        int l = visit(ctx.left);
+        int r = visit(ctx.right);
+        switch (ctx.op.getType()) {
+            case ArcanumParser.PLUS: return l + r;
+            case ArcanumParser.MINUS: return l - r;
+            case ArcanumParser.MULT: return l * r;
+            case ArcanumParser.DIV: return l / r;
+            default: throw new IllegalArgumentException("Unknown operator " + ctx.op);
+        }
     }
 
-    public Object visit(ParseTree parseTree) {
-        return null;
-    }
-
-    public Object visitChildren(RuleNode ruleNode) {
-        return null;
-    }
-
-    public Object visitTerminal(TerminalNode terminalNode) {
-        return null;
-    }
-
-    public Object visitErrorNode(ErrorNode errorNode) {
-        return null;
-    }
 }

@@ -3,11 +3,7 @@ parser grammar ArcanumParser;
 options { tokenVocab = ArcanumLexer; }
 
 expression
-    : expression operator expression EOF
-    | NUMBER
+    : l=expression op=('+'|'-'|'*'|'/') r=expression       #binaryExpr
+    | NUMBER                                                #number
     ;
 
-operator
-    : PLUS
-    | MINUS
-    ;
