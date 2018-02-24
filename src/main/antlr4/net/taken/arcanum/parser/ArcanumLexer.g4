@@ -1,17 +1,27 @@
 lexer grammar ArcanumLexer;
 
-NUMBER
-    : ('0'..'9')+ ('.'('0'..'9')+)?
+INT: DIGIT+ ;
+FLOAT
+    : DIGIT+ '.' DIGIT*
+    | '.' DIGIT+
     ;
 
-ENDL
-    : '\r\n'
-    | '\n'
-    ;
+ID: LETTER (ID | DIGIT | '_')* ;
 
-POW: '**';
-MULT: '*';
-DIV: '/';
-PLUS: '+';
-MINUS: '-';
-MOD: '%';
+ENDL: '\r'?'\n';
+
+POW: '**' ;
+MULT: '*' ;
+DIV: '/' ;
+PLUS: '+' ;
+MINUS: '-' ;
+MOD: '%' ;
+EQ: '=' ;
+
+WS: [ \t]+ -> skip ;
+
+// =============================
+// Common fragments
+// =============================
+fragment LETTER: 'a'..'z' | 'A'..'Z' ;
+fragment DIGIT: '0'..'9' ;
