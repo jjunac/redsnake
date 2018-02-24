@@ -2,7 +2,7 @@ package net.taken.arcanum.domain;
 
 public class ArcaInteger extends ArcaObject {
 
-    int value;
+    private int value;
 
     public ArcaInteger() {
         super(new ArcaMetaClass("Integer", "Object"));
@@ -21,7 +21,7 @@ public class ArcaInteger extends ArcaObject {
     }
 
     @Override
-    public String toS() {
+    public String toString() {
         return Integer.toString(value);
     }
 }

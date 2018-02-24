@@ -1,16 +1,26 @@
 package net.taken.arcanum.parser;
 
-import net.taken.arcanum.domain.ArcaInteger;
-import net.taken.arcanum.domain.ArcaObject;
+import net.taken.arcanum.domain.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
 
 public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
-    private Map<String, ArcaObject> variables = new HashMap<>();
+    private ArcaKernel kernel;
+    private Map<ArcaString, ArcaObject> variables;
+    private Map<ArcaString, Function<ArcaList, ArcaObject>> functions;
+
+    public ArcanumVisitor() {
+        kernel = new ArcaKernel();
+        variables = new HashMap<>();
+        functions = new HashMap<>();
+        functions.putAll(kernel.getBuiltInFunctions());
+    }
 
     @Override
     public ArcaObject visitProgram(ProgramContext ctx) {
@@ -18,19 +28,8 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     }
 
     @Override
-    public ArcaObject visitPrint(PrintContext ctx) {
-        System.out.println(variables.get(ctx.ID().getText()).toS());
-        return null;
-    }
-
-    @Override
-    public ArcaObject visitAssign(AssignContext ctx) {
-        return variables.put(ctx.ID().getText(), visit(ctx.expression()));
-    }
-
-    @Override
-    public ArcaObject visitBlank(BlankContext ctx) {
-        return null;
+    public ArcaObject visitInt(IntContext ctx) {
+        return new ArcaInteger(Integer.valueOf(ctx.INT().getText()));
     }
 
     @Override
@@ -72,7 +71,22 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     }
 
     @Override
-    public ArcaObject visitInt(IntContext ctx) {
-        return new ArcaInteger(Integer.valueOf(ctx.INT().getText()));
+    public ArcaObject visitAssignment(AssignmentContext ctx) {
+        return variables.put(visitVar(ctx.var()), visit(ctx.expr()));
+    }
+
+    @Override
+    public ArcaObject visitCall(CallContext ctx) {
+        return functions.get(visitVar(ctx.var())).apply(visitParams(ctx.params()));
+    }
+
+    @Override
+    public ArcaString visitVar(VarContext ctx) {
+        return new ArcaString(ctx.ID().getText());
+    }
+
+    @Override
+    public ArcaList visitParams(ParamsContext ctx) {
+        return new ArcaList(ctx.expr().stream().map(this::visit).collect(Collectors.toList()));
     }
 }

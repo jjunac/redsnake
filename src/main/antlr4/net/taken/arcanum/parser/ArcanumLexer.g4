@@ -10,13 +10,22 @@ ID: LETTER (ID | DIGIT | '_')* ;
 
 ENDL: '\r'?'\n';
 
+COMMA: ',' ;
+L_PAREN: '(' ;
+R_PAREN: ')' ;
+
+
+// =============================
+// Operators
+// =============================
+
 POW: '**' ;
 MULT: '*' ;
 DIV: '/' ;
 PLUS: '+' ;
 MINUS: '-' ;
 MOD: '%' ;
-EQ: '=' ;
+ASSIGN: '=' ;
 
 WS: [ \t]+ -> skip ;
 

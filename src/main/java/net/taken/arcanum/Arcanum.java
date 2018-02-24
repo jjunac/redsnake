@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Arcanum {
 
     public static void main(String[] args) throws IOException {
-        CharStream inputStream = CharStreams.fromString("a=5\na\n");
+        CharStream inputStream = CharStreams.fromString("a=5\nprint(a,51+18)\n");
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
