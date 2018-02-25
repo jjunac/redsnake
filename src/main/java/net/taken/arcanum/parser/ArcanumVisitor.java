@@ -23,13 +23,8 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     }
 
     @Override
-    public ArcaObject visitProgram(ProgramContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public ArcaObject visitInt(IntContext ctx) {
-        return new ArcaInteger(Integer.valueOf(ctx.INT().getText()));
+    public ArcaInteger visitInt(IntContext ctx) {
+        return new ArcaInteger(Integer.valueOf(ctx.getText()));
     }
 
     @Override
