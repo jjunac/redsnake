@@ -11,9 +11,9 @@ import static net.taken.arcanum.parser.ArcanumParser.*;
 
 public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
-    private ArcaKernel kernel;
-    private Map<ArcaString, ArcaObject> variables;
-    private Map<ArcaString, Function<ArcaList, ArcaObject>> functions;
+    ArcaKernel kernel;
+    Map<ArcaString, ArcaObject> variables;
+    Map<ArcaString, Function<ArcaList, ArcaObject>> functions;
 
     public ArcanumVisitor() {
         kernel = new ArcaKernel();
@@ -29,6 +29,7 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
     @Override
     public ArcaObject visitBinaryExpr(BinaryExprContext ctx) {
+        // FIXME: for now they only are integer
         int l = ((ArcaInteger)visit(ctx.l)).getValue();
         int r = ((ArcaInteger)visit(ctx.r)).getValue();
         int res;
@@ -71,13 +72,18 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     }
 
     @Override
+    public ArcaObject visitParenExpr(ParenExprContext ctx) {
+        return visit(ctx.expr());
+    }
+
+    @Override
     public ArcaObject visitCall(CallContext ctx) {
         return functions.get(visitVar(ctx.var())).apply(visitParams(ctx.params()));
     }
 
     @Override
     public ArcaString visitVar(VarContext ctx) {
-        return new ArcaString(ctx.ID().getText());
+        return new ArcaString(ctx.getText());
     }
 
     @Override
