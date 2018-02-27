@@ -78,7 +78,7 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
     @Override
     public ArcaObject visitCall(CallContext ctx) {
-        return functions.get(visitVar(ctx.var())).apply(visitParams(ctx.params()));
+        return functions.get(visitVar(ctx.fct)).apply(visitParams(ctx.args));
     }
 
     @Override

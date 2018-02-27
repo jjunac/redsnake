@@ -2,10 +2,14 @@ package net.taken.arcanum.parser;
 
 import com.sun.istack.internal.NotNull;
 import net.taken.arcanum.domain.ArcaInteger;
+import net.taken.arcanum.domain.ArcaList;
+import net.taken.arcanum.domain.ArcaObject;
 import net.taken.arcanum.domain.ArcaString;
 import org.antlr.v4.runtime.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Function;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +24,7 @@ class ArcanumVisitorTest {
         visitor = new ArcanumVisitor();
     }
 
-    private <U extends ParserRuleContext, V> U mockContext(Class<U> type, V value) {
+    private <U extends ParserRuleContext> U mockContext(Class<U> type, String value) {
         U ctx = mock(type);
         doReturn(value).when(ctx).getText();
         return ctx;
@@ -148,6 +152,23 @@ class ArcanumVisitorTest {
         ArcanumParser parser = initParser("-(2)**2");
         ArcaInteger actual = (ArcaInteger) visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(-4), actual);
+    }
+
+    @Test
+    void shouldCallFunctionWhenCallKernelFunction() {
+        Function<ArcaList, ArcaObject> fct = (Function<ArcaList, ArcaObject>) mock(Function.class);
+        when(fct.apply(any(ArcaList.class))).thenReturn(new ArcaInteger(42));
+        visitor.functions.put(new ArcaString("unitTestFunction"), fct);
+        CallContext ctx = mock(CallContext.class);
+        ctx.fct = mockContext(VarContext.class, "unitTestFunction");
+        ctx.args = mockNode(ParamsContext.class, new ArcaList());
+        assertEquals(new ArcaInteger(42), visitor.visitCall(ctx));
+    }
+
+    @Test
+    void shouldReturnListWhenVisitParams() {
+        ParamsContext ctx = mock(ParamsContext.class);
+        when(ctx.expr()).thenReturn()
     }
 
     @Test

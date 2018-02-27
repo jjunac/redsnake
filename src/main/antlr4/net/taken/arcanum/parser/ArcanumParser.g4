@@ -32,8 +32,8 @@ designator
     ;
 
 call
-    : var '(' params ')'
-    | var params
+    : fct=var '(' args=params ')'
+    | fct=var args=params
     ;
 
 var
