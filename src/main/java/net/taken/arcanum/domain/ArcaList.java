@@ -10,10 +10,10 @@ public class ArcaList extends ArcaObject {
     private List<ArcaObject> value;
 
     public ArcaList() {
-        this(new LinkedList());
+        this(new LinkedList<>());
     }
 
-    public ArcaList(List value) {
+    public ArcaList(List<ArcaObject> value) {
         super(new ArcaMetaClass("List", "Object"));
         this.value = value;
     }
@@ -22,7 +22,7 @@ public class ArcaList extends ArcaObject {
         return value;
     }
 
-    public void setValue(List value) {
+    public void setValue(List<ArcaObject> value) {
         this.value = value;
     }
 

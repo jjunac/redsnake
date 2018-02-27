@@ -168,7 +168,7 @@ class ArcanumVisitorTest {
     @Test
     void shouldReturnListWhenVisitParams() {
         ParamsContext ctx = mock(ParamsContext.class);
-        when(ctx.expr()).thenReturn()
+        when(ctx.expr()).thenReturn(new ArcaList(new ))
     }
 
     @Test
