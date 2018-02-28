@@ -58,7 +58,7 @@ public class Arcanum {
                 BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
                 ArcaObject res = parseProgram(CharStreams.fromString(is.readLine()));
                 if(!res.isNull()) {
-                    System.out.println(res);
+                    System.out.println("=> " + res);
                 }
             }
         } catch (IOException e) {
