@@ -3,6 +3,7 @@ package net.taken.arcanum.parser;
 import net.taken.arcanum.domain.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -68,7 +69,9 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
     @Override
     public ArcaObject visitAssignment(AssignmentContext ctx) {
-        return variables.put(visitVar(ctx.var()), visit(ctx.expr()));
+        ArcaObject value = visit(ctx.expr());
+        variables.put(visitVar(ctx.var()), value);
+        return value;
     }
 
     @Override
@@ -77,7 +80,23 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     }
 
     @Override
-    public ArcaObject visitCall(CallContext ctx) {
+    public ArcaObject visitVarDesignator(VarDesignatorContext ctx) {
+        // TODO handle error
+        ArcaString var = visitVar(ctx.var());
+        ArcaObject res = variables.get(var);
+        if (res == null) {
+            res = functions.get(var).apply(new ArcaList());
+        }
+        return res;
+    }
+
+    @Override
+    public ArcaObject visitCallWithoutParams(CallWithoutParamsContext ctx) {
+        return functions.get(visitVar(ctx.fct)).apply(new ArcaList());
+    }
+
+    @Override
+    public ArcaObject visitCallWithParams(CallWithParamsContext ctx) {
         return functions.get(visitVar(ctx.fct)).apply(visitParams(ctx.args));
     }
 

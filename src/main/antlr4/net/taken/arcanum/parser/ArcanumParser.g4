@@ -22,18 +22,19 @@ expr
     | var '=' expr                          #assignment
 
     // Miscellaneous
-    | '(' expr ')'                          #parenExpr
     | designator                            #designatorExpr
+    | '(' expr ')'                          #parenExpr
     ;
 
 designator
-    : var
-    | call
+    : call									#callDesignator
+    | var									#varDesignator
     ;
 
 call
-    : fct=var '(' args=params ')'
-    | fct=var args=params
+    : fct=var '(' ')'						#callWithoutParams
+    | fct=var '(' args=params ')'			#callWithParams
+    | fct=var args=params					#callWithParams
     ;
 
 var
@@ -41,5 +42,5 @@ var
     ;
 
 params
-    : (expr (',' expr)*)?
+    : expr (',' expr)*
     ;

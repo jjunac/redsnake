@@ -31,6 +31,10 @@ public class ArcaList extends ArcaObject {
         this.value = value;
     }
 
+    public int size() {
+        return value.size();
+    }
+
     @Override
     public String toString() {
         return value.stream().map(ArcaObject::toString).collect(Collectors.joining(" "));
