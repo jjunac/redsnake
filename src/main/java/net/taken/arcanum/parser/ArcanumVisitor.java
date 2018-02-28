@@ -68,7 +68,9 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
     @Override
     public ArcaObject visitAssignment(AssignmentContext ctx) {
-        return variables.put(visitVar(ctx.var()), visit(ctx.expr()));
+        ArcaObject value = visit(ctx.expr());
+        variables.put(visitVar(ctx.var()), value);
+        return value;
     }
 
     @Override
