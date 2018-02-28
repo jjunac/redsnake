@@ -1,6 +1,7 @@
 package net.taken.arcanum.parser;
 
 import com.sun.istack.internal.NotNull;
+import edu.emory.mathcs.backport.java.util.Arrays;
 import net.taken.arcanum.domain.ArcaInteger;
 import net.taken.arcanum.domain.ArcaList;
 import net.taken.arcanum.domain.ArcaObject;
@@ -9,6 +10,8 @@ import org.antlr.v4.runtime.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Function;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
@@ -168,7 +171,13 @@ class ArcanumVisitorTest {
     @Test
     void shouldReturnListWhenVisitParams() {
         ParamsContext ctx = mock(ParamsContext.class);
-        when(ctx.expr()).thenReturn(new ArcaList(new ))
+        List<ExprContext> expr = new LinkedList<>();
+        expr.add(mockNode(ExprContext.class, new ArcaInteger(24)));
+        expr.add(mockNode(ExprContext.class, new ArcaString("yHBpQI")));
+        expr.add(mockNode(ExprContext.class, new ArcaList(new ArcaInteger(881))));
+        when(ctx.expr()).thenReturn(expr);
+        assertEquals(new ArcaList(new ArcaInteger(24), new ArcaString("yHBpQI"), new ArcaList(new ArcaInteger(881))),
+                visitor.visitParams(ctx));
     }
 
     @Test
