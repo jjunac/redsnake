@@ -30,10 +30,11 @@ public class Arcanum {
             printHelp();
             System.exit(0);
         }
+
+        arcanumVisitor = new ArcanumVisitor();
         if (cmd.getArgList().size() == 0) {
             lauchShell();
         }
-        arcanumVisitor = new ArcanumVisitor();
     }
 
     private void initOptions() {
@@ -71,7 +72,7 @@ public class Arcanum {
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
         ParseTree t = parser.program();
-        return new ArcanumVisitor().visit(t);
+        return arcanumVisitor.visit(t);
     }
 
     public static void main(String[] args) throws ParseException {

@@ -1,7 +1,6 @@
 package net.taken.arcanum.parser;
 
 import com.sun.istack.internal.NotNull;
-import edu.emory.mathcs.backport.java.util.Arrays;
 import net.taken.arcanum.domain.ArcaInteger;
 import net.taken.arcanum.domain.ArcaList;
 import net.taken.arcanum.domain.ArcaObject;
@@ -58,6 +57,12 @@ class ArcanumVisitorTest {
         ctx.e = mockNode(IntContext.class, new ArcaInteger(e));
         ctx.op = mockToken(operator);
         return ctx;
+    }
+
+    private Function<ArcaList, ArcaObject> mockArcaFunction(ArcaObject value) {
+        Function<ArcaList, ArcaObject> fct = (Function<ArcaList, ArcaObject>) mock(Function.class);
+        when(fct.apply(any(ArcaList.class))).thenReturn(value);
+        return fct;
     }
 
     private ArcanumParser initParser(@NotNull String s) {
@@ -158,14 +163,48 @@ class ArcanumVisitorTest {
     }
 
     @Test
-    void shouldCallFunctionWhenCallKernelFunction() {
-        Function<ArcaList, ArcaObject> fct = (Function<ArcaList, ArcaObject>) mock(Function.class);
-        when(fct.apply(any(ArcaList.class))).thenReturn(new ArcaInteger(42));
+    void shouldReturnVariableValueWhenVisitVarDesignator() {
+        VarDesignatorContext ctx = mock(VarDesignatorContext.class);
+        VarContext testvar = mockContext(VarContext.class, "testvar");
+        when(ctx.var()).thenReturn(testvar);
+        visitor.variables.put(new ArcaString("testvar"), new ArcaInteger(223));
+        assertEquals(new ArcaInteger(223), visitor.visitVarDesignator(ctx));
+    }
+
+    @Test
+    void shouldCallFunctionWhenVisitVarDesignatorAndVarDoesntExist() {
+        VarDesignatorContext ctx = mock(VarDesignatorContext.class);
+        VarContext testvar = mockContext(VarContext.class, "testFunction");
+        when(ctx.var()).thenReturn(testvar);
+        visitor.functions.put(new ArcaString("testFunction"), mockArcaFunction(new ArcaInteger(22)));
+        assertEquals(new ArcaInteger(22), visitor.visitVarDesignator(ctx));
+    }
+
+    @Test
+    void shouldCallFunctionWhenVisitCallWithParams() {
+        Function<ArcaList, ArcaObject> fct = mockArcaFunction(new ArcaInteger(42));
         visitor.functions.put(new ArcaString("unitTestFunction"), fct);
-        CallContext ctx = mock(CallContext.class);
+        CallWithParamsContext ctx = mock(CallWithParamsContext.class);
         ctx.fct = mockContext(VarContext.class, "unitTestFunction");
         ctx.args = mockNode(ParamsContext.class, new ArcaList());
-        assertEquals(new ArcaInteger(42), visitor.visitCall(ctx));
+        assertEquals(new ArcaInteger(42), visitor.visitCallWithParams(ctx));
+    }
+
+    @Test
+    void shouldCallFunctionWhenVisitCallWithoutParams() {
+        Function<ArcaList, ArcaObject> fct = mockArcaFunction(new ArcaInteger(107));
+        visitor.functions.put(new ArcaString("unitTestFunction"), fct);
+        CallWithoutParamsContext ctx = mock(CallWithoutParamsContext.class);
+        ctx.fct = mockContext(VarContext.class, "unitTestFunction");
+        assertEquals(new ArcaInteger(107), visitor.visitCallWithoutParams(ctx));
+    }
+
+    @Test
+    void shouldCallFunctionWhenVisitVarDesignatorButVarDoesntExist() {
+
+        ArcanumParser parser = initParser("-(2)**2");
+        ArcaInteger actual = (ArcaInteger) visitor.visit(parser.expr());
+        assertEquals(new ArcaInteger(-4), actual);
     }
 
     @Test
