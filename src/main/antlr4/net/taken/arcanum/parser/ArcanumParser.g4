@@ -3,20 +3,43 @@ parser grammar ArcanumParser;
 options { tokenVocab = ArcanumLexer; }
 
 program
-    : (statement)* ;
+    : (stmt)* ;
 
-statement
-    : ID ENDL                       #print
-    | ID '=' expression ENDL        #assign
-    | ENDL                          #blank
+stmt
+    : expr (ENDL expr)*
+    | ENDL
     ;
 
-expression
-    : <assoc=right> l=expression op=POW r=expression    #binaryExpr
-    | op='-' e=expression                               #unaryExpr
-    | l=expression op=('*'|'/'|'%') r=expression        #binaryExpr
-    | l=expression op=('+'|'-') r=expression            #binaryExpr
-    | INT                                               #int
-//    | FLOAT                                             #float
+expr
+    // Primary type
+    : INT                                   #int
+
+    // Operator sort by priority
+    | <assoc=right> l=expr op=POW r=expr    #binaryExpr
+    | op='-' e=expr                         #unaryExpr
+    | l=expr op=('*'|'/'|'%') r=expr        #binaryExpr
+    | l=expr op=('+'|'-') r=expr            #binaryExpr
+    | var '=' expr                          #assignment
+
+    // Miscellaneous
+    | '(' expr ')'                          #parenExpr
+    | designator                            #designatorExpr
     ;
 
+designator
+    : var
+    | call
+    ;
+
+call
+    : fct=var '(' args=params ')'
+    | fct=var args=params
+    ;
+
+var
+    : ID
+    ;
+
+params
+    : (expr (',' expr)*)?
+    ;

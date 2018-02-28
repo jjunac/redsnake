@@ -12,7 +12,12 @@ public class ArcaObject {
         this.metaClass = metaClass;
     }
 
-    public String toS() {
+    public boolean isNull() {
+        return false;
+    }
+
+    @Override
+    public String toString() {
         return metaClass.name;
     }
 }
