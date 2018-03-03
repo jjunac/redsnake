@@ -33,6 +33,7 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     @SafeVarargs
     public final void registerVisitor(ArcanumParserBaseVisitor<? extends ArcaObject> visitor,
                                       Class<? extends ParserRuleContext>... contexts) {
+        // FIXME all mock are exploding
         Arrays.stream(contexts).forEach(ctx -> visitors.put(ctx, visitor));
     }
 
