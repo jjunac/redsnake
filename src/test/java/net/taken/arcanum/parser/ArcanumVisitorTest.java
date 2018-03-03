@@ -224,4 +224,13 @@ class ArcanumVisitorTest {
         VarContext varContext = mockContext(VarContext.class, "testvar");
         assertEquals(new ArcaString("testvar"), visitor.visitVar(varContext));
     }
+
+    @Test
+    void shouldCallRightVisitorWhenCallVisit() {
+        ExpressionVisitor expressionVisitor = mock(ExpressionVisitor.class);
+        when(expressionVisitor.visitBinaryExpr(any(BinaryExprContext.class))).thenReturn(new ArcaInteger(481));
+        visitor.registerVisitor(expressionVisitor, BinaryExprContext.class);
+        BinaryExprContext ctx = new BinaryExprContext(mock(ExprContext.class));
+        assertEquals(new ArcaInteger(481), visitor.visit(ctx));
+    }
 }

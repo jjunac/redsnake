@@ -1,7 +1,10 @@
 package net.taken.arcanum.parser;
 
 import net.taken.arcanum.domain.*;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,68 +18,27 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     ArcaKernel kernel;
     Map<ArcaString, ArcaObject> variables;
     Map<ArcaString, Function<ArcaList, ArcaObject>> functions;
+    Map<Class<? extends ParseTree>, ArcanumParserBaseVisitor<? extends ArcaObject>> visitors;
 
     public ArcanumVisitor() {
         kernel = new ArcaKernel();
         variables = new HashMap<>();
         functions = new HashMap<>();
         functions.putAll(kernel.getBuiltInFunctions());
+        visitors = new HashMap<>();
+        registerVisitor(new ExpressionVisitor(), IntContext.class, BinaryExprContext.class, UnaryExprContext.class,
+                AssignmentContext.class, ParenExprContext.class);
+    }
+
+    @SafeVarargs
+    public final void registerVisitor(ArcanumParserBaseVisitor<? extends ArcaObject> visitor,
+                                      Class<? extends ParserRuleContext>... contexts) {
+        Arrays.stream(contexts).forEach(ctx -> visitors.put(ctx, visitor));
     }
 
     @Override
-    public ArcaInteger visitInt(IntContext ctx) {
-        return new ArcaInteger(Integer.valueOf(ctx.getText()));
-    }
-
-    @Override
-    public ArcaObject visitBinaryExpr(BinaryExprContext ctx) {
-        // FIXME: for now they only are integer
-        int l = ((ArcaInteger)visit(ctx.l)).getValue();
-        int r = ((ArcaInteger)visit(ctx.r)).getValue();
-        int res;
-        switch (ctx.op.getType()) {
-            case PLUS:
-                res = l + r;
-                break;
-            case MINUS:
-                res = l - r;
-                break;
-            case MULT:
-                res = l * r;
-                break;
-            case DIV:
-                res = l / r;
-                break;
-            case MOD:
-                res = l % r;
-                break;
-            case POW:
-                res = (int) Math.pow(l, r);
-                break;
-            default: throw new IllegalArgumentException("Unknown operator " + ctx.op);
-        }
-        return new ArcaInteger(res);
-    }
-
-    @Override
-    public ArcaObject visitUnaryExpr(UnaryExprContext ctx) {
-        int e = ((ArcaInteger)visit(ctx.e)).getValue();
-        switch (ctx.op.getType()) {
-            case MINUS: return new ArcaInteger(-e);
-            default: throw new IllegalArgumentException("Unknown operator " + ctx.op);
-        }
-    }
-
-    @Override
-    public ArcaObject visitAssignment(AssignmentContext ctx) {
-        ArcaObject value = visit(ctx.expr());
-        variables.put(visitVar(ctx.var()), value);
-        return value;
-    }
-
-    @Override
-    public ArcaObject visitParenExpr(ParenExprContext ctx) {
-        return visit(ctx.expr());
+    public ArcaObject visit(ParseTree tree) {
+        return tree.accept(visitors.get(tree.getClass()));
     }
 
     @Override
