@@ -15,18 +15,13 @@ import static net.taken.arcanum.parser.ArcanumParser.*;
 
 public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
-    ArcaKernel kernel;
-    Map<ArcaString, ArcaObject> variables;
-    Map<ArcaString, Function<ArcaList, ArcaObject>> functions;
+    ArcaEnvironment environment;
     Map<Class<? extends ParseTree>, ArcanumParserBaseVisitor<? extends ArcaObject>> visitors;
 
     public ArcanumVisitor() {
-        kernel = new ArcaKernel();
-        variables = new HashMap<>();
-        functions = new HashMap<>();
-        functions.putAll(kernel.getBuiltInFunctions());
+        environment = new ArcaEnvironment();
         visitors = new HashMap<>();
-        registerVisitor(new ExpressionVisitor(), IntContext.class, BinaryExprContext.class, UnaryExprContext.class,
+        registerVisitor(new ExpressionVisitor(environment), IntContext.class, BinaryExprContext.class, UnaryExprContext.class,
                 AssignmentContext.class, ParenExprContext.class);
     }
 
@@ -50,21 +45,21 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     public ArcaObject visitVarDesignator(VarDesignatorContext ctx) {
         // TODO handle error
         ArcaString var = visitVar(ctx.var());
-        ArcaObject res = variables.get(var);
+        ArcaObject res = environment.getVariable(var);
         if (res == null) {
-            res = functions.get(var).apply(new ArcaList());
+            res = environment.resolveFunction(var).apply(new ArcaList());
         }
         return res;
     }
 
     @Override
     public ArcaObject visitCallWithoutParams(CallWithoutParamsContext ctx) {
-        return functions.get(visitVar(ctx.fct)).apply(new ArcaList());
+        return environment.resolveFunction(visitVar(ctx.fct)).apply(new ArcaList());
     }
 
     @Override
     public ArcaObject visitCallWithParams(CallWithParamsContext ctx) {
-        return functions.get(visitVar(ctx.fct)).apply(visitParams(ctx.args));
+        return environment.resolveFunction(visitVar(ctx.fct)).apply(visitParams(ctx.args));
     }
 
     @Override
