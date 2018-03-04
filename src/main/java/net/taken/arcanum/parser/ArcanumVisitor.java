@@ -39,7 +39,11 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
 
     @Override
     public ArcaObject visit(ParseTree tree) {
-        return tree.accept(visitors.get(tree.getClass()));
+        return visit(tree, tree.getClass());
+    }
+
+    ArcaObject visit(ParseTree tree, Class<? extends ParseTree> contextClass) {
+        return tree.accept(visitors.get(contextClass));
     }
 
     @Override

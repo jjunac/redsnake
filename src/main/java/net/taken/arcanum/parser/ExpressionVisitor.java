@@ -2,10 +2,16 @@ package net.taken.arcanum.parser;
 
 import net.taken.arcanum.domain.ArcaInteger;
 import net.taken.arcanum.domain.ArcaObject;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
 
 public class ExpressionVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
+
+    @Override
+    public ArcaObject visit(ParseTree tree) {
+        return super.visit(tree);
+    }
 
     @Override
     public ArcaInteger visitInt(ArcanumParser.IntContext ctx) {
