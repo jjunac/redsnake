@@ -60,7 +60,7 @@ public class ExpressionVisitor extends ArcanumAbstractVisitor {
     @Override
     public ArcaObject visitAssignment(AssignmentContext ctx) {
         ArcaObject value = visit(ctx.expr());
-        environment.putVariable(visitVar(ctx.var()), value);
+        environment.putVariable(arcanumVisitor.visitVar(ctx.var()), value);
         return value;
     }
 

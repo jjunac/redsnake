@@ -21,7 +21,7 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     public ArcanumVisitor() {
         environment = new ArcaEnvironment();
         visitors = new HashMap<>();
-        registerVisitor(new ExpressionVisitor(environment), IntContext.class, BinaryExprContext.class, UnaryExprContext.class,
+        registerVisitor(new ExpressionVisitor(this), IntContext.class, BinaryExprContext.class, UnaryExprContext.class,
                 AssignmentContext.class, ParenExprContext.class);
     }
 
