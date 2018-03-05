@@ -1,25 +1,23 @@
-package net.taken.arcanum.parser;
+package net.taken.arcanum.parser.visitors;
 
-import net.taken.arcanum.domain.ArcaEnvironment;
-import net.taken.arcanum.domain.ArcaInteger;
-import net.taken.arcanum.domain.ArcaObject;
-import org.antlr.v4.runtime.tree.ParseTree;
+import net.taken.arcanum.lang.ArcaInteger;
+import net.taken.arcanum.lang.ArcaObject;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
 
-public class ExpressionVisitor extends ArcanumAbstractVisitor {
+public class ExprVisitor extends ArcanumAbstractVisitor {
 
-    public ExpressionVisitor(ArcanumVisitor arcanumVisitor) {
+    public ExprVisitor(ArcanumVisitor arcanumVisitor) {
         super(arcanumVisitor);
     }
 
     @Override
-    public ArcaInteger visitInt(ArcanumParser.IntContext ctx) {
+    public ArcaInteger visitInt(IntContext ctx) {
         return new ArcaInteger(Integer.valueOf(ctx.getText()));
     }
 
     @Override
-    public ArcaObject visitBinaryExpr(ArcanumParser.BinaryExprContext ctx) {
+    public ArcaObject visitBinaryExpr(BinaryExprContext ctx) {
         // FIXME: for now they only are integer
         int l = ((ArcaInteger)visit(ctx.l)).getValue();
         int r = ((ArcaInteger)visit(ctx.r)).getValue();

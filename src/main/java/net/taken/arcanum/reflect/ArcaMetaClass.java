@@ -1,4 +1,4 @@
-package net.taken.arcanum.domain;
+package net.taken.arcanum.reflect;
 
 public class ArcaMetaClass {
 

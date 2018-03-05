@@ -1,9 +1,11 @@
-package net.taken.arcanum.parser;
+package net.taken.arcanum.parser.visitors;
 
 import com.sun.istack.internal.NotNull;
-import net.taken.arcanum.domain.ArcaInteger;
-import net.taken.arcanum.domain.ArcaList;
-import net.taken.arcanum.domain.ArcaObject;
+import net.taken.arcanum.lang.ArcaInteger;
+import net.taken.arcanum.lang.ArcaList;
+import net.taken.arcanum.lang.ArcaObject;
+import net.taken.arcanum.parser.ArcanumLexer;
+import net.taken.arcanum.parser.ArcanumParser;
 import org.antlr.v4.runtime.*;
 
 import java.util.function.Function;

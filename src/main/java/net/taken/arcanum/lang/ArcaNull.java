@@ -1,4 +1,4 @@
-package net.taken.arcanum.domain;
+package net.taken.arcanum.lang;
 
 public class ArcaNull extends ArcaObject {
 

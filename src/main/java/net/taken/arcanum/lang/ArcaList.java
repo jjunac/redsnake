@@ -1,4 +1,6 @@
-package net.taken.arcanum.domain;
+package net.taken.arcanum.lang;
+
+import net.taken.arcanum.reflect.ArcaMetaClass;
 
 import java.util.Arrays;
 import java.util.LinkedList;

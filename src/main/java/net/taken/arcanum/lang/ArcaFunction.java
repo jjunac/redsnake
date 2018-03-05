@@ -1,4 +1,4 @@
-package net.taken.arcanum.domain;
+package net.taken.arcanum.lang;
 
 import java.util.function.Function;
 

@@ -1,9 +1,9 @@
 package net.taken.arcanum;
 
-import net.taken.arcanum.domain.ArcaObject;
+import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
-import net.taken.arcanum.parser.ArcanumVisitor;
+import net.taken.arcanum.parser.visitors.ArcanumVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -12,7 +12,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.cli.*;
 
 import java.io.*;
-import java.nio.Buffer;
 
 public class Arcanum {
 

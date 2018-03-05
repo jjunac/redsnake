@@ -1,32 +1,33 @@
-package net.taken.arcanum.parser;
+package net.taken.arcanum.parser.visitors;
 
-import net.taken.arcanum.domain.ArcaInteger;
-import net.taken.arcanum.domain.ArcaString;
+import net.taken.arcanum.lang.ArcaInteger;
+import net.taken.arcanum.lang.ArcaString;
+import net.taken.arcanum.parser.ArcanumParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
-import static net.taken.arcanum.parser.TestUtils.*;
+import static net.taken.arcanum.parser.visitors.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ExpressionVisitorTest {
+class ExprVisitorTest {
 
-    private ExpressionVisitor visitor;
+    private ExprVisitor visitor;
 
     @BeforeEach
     void setUp() {
-        visitor = new ExpressionVisitor();
+        visitor = new ExprVisitor(new ArcanumVisitor());
     }
 
     @Test
     void shouldReturnIntValueWhenVisitInt() {
-        ArcanumParser.IntContext intContext = mockContext(ArcanumParser.IntContext.class, "42");
+        IntContext intContext = mockContext(IntContext.class, "42");
         assertEquals(new ArcaInteger(42), visitor.visitInt(intContext));
     }
 
     @Test
     void shouldReturnCorrectResultWhenVisitBinaryExprPower() {
-        ArcanumParser.BinaryExprContext ctx = mockBinaryExpr(2, 4, POW);
+        BinaryExprContext ctx = mockBinaryExpr(2, 4, POW);
         assertEquals(new ArcaInteger(16), visitor.visitBinaryExpr(ctx));
     }
 
@@ -78,14 +79,14 @@ class ExpressionVisitorTest {
     void shouldStoreVariableWhenVisitAssignment() {
         ArcanumParser parser = initParser("a = 771");
         visitor.visit(parser.expr());
-        assertEquals(new ArcaInteger(771), visitor.variables.get(new ArcaString("a")));
+        assertEquals(new ArcaInteger(771), visitor.environment.getVariable(new ArcaString("a")));
     }
 
     @Test
     void shouldPrioritizePlusAndMinusOverEquals() {
         ArcanumParser parser = initParser("a = 5+2-1");
         visitor.visit(parser.expr());
-        assertEquals(new ArcaInteger(6), visitor.variables.get(new ArcaString("a")));
+        assertEquals(new ArcaInteger(6), visitor.environment.getVariable(new ArcaString("a")));
     }
 
     @Test
