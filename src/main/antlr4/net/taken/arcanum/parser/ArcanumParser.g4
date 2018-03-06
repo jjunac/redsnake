@@ -3,7 +3,7 @@ parser grammar ArcanumParser;
 options { tokenVocab = ArcanumLexer; }
 
 program
-    : (stmt)* ;
+    : stmt ;
 
 stmt
     : expr (ENDL expr)*
@@ -27,14 +27,14 @@ expr
     ;
 
 designator
-    : call									#callDesignator
-    | var									#varDesignator
+    : var									#varDesignator
+    | call									#callDesignator
     ;
 
 call
-    : fct=var '(' ')'						#callWithoutParams
+    : fct=var args=params					#callWithParams
     | fct=var '(' args=params ')'			#callWithParams
-    | fct=var args=params					#callWithParams
+    | fct=var '(' ')'						#callWithoutParams
     ;
 
 var

@@ -32,7 +32,7 @@ class ArcanumVisitorTest {
     void shouldPrintRightResultWhenPrintCalculationWithoutParen() {
         ArcanumParser parser = initParser("print (946+-19*185**2-687)*670+895");
         visitor.visit(parser.program());
-        assertEquals("-435509825", wrt.toString());
+        assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
@@ -46,6 +46,16 @@ class ArcanumVisitorTest {
     void shouldPrintRightResultWhenDoingCalculationsWithVariable() {
         ArcanumParser parser = initParser("a = 42", "a = a - 40", "a = a * 2", "print a");
         ArcaObject o = visitor.visit(parser.program());
-        assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
+        assertEquals("4" + System.lineSeparator(), wrt.toString());
+    }
+
+    @Test
+    void shouldPrintRightResultWhenWorkingAroundCallsAndVariables() {
+        ArcanumParser parser = initParser("a = 51\n" +
+                "a = a - 42\n" +
+                "print\n" +
+                "print (a)*678\n");
+        visitor.visit(parser.program());
+        assertEquals(System.lineSeparator() + "6102" + System.lineSeparator(), wrt.toString());
     }
 }
