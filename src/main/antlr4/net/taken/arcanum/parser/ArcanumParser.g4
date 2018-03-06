@@ -22,8 +22,8 @@ expr
     | var '=' expr                          #assignment
 
     // Miscellaneous
-    | designator                            #designatorExpr
     | '(' expr ')'                          #parenExpr
+    | designator                            #designatorExpr
     ;
 
 designator

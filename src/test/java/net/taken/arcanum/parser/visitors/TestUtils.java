@@ -8,6 +8,7 @@ import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
 import org.antlr.v4.runtime.*;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 import static org.mockito.Matchers.any;
@@ -60,7 +61,13 @@ public class TestUtils {
     }
 
     public static ArcanumParser initParser(@NotNull String s) {
-        CharStream inputStream = CharStreams.fromString(s);
+        return initParser(new String[]{s});
+    }
+
+    public static ArcanumParser initParser(@NotNull String... s) {
+        StringBuilder str = new StringBuilder();
+        Arrays.stream(s).forEach(st -> str.append(st).append(System.lineSeparator()));
+        CharStream inputStream = CharStreams.fromString(str.toString());
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         return new ArcanumParser(commonTokenStream);

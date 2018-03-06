@@ -41,4 +41,11 @@ class ArcanumVisitorTest {
         visitor.visit(parser.program());
         assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
     }
+
+    @Test
+    void shouldPrintRightResultWhenDoingCalculationsWithVariable() {
+        ArcanumParser parser = initParser("a = 42", "a = a - 40", "a = a * 2", "print a");
+        ArcaObject o = visitor.visit(parser.program());
+        assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
+    }
 }
