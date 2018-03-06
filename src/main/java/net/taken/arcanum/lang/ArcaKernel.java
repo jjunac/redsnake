@@ -1,12 +1,19 @@
 package net.taken.arcanum.lang;
 
+import java.io.*;
 import java.util.*;
 import java.util.function.Function;
 
 public class ArcaKernel {
 
+    ArcaEnvironment environment;
+
+    public ArcaKernel(ArcaEnvironment environment) {
+        this.environment = environment;
+    }
+
     public ArcaNull print(ArcaList l) {
-        System.out.println(l);
+        environment.stdout.println(l.toString());
         return new ArcaNull();
     }
 

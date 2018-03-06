@@ -1,10 +1,6 @@
 package net.taken.arcanum.parser.visitors;
 
-import net.taken.arcanum.domain.*;
-import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.lang.ArcaList;
-import net.taken.arcanum.lang.ArcaObject;
-import net.taken.arcanum.lang.ArcaString;
+import net.taken.arcanum.lang.*;
 import net.taken.arcanum.parser.ArcanumParserBaseVisitor;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;

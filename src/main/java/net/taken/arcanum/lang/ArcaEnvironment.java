@@ -1,10 +1,14 @@
-package net.taken.arcanum.domain;
+package net.taken.arcanum.lang;
 
 import net.taken.arcanum.lang.ArcaKernel;
 import net.taken.arcanum.lang.ArcaList;
 import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.lang.ArcaString;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -12,11 +16,17 @@ import java.util.function.Function;
 public class ArcaEnvironment {
 
     ArcaKernel kernel;
+    PrintWriter stdout;
     Map<ArcaString, ArcaObject> variables;
     Map<ArcaString, Function<ArcaList, ArcaObject>> functions;
 
     public ArcaEnvironment() {
-        kernel = new ArcaKernel();
+        this(new OutputStreamWriter(System.out));
+    }
+
+    public ArcaEnvironment(Writer stdout) {
+        kernel = new ArcaKernel(this);
+        this.stdout = new PrintWriter(stdout);
         variables = new HashMap<>();
         functions = new HashMap<>();
         functions.putAll(kernel.getBuiltInFunctions());

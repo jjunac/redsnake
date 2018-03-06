@@ -2,6 +2,7 @@ package net.taken.arcanum.parser.visitors;
 
 import net.taken.arcanum.lang.ArcaInteger;
 import net.taken.arcanum.lang.ArcaObject;
+import net.taken.arcanum.parser.ArcanumParser;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
 
@@ -60,6 +61,11 @@ public class ExprVisitor extends ArcanumAbstractVisitor {
         ArcaObject value = visit(ctx.expr());
         environment.putVariable(arcanumVisitor.visitVar(ctx.var()), value);
         return value;
+    }
+
+    @Override
+    public ArcaObject visitDesignatorExpr(DesignatorExprContext ctx) {
+        return visitChildren(ctx);
     }
 
     @Override
