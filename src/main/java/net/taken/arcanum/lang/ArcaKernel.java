@@ -13,7 +13,7 @@ public class ArcaKernel {
     }
 
     public ArcaNull print(ArcaList l) {
-        environment.stdout.println(l.tos());
+        environment.stdout.println(l.tos().getValue());
         environment.stdout.flush();
         return new ArcaNull();
     }

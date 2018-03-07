@@ -20,9 +20,13 @@ Arcanum is a scripting language inspired by Ruby and Python.
 
 ## Built With
 
- * [Java](https://www.java.com/) - Programming Language
- * [Maven](https://maven.apache.org/) - Dependency Management
  * [ANTLR](https://www.antlr.org/) - Lexer/Parser
+ * [Apache Commons CLI](https://commons.apache.org/proper/commons-cli/) - Command-Line Interface
+ * [Google's Guava](https://github.com/google/guava/wiki) - Core Library
+ * [Java](https://www.java.com/) - Programming Language
+ * [JUnit](https://junit.org/) - Testing Framework
+ * [Maven](https://maven.apache.org/) - Dependency Management
+ * [Mockito](http://site.mockito.org/) - Mocking Framework
 
 ## Contributing
 

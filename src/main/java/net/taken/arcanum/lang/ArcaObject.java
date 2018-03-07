@@ -23,7 +23,48 @@ public class ArcaObject {
         return metaClass.name;
     }
 
-    public String tos() {
-        return metaClass.name;
+    // =============================
+    // Operators
+    // =============================
+
+    public ArcaObject plus(ArcaObject o) {
+        throw new IllegalStateException();
     }
+
+    public ArcaObject minus(ArcaObject o) {
+        throw new IllegalStateException();
+    }
+
+    public ArcaObject multiply(ArcaObject o) {
+        throw new IllegalStateException();
+    }
+
+    public ArcaObject divide(ArcaObject o) {
+        throw new IllegalStateException();
+    }
+
+    public ArcaObject modulo(ArcaObject o) {
+        throw new IllegalStateException();
+    }
+
+    public ArcaObject power(ArcaObject o) {
+        throw new IllegalStateException();
+    }
+
+    public ArcaObject uminus() {
+        throw new IllegalStateException();
+    }
+
+    // =============================
+    // Built-in conversions
+    // =============================
+
+    public ArcaString tos() {
+        return new ArcaString(metaClass.name);
+    }
+
+    public ArcaInteger toi() {
+        return new ArcaInteger(0);
+    }
+
 }

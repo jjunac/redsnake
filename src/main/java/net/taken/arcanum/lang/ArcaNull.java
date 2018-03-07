@@ -8,7 +8,12 @@ public class ArcaNull extends ArcaObject {
     }
 
     @Override
-    public String tos() {
-        return "null";
+    public ArcaString tos() {
+        return new ArcaString("null");
+    }
+
+    @Override
+    public ArcaInteger toi() {
+        return new ArcaInteger(0);
     }
 }

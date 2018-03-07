@@ -32,7 +32,7 @@ public class Arcanum {
 
         arcanumVisitor = new ArcanumVisitor();
         if (cmd.getArgList().size() == 0) {
-            lauchShell();
+            launchShell();
         }
     }
 
@@ -49,7 +49,7 @@ public class Arcanum {
         formater.printHelp(usage, header, options, footer, false);
     }
 
-    private void lauchShell() {
+    private void launchShell() {
         System.out.println(String.format("Arcanum [version %s]", VERSION));
         try {
             while (true) {
@@ -57,7 +57,7 @@ public class Arcanum {
                 BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
                 ArcaObject res = parseProgram(CharStreams.fromString(is.readLine()));
                 if(!res.isNull()) {
-                    System.out.println("=> " + res);
+                    System.out.println("=> " + res.tos().getValue());
                 }
             }
         } catch (IOException e) {

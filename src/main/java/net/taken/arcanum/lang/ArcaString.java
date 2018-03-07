@@ -1,5 +1,6 @@
 package net.taken.arcanum.lang;
 
+import com.google.common.base.Strings;
 import net.taken.arcanum.reflect.ArcaMetaClass;
 
 import java.util.Objects;
@@ -25,8 +26,31 @@ public class ArcaString extends ArcaObject {
     }
 
     @Override
-    public String tos() {
-        return value;
+    public ArcaString tos() {
+        return this;
+    }
+
+    @Override
+    public ArcaInteger toi() {
+        return new ArcaInteger(Integer.valueOf(value));
+    }
+
+    @Override
+    public ArcaString plus(ArcaObject o) {
+        return new ArcaString(value + o.tos().value);
+    }
+
+    @Override
+    public ArcaObject multiply(ArcaObject o) {
+        return new ArcaString(Strings.repeat(value, o.toi().getValue()));
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ArcaString{");
+        sb.append("value='").append(value).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     @Override
