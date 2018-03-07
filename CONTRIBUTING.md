@@ -11,6 +11,7 @@
 [Pull Request Process](#pull-request-process)
 
 [Styleguides](#styleguides)
+ * [Git Commit Messages](#git-commit-messages)
  * [Java Styleguide](#java-styleguide)
  * [ANTLR Styleguide](#antlr-styleguide)
 
@@ -67,9 +68,7 @@ Please use this configuration for the ANTLR plugin:
  * ☑ generate parse tree visitor
 
 To generate and the rules :
-
  * On **ArcanumParser.g4** Right-click and click on `Generate ANTLR RECOGNIZER` or `CTRL + SHIFT + G`.
-
  * Right-click and click on `Test Rule Program`
 
 
@@ -78,6 +77,12 @@ To generate and the rules :
 *TODO*
 
 ## Styleguides
+
+### Git Commit Messages
+
+ * Use the present tense ("Add feature" not "Added feature")
+ * Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+ * Limit the first line to 72 characters or less
 
 ### Java Styleguide
 
