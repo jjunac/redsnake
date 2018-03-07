@@ -1,5 +1,6 @@
 package net.taken.arcanum.parser.visitors;
 
+import com.google.common.base.Strings;
 import net.taken.arcanum.lang.*;
 import net.taken.arcanum.parser.ArcanumParser;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,5 +60,24 @@ class ArcanumVisitorTest {
         assertEquals(System.lineSeparator() + "6102" + System.lineSeparator(), wrt.toString());
     }
 
-    // TODO print with list, for instance int and string
+    @Test
+    void shouldPrintRightResultWhenDoingOperationOnStrings() {
+        ArcanumParser parser = initParser("a = \"WRjfMs\"\n" +
+            "a = a * 3\n" +
+            "a = a + \"mnV\"\n" +
+            "a = a * \"3\"\n" +
+            "print a");
+        visitor.visit(parser.program());
+        String expected = Strings.repeat("WRjfMs", 3);
+        expected += "mnV";
+        expected = Strings.repeat(expected, 3);
+        assertEquals(expected + System.lineSeparator(), wrt.toString());
+    }
+
+    @Test
+    void shouldPrintRightResultWhenPrintingMultipleParametersOfDifferentType() {
+        ArcanumParser parser = initParser("print 60, \"iYQaKswI\"");
+        visitor.visit(parser.program());
+        assertEquals("60 iYQaKswI" + System.lineSeparator(), wrt.toString());
+    }
 }
