@@ -25,7 +25,7 @@ public class ArcaString extends ArcaObject {
     }
 
     @Override
-    public String toString() {
+    public String tos() {
         return value;
     }
 

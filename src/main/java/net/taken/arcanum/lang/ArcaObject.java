@@ -22,4 +22,8 @@ public class ArcaObject {
     public String toString() {
         return metaClass.name;
     }
+
+    public String tos() {
+        return metaClass.name;
+    }
 }

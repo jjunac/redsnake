@@ -8,7 +8,7 @@ public class ArcaNull extends ArcaObject {
     }
 
     @Override
-    public String toString() {
+    public String tos() {
         return "null";
     }
 }

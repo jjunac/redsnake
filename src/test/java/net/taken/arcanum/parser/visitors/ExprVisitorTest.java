@@ -26,6 +26,12 @@ class ExprVisitorTest {
     }
 
     @Test
+    void shouldReturnStringValueWhenVisitString() {
+        StringContext stringContext = mockContext(StringContext.class, "VUUOWIp");
+        assertEquals(new ArcaString("VUUOWIp"), visitor.visitString(stringContext));
+    }
+
+    @Test
     void shouldReturnCorrectResultWhenVisitBinaryExprPower() {
         BinaryExprContext ctx = mockBinaryExpr(2, 4, POW);
         assertEquals(new ArcaInteger(16), visitor.visitBinaryExpr(ctx));
