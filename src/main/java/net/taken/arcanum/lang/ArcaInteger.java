@@ -70,6 +70,14 @@ public class ArcaInteger extends ArcaObject {
     }
 
     @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ArcaInteger{");
+        sb.append("value=").append(value);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
