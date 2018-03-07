@@ -35,8 +35,16 @@ public class ArcaString extends ArcaObject {
     }
 
     @Override
+    public ArcaString plus(ArcaObject o) {
+        return new ArcaString(value + o.tos().value);
+    }
+
+    @Override
     public String toString() {
-        return value;
+        final StringBuilder sb = new StringBuilder("ArcaString{");
+        sb.append("value='").append(value).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     @Override
