@@ -2,6 +2,7 @@ package net.taken.arcanum.parser.visitors;
 
 import net.taken.arcanum.lang.ArcaInteger;
 import net.taken.arcanum.lang.ArcaObject;
+import net.taken.arcanum.lang.ArcaString;
 import net.taken.arcanum.parser.ArcanumParser;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
@@ -15,6 +16,11 @@ public class ExprVisitor extends ArcanumAbstractVisitor {
     @Override
     public ArcaInteger visitInt(IntContext ctx) {
         return new ArcaInteger(Integer.valueOf(ctx.getText()));
+    }
+
+    @Override
+    public ArcaObject visitString(StringContext ctx) {
+        return new ArcaString(ctx.getText());
     }
 
     @Override
