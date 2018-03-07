@@ -1,10 +1,6 @@
 lexer grammar ArcanumLexer;
 
-INT: DIGIT+ ;
-FLOAT
-    : DIGIT+ '.' DIGIT*
-    | '.' DIGIT+
-    ;
+
 
 ID: LETTER (ID | DIGIT | '_')* ;
 
@@ -14,6 +10,19 @@ COMMA: ',' ;
 L_PAREN: '(' ;
 R_PAREN: ')' ;
 
+// =============================
+// Common types
+// =============================
+
+INT: DIGIT+ ;
+FLOAT
+    : DIGIT+ '.' DIGIT*
+    | '.' DIGIT+
+    ;
+STRING
+    : '"' ( ESC | . )*? '"'     { setText(getText().substring(1, getText().length()-1)); }
+    | '\'' ( ESC | . )*? '\''   { setText(getText().substring(1, getText().length()-1)); }
+    ;
 
 // =============================
 // Operators
@@ -32,5 +41,7 @@ WS: [ \t]+ -> skip ;
 // =============================
 // Common fragments
 // =============================
+
 fragment LETTER: 'a'..'z' | 'A'..'Z' ;
 fragment DIGIT: '0'..'9' ;
+fragment ESC: '\\' [btnr"'\\] ; // \b, \t, \n, \r, \", \', \\
