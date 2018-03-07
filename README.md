@@ -27,3 +27,12 @@ Arcanum is a scripting language inspired by Ruby and Python.
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Authors
+
+ * **Jeremy Junac** - [Taken0711](https://github.com/Taken0711)
+ * **Nassim Bounouas** - [NassimBounouas](https://github.com/NassimBounouas)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
