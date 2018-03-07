@@ -26,38 +26,31 @@ public class ExprVisitor extends ArcanumAbstractVisitor {
     @Override
     public ArcaObject visitBinaryExpr(BinaryExprContext ctx) {
         // FIXME: for now they only are integer
-        int l = ((ArcaInteger)visit(ctx.l)).getValue();
-        int r = ((ArcaInteger)visit(ctx.r)).getValue();
-        int res;
+        ArcaObject l = visit(ctx.l);
+        ArcaObject r = visit(ctx.r);
         switch (ctx.op.getType()) {
             case PLUS:
-                res = l + r;
-                break;
+                return l.plus(r);
             case MINUS:
-                res = l - r;
-                break;
+                return l.minus(r);
             case MULT:
-                res = l * r;
-                break;
+                return l.multiply(r);
             case DIV:
-                res = l / r;
-                break;
+                return l.divide(r);
             case MOD:
-                res = l % r;
-                break;
+                return l.modulo(r);
             case POW:
-                res = (int) Math.pow(l, r);
-                break;
+                return l.power(r);
             default: throw new IllegalArgumentException("Unknown operator " + ctx.op);
         }
-        return new ArcaInteger(res);
     }
 
     @Override
     public ArcaObject visitUnaryExpr(UnaryExprContext ctx) {
-        int e = ((ArcaInteger)visit(ctx.e)).getValue();
+        ArcaObject e = visit(ctx.e);
         switch (ctx.op.getType()) {
-            case MINUS: return new ArcaInteger(-e);
+            case MINUS:
+                return e.uminus();
             default: throw new IllegalArgumentException("Unknown operator " + ctx.op);
         }
     }

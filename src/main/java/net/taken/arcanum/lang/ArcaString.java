@@ -25,7 +25,17 @@ public class ArcaString extends ArcaObject {
     }
 
     @Override
-    public String tos() {
+    public ArcaString tos() {
+        return this;
+    }
+
+    @Override
+    public ArcaInteger toi() {
+        return new ArcaInteger(Integer.valueOf(value));
+    }
+
+    @Override
+    public String toString() {
         return value;
     }
 

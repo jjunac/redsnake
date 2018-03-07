@@ -25,8 +25,48 @@ public class ArcaInteger extends ArcaObject {
     }
 
     @Override
-    public String tos() {
-        return Integer.toString(value);
+    public ArcaString tos() {
+        return new ArcaString(Integer.toString(value));
+    }
+
+    @Override
+    public ArcaInteger toi() {
+        return this;
+    }
+
+    @Override
+    public ArcaInteger plus(ArcaObject o) {
+        return new ArcaInteger(value + o.toi().value);
+    }
+
+    @Override
+    public ArcaInteger minus(ArcaObject o) {
+        return new ArcaInteger(value - o.toi().value);
+    }
+
+    @Override
+    public ArcaInteger multiply(ArcaObject o) {
+        return new ArcaInteger(value * o.toi().value);
+    }
+
+    @Override
+    public ArcaInteger divide(ArcaObject o) {
+        return new ArcaInteger(value / o.toi().value);
+    }
+
+    @Override
+    public ArcaInteger modulo(ArcaObject o) {
+        return new ArcaInteger(value % o.toi().value);
+    }
+
+    @Override
+    public ArcaInteger power(ArcaObject o) {
+        return new ArcaInteger((int) Math.pow(value , o.toi().value));
+    }
+
+    @Override
+    public ArcaInteger uminus() {
+        return new ArcaInteger(- value);
     }
 
     @Override

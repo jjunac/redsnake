@@ -58,4 +58,6 @@ class ArcanumVisitorTest {
         visitor.visit(parser.program());
         assertEquals(System.lineSeparator() + "6102" + System.lineSeparator(), wrt.toString());
     }
+
+    // TODO print with list, for instance int and string
 }

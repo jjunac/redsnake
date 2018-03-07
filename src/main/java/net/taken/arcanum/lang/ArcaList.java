@@ -38,8 +38,13 @@ public class ArcaList extends ArcaObject {
     }
 
     @Override
-    public String tos() {
-        return value.stream().map(ArcaObject::toString).collect(Collectors.joining(" "));
+    public ArcaString tos() {
+        return new ArcaString(value.stream().map(s -> s.tos().toString()).collect(Collectors.joining(" ")));
+    }
+
+    @Override
+    public ArcaInteger toi() {
+        return new ArcaInteger(size());
     }
 
     @Override
