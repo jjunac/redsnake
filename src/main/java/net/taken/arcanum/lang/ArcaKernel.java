@@ -14,6 +14,7 @@ public class ArcaKernel {
 
     public ArcaNull print(ArcaList l) {
         environment.stdout.println(l.toString());
+        environment.stdout.flush();
         return new ArcaNull();
     }
 
