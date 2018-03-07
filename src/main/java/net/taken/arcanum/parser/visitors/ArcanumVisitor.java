@@ -1,6 +1,7 @@
 package net.taken.arcanum.parser.visitors;
 
 import net.taken.arcanum.lang.*;
+import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.ArcanumParserBaseVisitor;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
@@ -30,6 +31,11 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     @Override
     public ArcaInteger visitInt(IntContext ctx) {
         return exprVisitor.visitInt(ctx);
+    }
+
+    @Override
+    public ArcaObject visitString(StringContext ctx) {
+        return exprVisitor.visitString(ctx);
     }
 
     @Override

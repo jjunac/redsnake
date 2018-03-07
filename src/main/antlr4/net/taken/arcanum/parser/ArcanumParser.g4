@@ -13,6 +13,7 @@ stmt
 expr
     // Primary type
     : INT                                   #int
+    | STRING                                #string
 
     // Operator sort by priority
     | <assoc=right> l=expr op=POW r=expr    #binaryExpr
