@@ -32,7 +32,7 @@ public class Arcanum {
 
         arcanumVisitor = new ArcanumVisitor();
         if (cmd.getArgList().size() == 0) {
-            lauchShell();
+            launchShell();
         }
     }
 
@@ -49,7 +49,7 @@ public class Arcanum {
         formater.printHelp(usage, header, options, footer, false);
     }
 
-    private void lauchShell() {
+    private void launchShell() {
         System.out.println(String.format("Arcanum [version %s]", VERSION));
         try {
             while (true) {
