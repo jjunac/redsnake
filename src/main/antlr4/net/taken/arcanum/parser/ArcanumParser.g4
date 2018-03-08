@@ -6,7 +6,7 @@ program
     : stmt* EOF ;
 
 stmt
-    : (expr ENDL)+
+    : expr ENDL
     | ENDL
     ;
 
