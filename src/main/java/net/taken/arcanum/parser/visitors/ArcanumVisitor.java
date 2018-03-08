@@ -3,6 +3,7 @@ package net.taken.arcanum.parser.visitors;
 import net.taken.arcanum.lang.*;
 import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.ArcanumParserBaseVisitor;
+import org.antlr.v4.runtime.tree.ErrorNode;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
 
@@ -86,5 +87,10 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     @Override
     public ArcaList visitParams(ParamsContext ctx) {
         return paramsVisitor.visitParams(ctx);
+    }
+
+    @Override
+    public ArcaObject visitErrorNode(ErrorNode node) {
+        return super.visitErrorNode(node);
     }
 }

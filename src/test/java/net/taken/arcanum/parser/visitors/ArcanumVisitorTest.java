@@ -80,4 +80,11 @@ class ArcanumVisitorTest {
         visitor.visit(parser.program());
         assertEquals("60 iYQaKswI" + System.lineSeparator(), wrt.toString());
     }
+
+    @Test
+    void shouldReturnSyntaxErrorWhenMissingParenthesis() {
+        ArcanumParser parser = initParser("print(1,2");
+        visitor.visit(parser.program());
+        // FIXME test stderr
+    }
 }

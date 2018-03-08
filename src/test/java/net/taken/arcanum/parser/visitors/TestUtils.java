@@ -4,6 +4,8 @@ import com.sun.istack.internal.NotNull;
 import net.taken.arcanum.lang.ArcaInteger;
 import net.taken.arcanum.lang.ArcaList;
 import net.taken.arcanum.lang.ArcaObject;
+import net.taken.arcanum.parser.ArcanumErrorListener;
+import net.taken.arcanum.parser.ArcanumErrorStrategy;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
 import org.antlr.v4.runtime.*;
@@ -70,7 +72,10 @@ public class TestUtils {
         CharStream inputStream = CharStreams.fromString(str.toString());
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
-        return new ArcanumParser(commonTokenStream);
+        ArcanumParser parser = new ArcanumParser(commonTokenStream);
+        parser.removeErrorListeners();
+        parser.addErrorListener(new ArcanumErrorListener());
+        return parser;
     }
 
 

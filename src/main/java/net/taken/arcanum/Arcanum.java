@@ -1,6 +1,7 @@
 package net.taken.arcanum;
 
 import net.taken.arcanum.lang.ArcaObject;
+import net.taken.arcanum.parser.ArcanumErrorListener;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.visitors.ArcanumVisitor;
@@ -67,9 +68,12 @@ public class Arcanum {
 
 
     public ArcaObject parseProgram(CharStream inputStream) {
+        // FIXME may be put in common this parser creation with the TestUtils one
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
+        parser.removeErrorListeners();
+        parser.addErrorListener(new ArcanumErrorListener());
         ParseTree t = parser.program();
         return arcanumVisitor.visit(t);
     }
