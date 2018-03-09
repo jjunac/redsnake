@@ -13,6 +13,8 @@ stmt
 expr
     // Primary type
     : INT                                   #int
+    | BTRUE                                 #boolean
+    | BFALSE                                #boolean
     | STRING                                #string
 
     // Operator sort by priority

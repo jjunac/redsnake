@@ -1,5 +1,6 @@
 package net.taken.arcanum.parser.visitors;
 
+import net.taken.arcanum.lang.ArcaBoolean;
 import net.taken.arcanum.lang.ArcaInteger;
 import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.lang.ArcaString;
@@ -23,6 +24,10 @@ public class ExprVisitor extends ArcanumAbstractVisitor {
         return new ArcaString(ctx.getText());
     }
 
+    @Override
+    public ArcaObject visitBoolean(BooleanContext ctx) {
+        return new ArcaBoolean(Boolean.valueOf(ctx.getText()));
+    }
     @Override
     public ArcaObject visitBinaryExpr(BinaryExprContext ctx) {
         // FIXME: for now they only are integer
@@ -71,5 +76,4 @@ public class ExprVisitor extends ArcanumAbstractVisitor {
     public ArcaObject visitParenExpr(ParenExprContext ctx) {
         return visit(ctx.expr());
     }
-
 }

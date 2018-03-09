@@ -39,6 +39,12 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     }
 
     @Override
+    public ArcaObject visitBoolean(BooleanContext ctx) {
+        System.out.println("visiting a boolean");
+        return exprVisitor.visitBoolean(ctx);
+    }
+
+    @Override
     public ArcaObject visitBinaryExpr(BinaryExprContext ctx) {
         return exprVisitor.visitBinaryExpr(ctx);
     }

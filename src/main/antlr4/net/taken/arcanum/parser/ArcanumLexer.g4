@@ -1,6 +1,8 @@
 lexer grammar ArcanumLexer;
 
 
+BTRUE: 'true';
+BFALSE: 'false';
 
 ID: LETTER (ID | DIGIT | '_')* ;
 
@@ -19,11 +21,11 @@ FLOAT
     : DIGIT+ '.' DIGIT*
     | '.' DIGIT+
     ;
+
 STRING
     : '"' ( ESC | . )*? '"'     { setText(getText().substring(1, getText().length()-1)); }
     | '\'' ( ESC | . )*? '\''   { setText(getText().substring(1, getText().length()-1)); }
     ;
-
 // =============================
 // Operators
 // =============================
