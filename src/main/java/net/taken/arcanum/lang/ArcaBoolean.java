@@ -21,4 +21,8 @@ public class ArcaBoolean extends ArcaObject {
         return this.value;
     }
 
+    @Override
+    public ArcaObject and(ArcaObject o) {
+        return new ArcaBoolean(this.value && ((ArcaBoolean) o).value);
+    }
 }

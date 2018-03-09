@@ -19,6 +19,7 @@ expr
 
     // Operator sort by priority
     | <assoc=right> l=expr op=POW r=expr    #binaryExpr
+    | <assoc=right> l=expr op=AND r=expr    #binaryExpr
     | op='-' e=expr                         #unaryExpr
     | l=expr op=('*'|'/'|'%') r=expr        #binaryExpr
     | l=expr op=('+'|'-') r=expr            #binaryExpr

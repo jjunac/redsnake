@@ -55,6 +55,10 @@ public class ArcaObject {
         throw new IllegalStateException();
     }
 
+    public ArcaObject and(ArcaObject o) {
+        throw new IllegalStateException();
+    }
+
     // =============================
     // Built-in conversions
     // =============================

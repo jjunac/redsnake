@@ -6,6 +6,7 @@ import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.lang.ArcaString;
 import net.taken.arcanum.parser.ArcanumParser;
 
+import static net.taken.arcanum.parser.ArcanumLexer.AND;
 import static net.taken.arcanum.parser.ArcanumParser.*;
 
 public class ExprVisitor extends ArcanumAbstractVisitor {
@@ -46,6 +47,8 @@ public class ExprVisitor extends ArcanumAbstractVisitor {
                 return l.modulo(r);
             case POW:
                 return l.power(r);
+            case AND:
+                return l.and(r);
             default: throw new IllegalArgumentException("Unknown operator " + ctx.op);
         }
     }
