@@ -22,7 +22,7 @@ public class ArcaList extends ArcaObject {
         this.value = new LinkedList<>(value);
     }
 
-    public List getValue() {
+    public List<ArcaObject> getValue() {
         return value;
     }
 

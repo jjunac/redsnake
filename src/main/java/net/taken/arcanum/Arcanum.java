@@ -70,7 +70,7 @@ public class Arcanum {
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
-        ParseTree t = parser.stmt();
+        ParseTree t = parser.program();
         return arcanumVisitor.visit(t);
     }
 

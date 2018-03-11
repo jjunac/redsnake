@@ -89,9 +89,16 @@ class ArcanumVisitorTest {
     }
 
     @Test
-    void shouldreturnSomethingWhenParsingStmt() {
+    void shouldReturnSomethingWhenParsingStmt() {
         ArcanumParser parser = initParser("598");
-        ArcaObject res = visitor.visit(parser.stmt());
+        ArcaObject res = visitor.visit(parser.program());
         assertEquals(new ArcaInteger(598), res);
+    }
+
+    @Test
+    void shouldReturnNullWhenParsePrint() {
+        ArcanumParser parser = initParser("print 875");
+        ArcaObject res = visitor.visit(parser.program());
+        assertTrue(res.isNull());
     }
 }
