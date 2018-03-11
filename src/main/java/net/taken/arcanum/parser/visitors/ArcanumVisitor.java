@@ -3,6 +3,7 @@ package net.taken.arcanum.parser.visitors;
 import net.taken.arcanum.lang.*;
 import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.ArcanumParserBaseVisitor;
+import org.antlr.v4.runtime.tree.RuleNode;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
 
@@ -26,6 +27,21 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
         callVisitor = new CallVisitor(this);
         varVisitor = new VarVisitor(this);
         paramsVisitor = new ParamsVisitor(this);
+    }
+
+    @Override
+    public ArcaObject visitProgram(ProgramContext ctx) {
+        return visit(ctx.stmtList());
+    }
+
+    @Override
+    public ArcaObject visitStmtList(StmtListContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    @Override
+    public ArcaObject visitNonEmptyStmt(NonEmptyStmtContext ctx) {
+        return visit(ctx.s);
     }
 
     @Override
@@ -93,4 +109,15 @@ public class ArcanumVisitor extends ArcanumParserBaseVisitor<ArcaObject> {
     public ArcaList visitParams(ParamsContext ctx) {
         return paramsVisitor.visitParams(ctx);
     }
+
+    @Override
+    protected ArcaList defaultResult() {
+        return new ArcaList();
+    }
+
+    @Override
+    protected ArcaObject aggregateResult(ArcaObject aggregate, ArcaObject nextResult) {
+        return ((ArcaList)aggregate).push(nextResult);
+    }
+
 }

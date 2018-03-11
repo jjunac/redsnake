@@ -3,11 +3,17 @@ parser grammar ArcanumParser;
 options { tokenVocab = ArcanumLexer; }
 
 program
-    : stmt* EOF ;
+    : stmtList EOF
+    | EOF
+    ;
+
+stmtList
+    : stmt (ENDL stmt)*
+    ;
 
 stmt
-    : expr ENDL
-    | ENDL
+    : s=expr                                #nonEmptyStmt
+    | /* empty */                           #emptyStmt
     ;
 
 expr

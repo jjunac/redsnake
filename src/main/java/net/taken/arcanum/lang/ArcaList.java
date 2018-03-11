@@ -2,34 +2,31 @@ package net.taken.arcanum.lang;
 
 import net.taken.arcanum.reflect.ArcaMetaClass;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ArcaList extends ArcaObject {
 
-    private List<ArcaObject> value;
+    private LinkedList<ArcaObject> value;
 
     public ArcaList() {
         this(new LinkedList<>());
     }
 
     public ArcaList(ArcaObject... objects) {
-        this(new LinkedList<>(Arrays.asList(objects)));
+        this(Arrays.asList(objects));
     }
 
     public ArcaList(List<ArcaObject> value) {
         super(new ArcaMetaClass("List", "Object"));
-        this.value = value;
+        this.value = new LinkedList<>(value);
     }
 
     public List getValue() {
         return value;
     }
 
-    public void setValue(List<ArcaObject> value) {
+    public void setValue(LinkedList<ArcaObject> value) {
         this.value = value;
     }
 
@@ -59,5 +56,18 @@ public class ArcaList extends ArcaObject {
     public int hashCode() {
 
         return Objects.hash(value);
+    }
+
+    public ArcaList push(ArcaObject o) {
+        value.push(o);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ArcaList{");
+        sb.append("value=").append(value);
+        sb.append('}');
+        return sb.toString();
     }
 }

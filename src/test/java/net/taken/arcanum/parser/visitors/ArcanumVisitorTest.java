@@ -37,6 +37,13 @@ class ArcanumVisitorTest {
     }
 
     @Test
+    void shouldPrintRightResultWhenPrintCalculationWithoutParenWithENDL() {
+        ArcanumParser parser = initParser("print (946+-19*185**2-687)*670+895\n");
+        visitor.visit(parser.program());
+        assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
+    }
+
+    @Test
     void shouldPrintRightResultWhenPrintCalculationWithParen() {
         ArcanumParser parser = initParser("print((946+-19*185**2-687)*670+895)");
         visitor.visit(parser.program());
@@ -79,5 +86,12 @@ class ArcanumVisitorTest {
         ArcanumParser parser = initParser("print 60, \"iYQaKswI\"");
         visitor.visit(parser.program());
         assertEquals("60 iYQaKswI" + System.lineSeparator(), wrt.toString());
+    }
+
+    @Test
+    void shouldreturnSomethingWhenParsingStmt() {
+        ArcanumParser parser = initParser("598");
+        ArcaObject res = visitor.visit(parser.stmt());
+        assertEquals(new ArcaInteger(598), res);
     }
 }

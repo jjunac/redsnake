@@ -55,7 +55,7 @@ public class Arcanum {
             while (true) {
                 System.out.print("arca> ");
                 BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
-                ArcaObject res = parseProgram(CharStreams.fromString(is.readLine()));
+                ArcaObject res = parseStmt(CharStreams.fromString(is.readLine()));
                 if(!res.isNull()) {
                     System.out.println("=> " + res.tos().getValue());
                 }
@@ -66,11 +66,11 @@ public class Arcanum {
     }
 
 
-    public ArcaObject parseProgram(CharStream inputStream) {
+    public ArcaObject parseStmt(CharStream inputStream) {
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
-        ParseTree t = parser.program();
+        ParseTree t = parser.stmt();
         return arcanumVisitor.visit(t);
     }
 

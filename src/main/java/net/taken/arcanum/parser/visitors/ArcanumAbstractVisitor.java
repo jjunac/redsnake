@@ -21,8 +21,13 @@ public class ArcanumAbstractVisitor extends ArcanumParserBaseVisitor<ArcaObject>
     }
 
     @Override
-    public ArcaObject visitStmt(StmtContext ctx) {
-        return arcanumVisitor.visitStmt(ctx);
+    public ArcaObject visitNonEmptyStmt(NonEmptyStmtContext ctx) {
+        return arcanumVisitor.visitNonEmptyStmt(ctx);
+    }
+
+    @Override
+    public ArcaObject visitEmptyStmt(EmptyStmtContext ctx) {
+        return arcanumVisitor.visitEmptyStmt(ctx);
     }
 
     @Override
