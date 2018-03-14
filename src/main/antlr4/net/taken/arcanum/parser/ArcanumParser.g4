@@ -3,53 +3,53 @@ parser grammar ArcanumParser;
 options { tokenVocab = ArcanumLexer; }
 
 program
-    : stmtList EOF
+    : statementList EOF
     | EOF
     ;
 
-stmtList
-    : stmt (ENDL stmt)*
+statementList
+    : statement (ENDL statement)*
     ;
 
-stmt
-    : s=expr                                #nonEmptyStmt
-    | /* empty */                           #emptyStmt
+statement
+    : s=expression      #nonEmptyStatement
+    | /* empty */       #emptyStatement
     ;
 
-expr
+expression
     // Primary type
-    : INT                                   #integerLiteral
-    | BTRUE                                 #booleanLiteral
-    | BFALSE                                #booleanLiteral
-    | STRING                                #stringLiteral
+    : INT                                               #integerLiteral
+    | BTRUE                                             #booleanLiteral
+    | BFALSE                                            #booleanLiteral
+    | STRING                                            #stringLiteral
 
     // Operator sort by priority
-    | <assoc=right> l=expr op=POW r=expr    #binaryExpr
-    | op='-' e=expr                         #unaryExpr
-    | l=expr op=('*'|'/'|'%') r=expr        #binaryExpr
-    | l=expr op=('+'|'-') r=expr            #binaryExpr
-    | var '=' expr                          #assignment
+    | <assoc=right> l=expression op=POW r=expression    #binaryExpression
+    | op='-' e=expression                               #unaryExpression
+    | l=expression op=('*'|'/'|'%') r=expression        #binaryExpression
+    | l=expression op=('+'|'-') r=expression            #binaryExpression
+    | variable '=' expression                           #assignment
 
     // Miscellaneous
-    | '(' expr ')'                          #parenExpr
-    | designator                            #designatorExpr
+    | '(' expression ')'                                #parenExpression
+    | designator                                        #designatorExpression
     ;
 
 designator
-    : var									#varDesignator
-    | call									#callDesignator
+    : variable			#variableDesignator
+    | call				#callDesignator
     ;
 
 call
-    : fct=var args=params					#callWithParams
-    | fct=var '(' args=params ')'			#callWithParams
-    | fct=var '(' ')'						#callWithoutParams
+    : fct=variable args=parameters				#callWithParameters
+    | fct=variable '(' args=parameters          #callWithParameters
+    | fct=variable '(' ')'					    #callWithoutParameters
     ;
 
-var
+variable
     : ID
     ;
 
-params
-    : expr (',' expr)*
+parameters
+    : expression (',' expression)*
     ;

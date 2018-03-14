@@ -1,4 +1,4 @@
-package net.taken.arcanum.tree.expr;
+package net.taken.arcanum.tree.expressions;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.lang.ArcaObject;
@@ -6,7 +6,7 @@ import net.taken.arcanum.tree.Node;
 
 import java.util.List;
 
-public class UnaryExpr extends Expr {
+public class UnaryExpression extends Expression {
 
     public enum Type {
         MINUS("-");
@@ -24,9 +24,9 @@ public class UnaryExpr extends Expr {
     }
 
     private final Type type;
-    private final Expr value;
+    private final Expression value;
 
-    public UnaryExpr(Type type, Expr value) {
+    public UnaryExpression(Type type, Expression value) {
         this.type = type;
         this.value = value;
     }

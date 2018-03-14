@@ -1,7 +1,6 @@
-package net.taken.arcanum.tree.expr.literals;
+package net.taken.arcanum.tree.expressions.literals;
 
 import net.taken.arcanum.lang.ArcaBoolean;
-import net.taken.arcanum.lang.ArcaString;
 
 public class BooleanLiteral extends Literal {
 

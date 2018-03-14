@@ -1,8 +1,6 @@
-package net.taken.arcanum.tree.expr.literals;
+package net.taken.arcanum.tree.expressions.literals;
 
 import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.lang.ArcaObject;
-import net.taken.arcanum.lang.ArcaString;
 
 public class IntegerLiteral extends Literal {
 

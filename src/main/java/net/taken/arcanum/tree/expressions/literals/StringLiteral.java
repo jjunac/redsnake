@@ -1,10 +1,6 @@
-package net.taken.arcanum.tree.expr.literals;
+package net.taken.arcanum.tree.expressions.literals;
 
-import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.lang.ArcaString;
-import net.taken.arcanum.tree.Node;
-
-import java.util.List;
 
 public class StringLiteral extends Literal {
 

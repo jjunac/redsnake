@@ -1,4 +1,4 @@
-package net.taken.arcanum.tree.expr;
+package net.taken.arcanum.tree.expressions;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.lang.ArcaObject;
@@ -6,7 +6,7 @@ import net.taken.arcanum.tree.Node;
 
 import java.util.List;
 
-public class BinaryExpr extends Expr {
+public class BinaryExpression extends Expression {
 
     public enum Type {
         POWER("**"),
@@ -29,10 +29,10 @@ public class BinaryExpr extends Expr {
     }
 
     private final Type type;
-    private final Expr left;
-    private final Expr right;
+    private final Expression left;
+    private final Expression right;
 
-    public BinaryExpr(Type type, Expr left, Expr right) {
+    public BinaryExpression(Type type, Expression left, Expression right) {
         this.type = type;
         this.left = left;
         this.right = right;
