@@ -18,10 +18,10 @@ stmt
 
 expr
     // Primary type
-    : INT                                   #int
-    | BTRUE                                 #boolean
-    | BFALSE                                #boolean
-    | STRING                                #string
+    : INT                                   #integerLiteral
+    | BTRUE                                 #booleanLiteral
+    | BFALSE                                #booleanLiteral
+    | STRING                                #stringLiteral
 
     // Operator sort by priority
     | <assoc=right> l=expr op=POW r=expr    #binaryExpr

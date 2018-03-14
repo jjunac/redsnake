@@ -4,7 +4,7 @@ import net.taken.arcanum.lang.ArcaObject;
 
 import java.util.List;
 
-public abstract class Node {
+public abstract class Node<T> {
 
     // TODO save location for error trace
     public Node() {
@@ -12,6 +12,6 @@ public abstract class Node {
 
     public abstract List<? extends Node> getChildren();
 
-    public abstract ArcaObject execute();
+    public abstract T execute();
 
 }
