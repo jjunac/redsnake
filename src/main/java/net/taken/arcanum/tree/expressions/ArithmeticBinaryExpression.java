@@ -1,12 +1,13 @@
 package net.taken.arcanum.tree.expressions;
 
 import com.google.common.collect.ImmutableList;
+import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.tree.Node;
 
 import java.util.List;
 
-public class BinaryExpression extends Expression {
+public class ArithmeticBinaryExpression extends Expression {
 
     public enum Type {
         POWER("**"),
@@ -32,19 +33,19 @@ public class BinaryExpression extends Expression {
     private final Expression left;
     private final Expression right;
 
-    public BinaryExpression(Type type, Expression left, Expression right) {
+    public ArithmeticBinaryExpression(Type type, Expression left, Expression right) {
         this.type = type;
         this.left = left;
         this.right = right;
     }
 
     @Override
-    public List<? extends Node> getChildren() {
+    public List<Node> getChildren() {
         return ImmutableList.of(left, right);
     }
 
     @Override
-    public ArcaObject execute() {
+    public ArcaObject execute(ArcaEnvironment env) {
         ArcaObject l = left.execute();
         ArcaObject r = left.execute();
         switch (type){

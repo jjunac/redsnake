@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -17,8 +18,8 @@ public class ArcaEnvironment {
 
     ArcaKernel kernel;
     PrintWriter stdout;
-    Map<ArcaString, ArcaObject> variables;
-    Map<ArcaString, Function<ArcaList, ArcaObject>> functions;
+    Map<String, ArcaObject> variables;
+    Map<String, Function<List<ArcaObject>, ArcaObject>> functions;
 
     public ArcaEnvironment() {
         this(new OutputStreamWriter(System.out));
@@ -32,19 +33,19 @@ public class ArcaEnvironment {
         functions.putAll(kernel.getBuiltInFunctions());
     }
 
-    public ArcaObject getVariable(ArcaString name) {
+    public ArcaObject getVariable(String name) {
         return variables.get(name);
     }
 
-    public void putVariable(ArcaString name, ArcaObject value) {
+    public void putVariable(String name, ArcaObject value) {
         variables.put(name, value);
     }
 
-    public Function<ArcaList, ArcaObject> resolveFunction(ArcaString name) {
+    public Function<List<ArcaObject>, ArcaObject> resolveFunction(String name) {
         return functions.get(name);
     }
 
-    public void putFunction(ArcaString name, Function<ArcaList, ArcaObject> function) {
+    public void putFunction(String name, Function<List<ArcaObject>, ArcaObject> function) {
         functions.put(name, function);
     }
 }

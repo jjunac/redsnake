@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class Literal extends Expression {
 
     @Override
-    public List<? extends Node> getChildren() {
+    public List<Node> getChildren() {
         return ImmutableList.of();
     }
 }

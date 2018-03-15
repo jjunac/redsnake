@@ -1,6 +1,6 @@
 package net.taken.arcanum.tree;
 
-import net.taken.arcanum.lang.ArcaObject;
+import net.taken.arcanum.lang.ArcaEnvironment;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ public abstract class Node<T> {
     public Node() {
     }
 
-    public abstract List<? extends Node> getChildren();
+    public abstract List<Node> getChildren();
 
-    public abstract T execute();
+    public abstract T execute(ArcaEnvironment env);
 
 }

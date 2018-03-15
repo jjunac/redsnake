@@ -1,6 +1,7 @@
 package net.taken.arcanum.tree.expressions.literals;
 
 import net.taken.arcanum.lang.ArcaBoolean;
+import net.taken.arcanum.lang.ArcaEnvironment;
 
 public class BooleanLiteral extends Literal {
 
@@ -11,7 +12,7 @@ public class BooleanLiteral extends Literal {
     }
 
     @Override
-    public ArcaBoolean execute() {
+    public ArcaBoolean execute(ArcaEnvironment env) {
         return new ArcaBoolean(value);
     }
 }

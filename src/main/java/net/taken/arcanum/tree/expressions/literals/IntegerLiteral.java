@@ -1,5 +1,6 @@
 package net.taken.arcanum.tree.expressions.literals;
 
+import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
 
 public class IntegerLiteral extends Literal {
@@ -11,7 +12,7 @@ public class IntegerLiteral extends Literal {
     }
 
     @Override
-    public ArcaInteger execute() {
+    public ArcaInteger execute(ArcaEnvironment env) {
         return new ArcaInteger(value);
     }
 }

@@ -3,17 +3,17 @@ parser grammar ArcanumParser;
 options { tokenVocab = ArcanumLexer; }
 
 program
-    : statementList EOF
+    : statements EOF
     | EOF
     ;
 
-statementList
+statements
     : statement (ENDL statement)*
     ;
 
 statement
-    : s=expression      #nonEmptyStatement
-    | /* empty */       #emptyStatement
+    : expression
+    | /* empty */
     ;
 
 expression
@@ -24,14 +24,14 @@ expression
     | STRING                                            #stringLiteral
 
     // Operator sort by priority
-    | <assoc=right> l=expression op=POW r=expression    #binaryExpression
-    | op='-' e=expression                               #unaryExpression
-    | l=expression op=('*'|'/'|'%') r=expression        #binaryExpression
-    | l=expression op=('+'|'-') r=expression            #binaryExpression
+    | <assoc=right> l=expression op=POW r=expression    #arithmeticBinary
+    | op='-' e=expression                               #arithmeticUnary
+    | l=expression op=('*'|'/'|'%') r=expression        #arithmeticBinary
+    | l=expression op=('+'|'-') r=expression            #arithmeticBinary
     | variable '=' expression                           #assignment
 
     // Miscellaneous
-    | '(' expression ')'                                #parenExpression
+    | '(' expression ')'                                #subExpression
     | designator                                        #designatorExpression
     ;
 
