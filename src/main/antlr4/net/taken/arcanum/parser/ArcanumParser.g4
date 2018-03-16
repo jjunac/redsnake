@@ -8,12 +8,11 @@ program
     ;
 
 statements
-    : statement (ENDL statement)*
+    : statement (ENDL statement?)*
     ;
 
 statement
     : expression
-    | /* empty */
     ;
 
 expression
@@ -41,9 +40,9 @@ designator
     ;
 
 call
-    : fct=variable args=parameters				#callWithParameters
-    | fct=variable '(' args=parameters          #callWithParameters
-    | fct=variable '(' ')'					    #callWithoutParameters
+    : fct=variable args=parameters
+    | fct=variable '(' args=parameters ')'
+    | fct=variable '(' ')'
     ;
 
 variable
