@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 import java.util.List;
 
-import static net.taken.arcanum.parser.visitors.TestUtils.mockNode;
-import static org.junit.jupiter.api.Assertions.*;
+import static net.taken.arcanum.tree.expressions.TestUtils.mockNode;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

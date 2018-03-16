@@ -7,74 +7,63 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringWriter;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.function.Function;
 
-import static net.taken.arcanum.parser.ArcanumParser.*;
+import static net.taken.arcanum.tree.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import static net.taken.arcanum.parser.visitors.TestUtils.*;
 
 
 
 class ArcanumVisitorTest {
 
-    private ArcanumVisitor visitor;
     private StringWriter wrt;
+    private ArcaEnvironment env;
 
     @BeforeEach
     void setUp() {
         wrt = new StringWriter();
-        visitor = new ArcanumVisitor(new ArcaEnvironment(wrt));
+        env = new ArcaEnvironment(wrt);
     }
 
     @Test
     void shouldPrintRightResultWhenPrintCalculationWithoutParen() {
-        ArcanumParser parser = initParser("print (946+-19*185**2-687)*670+895");
-        visitor.visit(parser.program());
+        parseProgram("print (946+-19*185**2-687)*670+895").execute(env);
         assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldPrintRightResultWhenPrintCalculationWithoutParenWithENDL() {
-        ArcanumParser parser = initParser("print (946+-19*185**2-687)*670+895\n");
-        visitor.visit(parser.program());
+        parseProgram("print (946+-19*185**2-687)*670+895\n").execute(env);
         assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldPrintRightResultWhenPrintCalculationWithParen() {
-        ArcanumParser parser = initParser("print((946+-19*185**2-687)*670+895)");
-        visitor.visit(parser.program());
+        parseProgram("print((946+-19*185**2-687)*670+895)").execute(env);
         assertEquals("-435509825" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldPrintRightResultWhenDoingCalculationsWithVariable() {
-        ArcanumParser parser = initParser("a = 42", "a = a - 40", "a = a * 2", "print a");
-        ArcaObject o = visitor.visit(parser.program());
+        parseProgram("a = 42", "a = a - 40", "a = a * 2", "print a").execute(env);
         assertEquals("4" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldPrintRightResultWhenWorkingAroundCallsAndVariables() {
-        ArcanumParser parser = initParser("a = 51\n" +
+        parseProgram("a = 51\n" +
                 "a = a - 42\n" +
                 "print\n" +
-                "print (a)*678\n");
-        visitor.visit(parser.program());
+                "print (a)*678\n").execute(env);
         assertEquals(System.lineSeparator() + "6102" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldPrintRightResultWhenDoingOperationOnStrings() {
-        ArcanumParser parser = initParser("a = \"WRjfMs\"\n" +
+        parseProgram("a = \"WRjfMs\"\n" +
             "a = a * 3\n" +
             "a = a + \"mnV\"\n" +
             "a = a * \"3\"\n" +
-            "print a");
-        visitor.visit(parser.program());
+            "print a").execute(env);
         String expected = Strings.repeat("WRjfMs", 3);
         expected += "mnV";
         expected = Strings.repeat(expected, 3);
@@ -83,22 +72,25 @@ class ArcanumVisitorTest {
 
     @Test
     void shouldPrintRightResultWhenPrintingMultipleParametersOfDifferentType() {
-        ArcanumParser parser = initParser("print 60, \"iYQaKswI\"");
-        visitor.visit(parser.program());
+        parseProgram("print 60, \"iYQaKswI\"").execute(env);
         assertEquals("60 iYQaKswI" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldReturnSomethingWhenParsingStmt() {
-        ArcanumParser parser = initParser("598");
-        ArcaObject res = visitor.visit(parser.program());
-        assertEquals(new ArcaInteger(598), res);
+        ArcaObject actual =parseProgram("598").execute(env);
+        assertEquals(new ArcaInteger(598), actual);
     }
 
     @Test
     void shouldReturnNullWhenParsePrint() {
-        ArcanumParser parser = initParser("print 875");
-        ArcaObject res = visitor.visit(parser.program());
-        assertTrue(res.isNull());
+        ArcaObject actual = parseProgram("print 875").execute(env);
+        assertTrue(actual.isNull());
+    }
+
+    @Test
+    void shouldBeRightAssociativeWhenVisitBinaryExprPow() {
+        ArcaObject actual = parseProgram("2**3**2").execute(env);
+        assertEquals(new ArcaInteger(512), actual);
     }
 }

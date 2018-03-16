@@ -39,7 +39,7 @@ public class ArithmeticUnaryExpression extends Expression {
 
     @Override
     public ArcaObject execute(ArcaEnvironment env) {
-        ArcaObject v = value.execute();
+        ArcaObject v = value.execute(env);
         switch (type){
             case MINUS:
                 return v.uminus();

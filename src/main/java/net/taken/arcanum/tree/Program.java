@@ -3,10 +3,11 @@ package net.taken.arcanum.tree;
 import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaNull;
+import net.taken.arcanum.lang.ArcaObject;
 
 import java.util.List;
 
-public class Program extends Node {
+public class Program extends Node<ArcaObject> {
 
     private final List<Statement> statements;
 
@@ -20,7 +21,7 @@ public class Program extends Node {
     }
 
     @Override
-    public Object execute(ArcaEnvironment env) {
+    public ArcaObject execute(ArcaEnvironment env) {
         statements.forEach(s -> execute(env));
         return new ArcaNull();
     }

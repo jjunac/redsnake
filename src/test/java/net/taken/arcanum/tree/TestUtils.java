@@ -1,4 +1,4 @@
-package net.taken.arcanum.parser.visitors;
+package net.taken.arcanum.tree;
 
 import com.sun.istack.internal.NotNull;
 import net.taken.arcanum.lang.ArcaInteger;
@@ -6,7 +6,12 @@ import net.taken.arcanum.lang.ArcaList;
 import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
+import net.taken.arcanum.parser.visitors.ASTBuilder;
+import net.taken.arcanum.tree.expressions.ArithmeticBinaryExpression;
+import net.taken.arcanum.tree.expressions.ArithmeticUnaryExpression;
+import net.taken.arcanum.tree.expressions.Expression;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -39,19 +44,18 @@ public class TestUtils {
         return mock;
     }
 
-    public static ArcanumParser.BinaryExprContext mockBinaryExpr(int l, int r, int operator) {
-        ArcanumParser.BinaryExprContext ctx = mock(ArcanumParser.BinaryExprContext.class);
-        ctx.l = mockNode(ArcanumParser.IntContext.class, new ArcaInteger(l));
-        ctx.r = mockNode(ArcanumParser.IntContext.class, new ArcaInteger(r));
-        ctx.op = mockToken(operator);
-        return ctx;
+    public static ArithmeticBinaryExpression mockBinaryExpr(ArithmeticBinaryExpression.Type operator, int l, int r) {
+        Expression left = mock(Expression.class);
+        when(left.execute(any())).thenReturn(new ArcaInteger(l));
+        Expression right = mock(Expression.class);
+        when(right.execute(any())).thenReturn(new ArcaInteger(r));
+        return new ArithmeticBinaryExpression(operator, left, right);
     }
 
-    public static ArcanumParser.UnaryExprContext mockUnaryExpr(int e, int operator) {
-        ArcanumParser.UnaryExprContext ctx = mock(ArcanumParser.UnaryExprContext.class);
-        ctx.e = mockNode(ArcanumParser.IntContext.class, new ArcaInteger(e));
-        ctx.op = mockToken(operator);
-        return ctx;
+    public static ArithmeticUnaryExpression mockUnaryExpr(ArithmeticUnaryExpression.Type operator, int e) {
+        Expression expr = mock(Expression.class);
+        when(expr.execute(any())).thenReturn(new ArcaInteger(e));
+        return new ArithmeticUnaryExpression(operator, expr);
     }
 
     public static Function<ArcaList, ArcaObject> mockArcaFunction(ArcaObject value) {
@@ -60,17 +64,15 @@ public class TestUtils {
         return fct;
     }
 
-    public static ArcanumParser initParser(@NotNull String s) {
-        return initParser(new String[]{s});
-    }
-
-    public static ArcanumParser initParser(@NotNull String... s) {
+    public static Program parseProgram(@NotNull String... s) {
         StringBuilder str = new StringBuilder();
         Arrays.stream(s).forEach(st -> str.append(st).append(System.lineSeparator()));
         CharStream inputStream = CharStreams.fromString(str.toString());
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
-        return new ArcanumParser(commonTokenStream);
+        ArcanumParser parser = new ArcanumParser(commonTokenStream);
+        ParseTree t = parser.program();
+        return (Program) new ASTBuilder().visit(t);
     }
 
 

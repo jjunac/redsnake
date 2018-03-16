@@ -3,12 +3,13 @@ package net.taken.arcanum.parser.visitors;
 import net.taken.arcanum.lang.ArcaInteger;
 import net.taken.arcanum.lang.ArcaString;
 import net.taken.arcanum.parser.ArcanumParser;
+import net.taken.arcanum.tree.expressions.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static net.taken.arcanum.parser.visitors.TestUtils.initParser;
-import static net.taken.arcanum.parser.visitors.TestUtils.mockArcaFunction;
-import static net.taken.arcanum.parser.visitors.TestUtils.mockContext;
+import static net.taken.arcanum.tree.expressions.TestUtils.parseProgram;
+import static net.taken.arcanum.tree.expressions.TestUtils.mockArcaFunction;
+import static net.taken.arcanum.tree.expressions.TestUtils.mockContext;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -42,7 +43,7 @@ class DesignatorVisitorTest {
 
     @Test
     void shouldCallFunctionWhenVisitVarDesignatorButVarDoesntExist() {
-        ArcanumParser parser = initParser("-(2)**2");
+        ArcanumParser parser = TestUtils.parseProgram("-(2)**2");
         ArcaInteger actual = (ArcaInteger) visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(-4), actual);
     }

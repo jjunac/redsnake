@@ -10,10 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.function.Function;
 
-import static net.taken.arcanum.parser.visitors.TestUtils.mockArcaFunction;
-import static net.taken.arcanum.parser.visitors.TestUtils.mockContext;
-import static net.taken.arcanum.parser.visitors.TestUtils.mockNode;
-import static org.junit.jupiter.api.Assertions.*;
+import static net.taken.arcanum.tree.expressions.TestUtils.mockArcaFunction;
+import static net.taken.arcanum.tree.expressions.TestUtils.mockContext;
+import static net.taken.arcanum.tree.expressions.TestUtils.mockNode;
 import static org.mockito.Mockito.mock;
 
 class CallVisitorTest {

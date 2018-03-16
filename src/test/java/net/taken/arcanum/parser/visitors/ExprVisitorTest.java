@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.arcanum.parser.ArcanumParser.*;
-import static net.taken.arcanum.parser.visitors.TestUtils.*;
+import static net.taken.arcanum.tree.expressions.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExprVisitorTest {
@@ -39,7 +39,7 @@ class ExprVisitorTest {
 
     @Test
     void shouldBeRightAssociativeWhenVisitBinaryExprPow() {
-        ArcanumParser parser = initParser("2**3**2");
+        ArcanumParser parser = parseProgram("2**3**2");
         ArcaInteger actual = (ArcaInteger) visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(512), actual);
     }
@@ -83,35 +83,35 @@ class ExprVisitorTest {
 
     @Test
     void shouldStoreVariableWhenVisitAssignment() {
-        ArcanumParser parser = initParser("a = 771");
+        ArcanumParser parser = parseProgram("a = 771");
         visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(771), visitor.environment.getVariable(new ArcaString("a")));
     }
 
     @Test
     void shouldPrioritizePlusAndMinusOverEquals() {
-        ArcanumParser parser = initParser("a = 5+2-1");
+        ArcanumParser parser = parseProgram("a = 5+2-1");
         visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(6), visitor.environment.getVariable(new ArcaString("a")));
     }
 
     @Test
     void shouldPrioritizeMultiplyDivideAndModuloOverPlusAndMinus() {
-        ArcanumParser parser = initParser("2+2*3-4/2+5%3");
+        ArcanumParser parser = parseProgram("2+2*3-4/2+5%3");
         ArcaInteger actual = (ArcaInteger) visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(8), actual);
     }
 
     @Test
     void shouldPrioritizeUnaryMinusOverMultiplyDivideAndModulo() {
-        ArcanumParser parser = initParser("2*-1/-1*(1%-(-2))");
+        ArcanumParser parser = parseProgram("2*-1/-1*(1%-(-2))");
         ArcaInteger actual = (ArcaInteger) visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(2), actual);
     }
 
     @Test
     void shouldPrioritizePowerOverUnaryMinus() {
-        ArcanumParser parser = initParser("-(2)**2");
+        ArcanumParser parser = parseProgram("-(2)**2");
         ArcaInteger actual = (ArcaInteger) visitor.visit(parser.expr());
         assertEquals(new ArcaInteger(-4), actual);
     }

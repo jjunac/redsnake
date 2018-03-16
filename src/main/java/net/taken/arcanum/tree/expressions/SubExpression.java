@@ -22,6 +22,6 @@ public class SubExpression extends Expression {
 
     @Override
     public ArcaObject execute(ArcaEnvironment env) {
-        return subExpression.execute();
+        return subExpression.execute(env);
     }
 }

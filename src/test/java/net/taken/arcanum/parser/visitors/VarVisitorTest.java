@@ -5,8 +5,7 @@ import net.taken.arcanum.parser.ArcanumParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static net.taken.arcanum.parser.visitors.TestUtils.mockContext;
-import static org.junit.jupiter.api.Assertions.*;
+import static net.taken.arcanum.tree.expressions.TestUtils.mockContext;
 
 class VarVisitorTest {
 

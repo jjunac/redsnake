@@ -23,6 +23,6 @@ public class DesignatorExpression extends Expression {
 
     @Override
     public ArcaObject execute(ArcaEnvironment env) {
-        return value.execute();
+        return value.execute(env);
     }
 }

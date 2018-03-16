@@ -1,9 +1,11 @@
 package net.taken.arcanum;
 
+import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
-import net.taken.arcanum.parser.visitors.ArcanumVisitor;
+import net.taken.arcanum.parser.visitors.ASTBuilder;
+import net.taken.arcanum.tree.Program;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -19,7 +21,8 @@ public class Arcanum {
 
     Options options;
     CommandLineParser cliParser;
-    ArcanumVisitor arcanumVisitor;
+    ASTBuilder astBuilder;
+    ArcaEnvironment arcaEnvironment;
 
     public Arcanum(String[] args) throws ParseException {
         initOptions();
@@ -30,7 +33,7 @@ public class Arcanum {
             System.exit(0);
         }
 
-        arcanumVisitor = new ArcanumVisitor();
+        astBuilder = new ASTBuilder();
         if (cmd.getArgList().size() == 0) {
             launchShell();
         }
@@ -55,7 +58,7 @@ public class Arcanum {
             while (true) {
                 System.out.print("arca> ");
                 BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
-                ArcaObject res = parseStmt(CharStreams.fromString(is.readLine()));
+                ArcaObject res = buildAST(CharStreams.fromString(is.readLine())).execute(arcaEnvironment);
                 if(!res.isNull()) {
                     System.out.println("=> " + res.tos().getValue());
                 }
@@ -66,12 +69,12 @@ public class Arcanum {
     }
 
 
-    public ArcaObject parseStmt(CharStream inputStream) {
+    public Program buildAST(CharStream inputStream) {
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
         ParseTree t = parser.program();
-        return arcanumVisitor.visit(t);
+        return (Program) astBuilder.visit(t);
     }
 
     public static void main(String[] args) throws ParseException {
