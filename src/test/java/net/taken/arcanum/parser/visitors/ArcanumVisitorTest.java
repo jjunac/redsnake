@@ -88,9 +88,4 @@ class ArcanumVisitorTest {
         assertTrue(actual.isNull());
     }
 
-    @Test
-    void shouldBeRightAssociativeWhenVisitBinaryExprPow() {
-        ArcaObject actual = parseProgram("2**3**2").execute(env);
-        assertEquals(new ArcaInteger(512), actual);
-    }
 }
