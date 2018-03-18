@@ -9,7 +9,6 @@ import net.taken.arcanum.tree.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static net.taken.arcanum.tree.TestUtils.mockArcaFunction;
 import static net.taken.arcanum.tree.TestUtils.mockVariable;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -30,14 +29,22 @@ class VariableDesignatorTest {
     }
 
     @Test
-    void shouldReturnVariableValueWhenExecuteVar() {
+    void shouldReturnVariableValueWhenExecuteVarDesignator() {
         VariableDesignator var = createVariableDesignator("testvar");
         env.putVariable("testvar", new ArcaInteger(223));
         assertEquals(new ArcaInteger(223), var.execute(env));
     }
 
     @Test
-    void shouldCallFunctionWhenVisitVarDesignatorAndVarDoesntExist() {
+    void shouldReturnVariableValueWhenExecuteVarDesignatorAndFunctionExists() {
+        VariableDesignator var = createVariableDesignator("testvar");
+        env.putVariable("testvar", new ArcaInteger(96));
+        env.putFunction("testvar", list -> new ArcaInteger(957));
+        assertEquals(new ArcaInteger(96), var.execute(env));
+    }
+
+    @Test
+    void shouldCallFunctionWhenExecuteVarDesignatorAndVarDoesntExist() {
         VariableDesignator var = createVariableDesignator("testFunction");
         env.putFunction("testFunction", list -> new ArcaInteger(22));
         assertEquals(new ArcaInteger(22), var.execute(env));

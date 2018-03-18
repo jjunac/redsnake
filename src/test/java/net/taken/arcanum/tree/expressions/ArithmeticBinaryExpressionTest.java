@@ -28,43 +28,43 @@ class ArithmeticBinaryExpressionTest {
     }
 
     @Test
-    void shouldReturnCorrectResultWhenVisitBinaryExprPower() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprPower() {
         ArithmeticBinaryExpression abe = createBinaryExpression(POWER, 2, 4);
         assertEquals(new ArcaInteger(16), abe.execute(env));
     }
 
     @Test
-    void shouldReturnCorrectResultWhenVisitBinaryExprMult() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprMult() {
         ArithmeticBinaryExpression abe = createBinaryExpression(MULTIPLY, 4, 2);
         assertEquals(new ArcaInteger(8), abe.execute(env));
     }
 
     @Test
-    void shouldReturnCorrectResultWhenVisitBinaryExprDiv() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprDiv() {
         ArithmeticBinaryExpression abe = createBinaryExpression(DIVIDE, 4, 2);
         assertEquals(new ArcaInteger(2), abe.execute(env));
     }
 
     @Test
-    void shouldReturnCorrectResultWhenVisitBinaryExprMod() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprMod() {
         ArithmeticBinaryExpression abe = createBinaryExpression(MODULUS, 4, 3);
         assertEquals(new ArcaInteger(1), abe.execute(env));
     }
 
     @Test
-    void shouldReturnCorrectResultWhenVisitBinaryPlus() {
+    void shouldReturnCorrectResultWhenExecuteBinaryPlus() {
         ArithmeticBinaryExpression abe = createBinaryExpression(ADD, 4, 3);
         assertEquals(new ArcaInteger(7), abe.execute(env));
     }
 
     @Test
-    void shouldReturnCorrectResultWhenVisitBinaryMinus() {
+    void shouldReturnCorrectResultWhenExecuteBinaryMinus() {
         ArithmeticBinaryExpression abe = createBinaryExpression(SUBTRACT, 4, 3);
         assertEquals(new ArcaInteger(1), abe.execute(env));
     }
 
     @Test
-    void shouldBeRightAssociativeWhenVisitBinaryExprPow() {
+    void shouldBeRightAssociativeWhenExecuteBinaryExprPow() {
         ArcaObject actual = parseProgram("2**3**2").execute(env);
         assertEquals(new ArcaInteger(512), actual);
     }

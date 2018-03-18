@@ -29,17 +29,17 @@ class AssignmentTest {
 
     @Test
     void shouldStoreVariableAndReturnValueWhenAssignNewVariable() {
-        Assignment assignment = createAssignment("vnZz3g5T", 250);
+        Assignment assignment = createAssignment("ctrl", 250);
         assertEquals(new ArcaInteger(250), assignment.execute(env));
-        assertEquals(new ArcaInteger(250), env.getVariable("vnZz3g5T"));
+        assertEquals(new ArcaInteger(250), env.getVariable("ctrl"));
     }
 
     @Test
     void shouldUpdateValueWhenAssignExistingVariable() {
-        env.putVariable("rtyur", new ArcaInteger(317));
-        Assignment assignment = createAssignment("rtyur", 834);
+        env.putVariable("durra", new ArcaInteger(317));
+        Assignment assignment = createAssignment("durra", 834);
         assignment.execute(env);
-        assertEquals(new ArcaInteger(834), env.getVariable("rtyur"));
+        assertEquals(new ArcaInteger(834), env.getVariable("durra"));
     }
 
     @Test

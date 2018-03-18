@@ -1,19 +1,18 @@
-package net.taken.arcanum.parser.visitors;
+package net.taken.arcanum.tree;
 
 import com.google.common.base.Strings;
-import net.taken.arcanum.lang.*;
-import net.taken.arcanum.parser.ArcanumParser;
+import net.taken.arcanum.lang.ArcaEnvironment;
+import net.taken.arcanum.lang.ArcaInteger;
+import net.taken.arcanum.lang.ArcaObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.StringWriter;
 
-import static net.taken.arcanum.tree.TestUtils.*;
+import static net.taken.arcanum.tree.TestUtils.parseProgram;
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
-class ArcanumVisitorTest {
+class ProgramTest {
 
     private StringWriter wrt;
     private ArcaEnvironment env;
@@ -51,29 +50,29 @@ class ArcanumVisitorTest {
     @Test
     void shouldPrintRightResultWhenWorkingAroundCallsAndVariables() {
         parseProgram("a = 51\n" +
-                "a = a - 42\n" +
-                "print\n" +
-                "print (a)*678\n").execute(env);
+            "a = a - 42\n" +
+            "print\n" +
+            "print (a)*678\n").execute(env);
         assertEquals(System.lineSeparator() + "6102" + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldPrintRightResultWhenDoingOperationOnStrings() {
-        parseProgram("a = \"WRjfMs\"\n" +
+        parseProgram("a = \"Gloater\"\n" +
             "a = a * 3\n" +
-            "a = a + \"mnV\"\n" +
+            "a = a + \"Mafurra\"\n" +
             "a = a * \"3\"\n" +
             "print a").execute(env);
-        String expected = Strings.repeat("WRjfMs", 3);
-        expected += "mnV";
+        String expected = Strings.repeat("Gloater", 3);
+        expected += "Mafurra";
         expected = Strings.repeat(expected, 3);
         assertEquals(expected + System.lineSeparator(), wrt.toString());
     }
 
     @Test
     void shouldPrintRightResultWhenPrintingMultipleParametersOfDifferentType() {
-        parseProgram("print 60, \"iYQaKswI\"").execute(env);
-        assertEquals("60 iYQaKswI" + System.lineSeparator(), wrt.toString());
+        parseProgram("print 60, \"Unjuiced\"").execute(env);
+        assertEquals("60 Unjuiced" + System.lineSeparator(), wrt.toString());
     }
 
     @Test

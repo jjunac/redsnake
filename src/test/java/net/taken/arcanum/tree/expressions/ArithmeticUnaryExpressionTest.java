@@ -23,7 +23,7 @@ class ArithmeticUnaryExpressionTest {
     }
 
     @Test
-    void shouldReturnCorrectResultWhenVisitUnaryExprUnaryMinus() {
+    void shouldReturnCorrectResultWhenExecuteUnaryExprUnaryMinus() {
         ArithmeticUnaryExpression aue = createUnaryExpression(ArithmeticUnaryExpression.Type.MINUS, 2);
         assertEquals(new ArcaInteger(-2), aue.execute(env));
     }

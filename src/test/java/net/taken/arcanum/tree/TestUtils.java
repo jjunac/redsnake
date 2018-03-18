@@ -2,24 +2,17 @@ package net.taken.arcanum.tree;
 
 import com.sun.istack.internal.NotNull;
 import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.lang.ArcaList;
 import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.visitors.ASTBuilder;
-import net.taken.arcanum.tree.designators.VariableDesignator;
-import net.taken.arcanum.tree.expressions.ArithmeticBinaryExpression;
-import net.taken.arcanum.tree.expressions.ArithmeticUnaryExpression;
-import net.taken.arcanum.tree.expressions.Assignment;
 import net.taken.arcanum.tree.expressions.Expression;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.Arrays;
-import java.util.function.Function;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,6 +31,12 @@ public class TestUtils {
         Variable var = mock(Variable.class);
         when(var.execute(any())).thenReturn(name);
         return var;
+    }
+
+    public static Call mockCall(ArcaObject value) {
+        Call call = mock(Call.class);
+        when(call.execute(any())).thenReturn(value);
+        return call;
     }
 
     public static Program parseProgram(@NotNull String... s) {

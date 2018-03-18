@@ -8,17 +8,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BooleanLiteralTest {
 
+    private ArcaEnvironment env;
     private BooleanLiteral trueNode;
     private BooleanLiteral falseNode;
 
     @BeforeEach
     void setUp() {
+        env = new ArcaEnvironment();
         trueNode = new BooleanLiteral("true");
         falseNode = new BooleanLiteral("false");
     }
 
     @Test
     void shouldReturnTrueWhenExecutingTrueNode() {
-        assertTrue(trueNode.execute(new ArcaEnvironment()).getValue());
+        env = new ArcaEnvironment();
+        assertTrue(trueNode.execute(env).getValue());
+    }
+
+    @Test
+    void shouldReturnFalseWhenExecutingFalseNode() {
+        assertFalse(falseNode.execute(env).getValue());
     }
 }
