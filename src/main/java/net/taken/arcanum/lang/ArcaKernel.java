@@ -3,6 +3,7 @@ package net.taken.arcanum.lang;
 import java.io.*;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ArcaKernel {
 
@@ -12,26 +13,25 @@ public class ArcaKernel {
         this.environment = environment;
     }
 
-    public ArcaNull print(ArcaList l) {
-        environment.stdout.println(l.tos().getValue());
+    public ArcaNull print(List<ArcaObject> l) {
+        environment.stdout.println(String.join(" ", l.stream().map(o -> o.tos().getValue()).collect(Collectors.toList())));
         environment.stdout.flush();
         return new ArcaNull();
     }
 
-    public ArcaNull exit(ArcaList l) {
+    public ArcaNull exit(List<ArcaObject> l) {
         if (l.size() == 0) {
             System.exit(0);
         } else {
-            // TODO fix this with to_i method
-            System.exit(((ArcaInteger)l.getValue().get(0)).getValue());
+            System.exit(l.get(0).toi().getValue());
         }
         return new ArcaNull();
     }
 
-    public Map<ArcaString, Function<ArcaList, ArcaObject>> getBuiltInFunctions() {
-        Map<ArcaString, Function<ArcaList, ArcaObject>> res = new HashMap<>();
-        res.put(new ArcaString("print"), this::print);
-        res.put(new ArcaString("exit"), this::exit);
+    public Map<String, Function<List<ArcaObject>, ArcaObject>> getBuiltInFunctions() {
+        Map<String, Function<List<ArcaObject>, ArcaObject>> res = new HashMap<>();
+        res.put("print", this::print);
+        res.put("exit", this::exit);
         return res;
     }
 }

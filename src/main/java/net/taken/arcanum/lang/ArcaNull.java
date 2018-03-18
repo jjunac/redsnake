@@ -1,6 +1,12 @@
 package net.taken.arcanum.lang;
 
+import net.taken.arcanum.reflect.ArcaMetaClass;
+
 public class ArcaNull extends ArcaObject {
+
+    public ArcaNull() {
+        super(new ArcaMetaClass("Null", "Object"));
+    }
 
     @Override
     public boolean isNull() {

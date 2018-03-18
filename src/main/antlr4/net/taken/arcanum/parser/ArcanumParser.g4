@@ -3,47 +3,52 @@ parser grammar ArcanumParser;
 options { tokenVocab = ArcanumLexer; }
 
 program
-    : stmt* EOF ;
-
-stmt
-    : expr ENDL
-    | ENDL
+    : statements EOF
+    | EOF
     ;
 
-expr
+statements
+    : statement (ENDL statement?)*
+    ;
+
+statement
+    : expression
+    ;
+
+expression
     // Primary type
-    : INT                                   #int
-    | BTRUE                                 #boolean
-    | BFALSE                                #boolean
-    | STRING                                #string
+    : INT                                               #integerLiteral
+    | BTRUE                                             #booleanLiteral
+    | BFALSE                                            #booleanLiteral
+    | STRING                                            #stringLiteral
 
     // Operator sort by priority
-    | <assoc=right> l=expr op=POW r=expr    #binaryExpr
-    | op='-' e=expr                         #unaryExpr
-    | l=expr op=('*'|'/'|'%') r=expr        #binaryExpr
-    | l=expr op=('+'|'-') r=expr            #binaryExpr
-    | var '=' expr                          #assignment
+    | <assoc=right> l=expression op=POW r=expression    #arithmeticBinary
+    | op='-' e=expression                               #arithmeticUnary
+    | l=expression op=('*'|'/'|'%') r=expression        #arithmeticBinary
+    | l=expression op=('+'|'-') r=expression            #arithmeticBinary
+    | variable '=' expression                           #assignment
 
     // Miscellaneous
-    | '(' expr ')'                          #parenExpr
-    | designator                            #designatorExpr
+    | '(' expression ')'                                #subExpression
+    | designator                                        #designatorExpression
     ;
 
 designator
-    : var									#varDesignator
-    | call									#callDesignator
+    : variable			#variableDesignator
+    | call				#callDesignator
     ;
 
 call
-    : fct=var args=params					#callWithParams
-    | fct=var '(' args=params ')'			#callWithParams
-    | fct=var '(' ')'						#callWithoutParams
+    : fct=variable args=parameters
+    | fct=variable '(' args=parameters ')'
+    | fct=variable '(' ')'
     ;
 
-var
+variable
     : ID
     ;
 
-params
-    : expr (',' expr)*
+parameters
+    : expression (',' expression)*
     ;
