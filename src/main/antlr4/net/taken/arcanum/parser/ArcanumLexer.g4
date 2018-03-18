@@ -1,8 +1,8 @@
 lexer grammar ArcanumLexer;
 
 
-BTRUE: 'true';
-BFALSE: 'false';
+TRUE: 'true';
+FALSE: 'false';
 
 ID: LETTER (ID | DIGIT | '_')* ;
 

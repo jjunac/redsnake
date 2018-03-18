@@ -18,8 +18,8 @@ statement
 expression
     // Primary type
     : INT                                               #integerLiteral
-    | BTRUE                                             #booleanLiteral
-    | BFALSE                                            #booleanLiteral
+    | TRUE                                              #booleanLiteral
+    | FALSE                                             #booleanLiteral
     | STRING                                            #stringLiteral
 
     // Operator sort by priority
