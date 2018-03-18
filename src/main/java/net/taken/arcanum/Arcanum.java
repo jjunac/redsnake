@@ -5,7 +5,7 @@ import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.visitors.ASTBuilder;
-import net.taken.arcanum.tree.Program;
+import net.taken.arcanum.tree.Statement;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -71,12 +71,12 @@ public class Arcanum {
     }
 
 
-    public Program buildAST(CharStream inputStream) {
+    public Statement buildAST(CharStream inputStream) {
         ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
         ArcanumParser parser = new ArcanumParser(commonTokenStream);
-        ParseTree t = parser.program();
-        return (Program) astBuilder.visit(t);
+        ParseTree t = parser.statement();
+        return (Statement) astBuilder.visit(t);
     }
 
     public static void main(String[] args) throws ParseException {
