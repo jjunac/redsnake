@@ -1,16 +1,18 @@
 lexer grammar ArcanumLexer;
 
-
-TRUE: 'true';
-FALSE: 'false';
-
-ID: LETTER (ID | DIGIT | '_')* ;
+// =============================
+// Common tokens
+// =============================
 
 ENDL: '\r'?'\n';
 
 COMMA: ',' ;
+
 L_PAREN: '(' ;
 R_PAREN: ')' ;
+
+L_BRACK: '{' ;
+R_BRACK: '}' ;
 
 // =============================
 // Common types
@@ -26,6 +28,10 @@ STRING
     : '"' ( ESC | . )*? '"'     { setText(getText().substring(1, getText().length()-1)); }
     | '\'' ( ESC | . )*? '\''   { setText(getText().substring(1, getText().length()-1)); }
     ;
+
+TRUE: 'true';
+FALSE: 'false';
+
 // =============================
 // Operators
 // =============================
@@ -39,6 +45,19 @@ MOD: '%' ;
 ASSIGN: '=' ;
 
 WS: [ \t]+ -> skip ;
+
+// =============================
+// Keywords
+// =============================
+
+IF: 'if';
+ELSE: 'else';
+
+// =============================
+// Identifiers
+// =============================
+
+ID: LETTER (ID | DIGIT | '_')* ;
 
 // =============================
 // Common fragments

@@ -8,11 +8,17 @@ program
     ;
 
 statements
+    // FIXME: cannot start program with an emptyline
     : statement (ENDL statement?)*
     ;
 
 statement
     : expression
+    ;
+
+suite
+    : statement
+    | '{' statements
     ;
 
 expression
