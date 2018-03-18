@@ -50,5 +50,13 @@ public class TestUtils {
         return (Program) new ASTBuilder().visit(t);
     }
 
+    public static Statement parseStatement(@NotNull String s) {
+        CharStream inputStream = CharStreams.fromString(s);
+        ArcanumLexer arcanumLexer = new ArcanumLexer(inputStream);
+        TokenStream commonTokenStream = new CommonTokenStream(arcanumLexer);
+        ArcanumParser parser = new ArcanumParser(commonTokenStream);
+        ParseTree t = parser.expression();
+        return (Expression) new ASTBuilder().visit(t);
+    }
 
 }

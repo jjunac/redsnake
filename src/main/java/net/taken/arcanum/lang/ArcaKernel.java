@@ -3,6 +3,7 @@ package net.taken.arcanum.lang;
 import java.io.*;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ArcaKernel {
 
@@ -13,8 +14,7 @@ public class ArcaKernel {
     }
 
     public ArcaNull print(List<ArcaObject> l) {
-        // FIXME fix print
-        //environment.stdout.println(l.tos().getValue());
+        environment.stdout.println(String.join(" ", l.stream().map(o -> o.tos().getValue()).collect(Collectors.toList())));
         environment.stdout.flush();
         return new ArcaNull();
     }
@@ -23,8 +23,7 @@ public class ArcaKernel {
         if (l.size() == 0) {
             System.exit(0);
         } else {
-            // FIXME fix exit
-            //System.exit(((ArcaInteger)l.getValue().get(0)).getValue());
+            System.exit(l.get(0).toi().getValue());
         }
         return new ArcaNull();
     }

@@ -53,7 +53,7 @@ public class ASTBuilder extends ArcanumParserBaseVisitor<Node> {
 
     @Override
     public Node visitArithmeticBinary(ArcanumParser.ArithmeticBinaryContext ctx) {
-        return new ArithmeticBinaryExpression(getArithmeticBinaryOperator(ctx.op), (Expression) visit(ctx.l), (Expression) visit(ctx.l));
+        return new ArithmeticBinaryExpression(getArithmeticBinaryOperator(ctx.op), (Expression) visit(ctx.l), (Expression) visit(ctx.r));
     }
 
     @Override

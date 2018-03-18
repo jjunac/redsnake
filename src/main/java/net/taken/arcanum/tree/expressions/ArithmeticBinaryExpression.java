@@ -47,7 +47,7 @@ public class ArithmeticBinaryExpression extends Expression {
     @Override
     public ArcaObject execute(ArcaEnvironment env) {
         ArcaObject l = left.execute(env);
-        ArcaObject r = left.execute(env);
+        ArcaObject r = right.execute(env);
         switch (type){
             case POWER:
                 return l.power(r);

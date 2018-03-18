@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.io.StringWriter;
 
 import static net.taken.arcanum.tree.TestUtils.parseProgram;
+import static net.taken.arcanum.tree.TestUtils.parseStatement;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProgramTest {
@@ -77,8 +78,8 @@ class ProgramTest {
 
     @Test
     void shouldReturnSomethingWhenParsingStmt() {
-        ArcaObject actual =parseProgram("598").execute(env);
-        assertEquals(new ArcaInteger(598), actual);
+        Statement stmt = parseStatement("598");
+        assertEquals(new ArcaInteger(598), stmt.execute(env));
     }
 
     @Test

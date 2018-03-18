@@ -1,4 +1,6 @@
 package net.taken.arcanum.tree;
 
-public abstract class Statement<T> extends Node<T> {
+import net.taken.arcanum.lang.ArcaObject;
+
+public abstract class Statement extends Node<ArcaObject> {
 }

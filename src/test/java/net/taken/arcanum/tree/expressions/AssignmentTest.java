@@ -2,7 +2,7 @@ package net.taken.arcanum.tree.expressions;
 
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.tree.Program;
+import net.taken.arcanum.tree.Statement;
 import net.taken.arcanum.tree.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,15 +44,15 @@ class AssignmentTest {
 
     @Test
     void shouldStoreVariableWhenParseAssignment() {
-        Program program = parseProgram("a = 771");
-        program.execute(env);
+        Statement stmt = parseStatement("a = 771");
+        stmt.execute(env);
         assertEquals(new ArcaInteger(771), env.getVariable("a"));
     }
 
     @Test
     void shouldPrioritizePlusAndMinusOverEquals() {
-        Program program = parseProgram("a = 5+2-1");
-        program.execute(env);
+        Statement stmt = parseStatement("a = 5+2-1");
+        stmt.execute(env);
         assertEquals(new ArcaInteger(6), env.getVariable("a"));
     }
 

@@ -23,6 +23,11 @@ public class VariableDesignator extends Designator{
 
     @Override
     public ArcaObject execute(ArcaEnvironment env) {
-        return env.getVariable(value.execute(env));
+        String identifier = value.execute(env);
+        ArcaObject res = env.getVariable(identifier);
+        if (res == null) {
+            res = env.resolveFunction(identifier).apply(ImmutableList.of());
+        }
+        return res;
     }
 }

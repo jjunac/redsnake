@@ -2,13 +2,12 @@ package net.taken.arcanum.tree.expressions;
 
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.lang.ArcaObject;
-import net.taken.arcanum.tree.Program;
+import net.taken.arcanum.tree.Statement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.arcanum.tree.TestUtils.mockExpression;
-import static net.taken.arcanum.tree.TestUtils.parseProgram;
+import static net.taken.arcanum.tree.TestUtils.parseStatement;
 import static net.taken.arcanum.tree.expressions.ArithmeticBinaryExpression.Type.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,26 +64,26 @@ class ArithmeticBinaryExpressionTest {
 
     @Test
     void shouldBeRightAssociativeWhenExecuteBinaryExprPow() {
-        ArcaObject actual = parseProgram("2**3**2").execute(env);
-        assertEquals(new ArcaInteger(512), actual);
+        Statement stmt = parseStatement("2**3**2");
+        assertEquals(new ArcaInteger(512), stmt.execute(env));
     }
 
     @Test
     void shouldPrioritizeMultiplyDivideAndModuloOverPlusAndMinus() {
-        Program program = parseProgram("2+2*3-4/2+5%3");
-        assertEquals(new ArcaInteger(8), program.execute(env));
+        Statement stmt = parseStatement("2+2*3-4/2+5%3");
+        assertEquals(new ArcaInteger(8), stmt.execute(env));
     }
 
     @Test
     void shouldPrioritizeUnaryMinusOverMultiplyDivideAndModulo() {
-        Program program = parseProgram("2*-1/-1*(1%-(-2))");
-        assertEquals(new ArcaInteger(2), program.execute(env));
+        Statement stmt = parseStatement("2*-1/-1*(1%-(-2))");
+        assertEquals(new ArcaInteger(2), stmt.execute(env));
     }
 
     @Test
     void shouldPrioritizePowerOverUnaryMinus() {
-        Program program = parseProgram("-(2)**2");
-        assertEquals(new ArcaInteger(-4), program.execute(env));
+        Statement stmt = parseStatement("-(2)**2");
+        assertEquals(new ArcaInteger(-4), stmt.execute(env));
     }
 
 }

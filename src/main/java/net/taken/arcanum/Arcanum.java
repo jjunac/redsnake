@@ -27,13 +27,15 @@ public class Arcanum {
     public Arcanum(String[] args) throws ParseException {
         initOptions();
         cliParser = new DefaultParser();
+        astBuilder = new ASTBuilder();
+        arcaEnvironment = new ArcaEnvironment();
+
         CommandLine cmd = cliParser.parse(options, args);
         if (cmd.hasOption("h")) {
             printHelp();
             System.exit(0);
         }
 
-        astBuilder = new ASTBuilder();
         if (cmd.getArgList().size() == 0) {
             launchShell();
         }

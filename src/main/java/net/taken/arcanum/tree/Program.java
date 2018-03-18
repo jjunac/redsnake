@@ -22,7 +22,7 @@ public class Program extends Node<ArcaObject> {
 
     @Override
     public ArcaObject execute(ArcaEnvironment env) {
-        statements.forEach(s -> execute(env));
+        statements.forEach(s -> s.execute(env));
         return new ArcaNull();
     }
 }
