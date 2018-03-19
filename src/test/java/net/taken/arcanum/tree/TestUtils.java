@@ -6,7 +6,8 @@ import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.visitors.ASTBuilder;
-import net.taken.arcanum.tree.expressions.Expression;
+import net.taken.arcanum.tree.statements.Statement;
+import net.taken.arcanum.tree.statements.expressions.Expression;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 

@@ -3,7 +3,7 @@ package net.taken.arcanum.tree;
 import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaObject;
-import net.taken.arcanum.tree.expressions.Expression;
+import net.taken.arcanum.tree.statements.expressions.Expression;
 
 import java.util.List;
 import java.util.stream.Collectors;

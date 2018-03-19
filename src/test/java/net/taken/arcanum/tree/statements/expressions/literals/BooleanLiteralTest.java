@@ -1,4 +1,4 @@
-package net.taken.arcanum.tree.expressions.literals;
+package net.taken.arcanum.tree.statements.expressions.literals;
 
 import net.taken.arcanum.lang.ArcaEnvironment;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,8 +1,8 @@
-package net.taken.arcanum.tree.expressions;
+package net.taken.arcanum.tree.statements.expressions;
 
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.tree.Statement;
+import net.taken.arcanum.tree.statements.Statement;
 import net.taken.arcanum.tree.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

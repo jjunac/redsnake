@@ -1,14 +1,14 @@
-package net.taken.arcanum.tree.expressions;
+package net.taken.arcanum.tree.statements.expressions;
 
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.tree.Statement;
+import net.taken.arcanum.tree.statements.Statement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.arcanum.tree.TestUtils.mockExpression;
 import static net.taken.arcanum.tree.TestUtils.parseStatement;
-import static net.taken.arcanum.tree.expressions.ArithmeticBinaryExpression.Type.*;
+import static net.taken.arcanum.tree.statements.expressions.ArithmeticBinaryExpression.Type.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArithmeticBinaryExpressionTest {

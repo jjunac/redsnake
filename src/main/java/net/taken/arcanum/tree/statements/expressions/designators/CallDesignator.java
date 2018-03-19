@@ -1,4 +1,4 @@
-package net.taken.arcanum.tree.designators;
+package net.taken.arcanum.tree.statements.expressions.designators;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.lang.ArcaEnvironment;

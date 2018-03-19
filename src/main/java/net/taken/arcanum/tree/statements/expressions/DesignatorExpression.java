@@ -1,9 +1,9 @@
-package net.taken.arcanum.tree.expressions;
+package net.taken.arcanum.tree.statements.expressions;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaObject;
-import net.taken.arcanum.tree.designators.Designator;
+import net.taken.arcanum.tree.statements.expressions.designators.Designator;
 import net.taken.arcanum.tree.Node;
 
 import java.util.List;

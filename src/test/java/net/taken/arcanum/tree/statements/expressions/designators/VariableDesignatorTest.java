@@ -1,18 +1,13 @@
-package net.taken.arcanum.tree.designators;
+package net.taken.arcanum.tree.statements.expressions.designators;
 
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
-import net.taken.arcanum.lang.ArcaString;
-import net.taken.arcanum.parser.ArcanumParser;
-import net.taken.arcanum.tree.TestUtils;
 import net.taken.arcanum.tree.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.arcanum.tree.TestUtils.mockVariable;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class VariableDesignatorTest {
 

@@ -1,8 +1,8 @@
-package net.taken.arcanum.tree.expressions.literals;
+package net.taken.arcanum.tree.statements.expressions.literals;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.tree.Node;
-import net.taken.arcanum.tree.expressions.Expression;
+import net.taken.arcanum.tree.statements.expressions.Expression;
 
 import java.util.List;
 

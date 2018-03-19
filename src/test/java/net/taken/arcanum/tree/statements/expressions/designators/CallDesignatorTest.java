@@ -1,4 +1,4 @@
-package net.taken.arcanum.tree.designators;
+package net.taken.arcanum.tree.statements.expressions.designators;
 
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
