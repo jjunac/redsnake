@@ -1,6 +1,6 @@
-# Arcanum
+# Redsnake
 
-Arcanum is a scripting language inspired by Ruby and Python.
+Redsnake is a scripting language inspired by Ruby and Python.
 
 ## Getting Started
 
