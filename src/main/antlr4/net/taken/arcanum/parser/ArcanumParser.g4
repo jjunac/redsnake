@@ -8,17 +8,17 @@ program
     ;
 
 statements
-    // FIXME: cannot start program with an emptyline
-    : statement (ENDL statement?)*
+    : statement? (ENDL statement?)*
     ;
 
 statement
     : expression
+    | IF cond=expression thenBody=suite (ELSE elseBody=suite)?
     ;
 
 suite
-    : statement
-    | '{' statements
+    : ENDL* statement ENDL*
+    | ENDL* '{' statements '}' ENDL*
     ;
 
 expression
