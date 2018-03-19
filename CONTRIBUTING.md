@@ -43,6 +43,14 @@ These are the values to which people in the Arcanum community should aspire:
 
 People are complicated. You should expect to be misunderstood and to misunderstand others; when this inevitably occurs, resist the urge to be defensive or assign blame. Try not to take offense where no offense was intended. Give people the benefit of the doubt. Even if the intent was to provoke, do not rise to it. It is the responsibility of all parties to de-escalate conflict when it arises.
 
+## Before getting started
+
+You should consider reading resources on the technology we are using and the common software engineering patterns.
+
+Here is a non-exhaustive list of useful books:
+ * The Definitive ANTLR 4 Reference - Terence Parr - *ANTLR4 reference*
+ * Compilers: Principles, Techniques, and Tools - Alfred V. Aho - *Compilers (and interpreters) reference*
+ * Effective Java - Joshua Bloch - *Java reference*
 
 ## How to contribute
 
@@ -83,6 +91,7 @@ To generate and the rules :
  * Use the present tense ("Add feature" not "Added feature")
  * Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
  * Limit the first line to 72 characters or less
+ * Reference issue either at the end of the first line or in the description
 
 ### Java Styleguide
 
