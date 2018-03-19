@@ -6,6 +6,7 @@ import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParserBaseVisitor;
 import net.taken.arcanum.tree.*;
 import net.taken.arcanum.tree.statements.Statement;
+import net.taken.arcanum.tree.statements.StatementList;
 import net.taken.arcanum.tree.statements.expressions.designators.CallDesignator;
 import net.taken.arcanum.tree.statements.expressions.designators.Designator;
 import net.taken.arcanum.tree.statements.expressions.designators.VariableDesignator;
@@ -25,16 +26,25 @@ public class ASTBuilder extends ArcanumParserBaseVisitor<Node> {
 
     @Override
     public Node visitProgram(ArcanumParser.ProgramContext ctx) {
-        List<Statement> statements = ImmutableList.of();
-        if (ctx.statements() != null) {
-            statements = visit(ctx.statements().statement(), Statement.class);
-        }
-        return new Program(statements);
+        return new Program((StatementList) visit(ctx.statements()));
+    }
+
+    @Override
+    public Node visitStatements(ArcanumParser.StatementsContext ctx) {
+        return new StatementList(visit(ctx.statement(), Statement.class));
     }
 
     @Override
     public Node visitStatement(ArcanumParser.StatementContext ctx) {
         return visit(ctx.expression());
+    }
+
+    @Override
+    public Node visitSuite(ArcanumParser.SuiteContext ctx) {
+        if (ctx.statement() != null) {
+            return new StatementList(ImmutableList.of((Statement) visit(ctx.statement())));
+        }
+        return visit(ctx.statements());
     }
 
     @Override

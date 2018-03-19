@@ -22,4 +22,9 @@ public class ArcaNull extends ArcaObject {
     public ArcaInteger toi() {
         return new ArcaInteger(0);
     }
+
+    @Override
+    public ArcaBoolean tob() {
+        return ArcaBoolean.FALSE;
+    }
 }

@@ -67,4 +67,8 @@ public class ArcaObject {
         return new ArcaInteger(0);
     }
 
+    public ArcaBoolean tob() {
+        return ArcaBoolean.FALSE;
+    }
+
 }

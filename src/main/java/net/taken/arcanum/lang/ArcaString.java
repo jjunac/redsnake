@@ -36,6 +36,11 @@ public class ArcaString extends ArcaObject {
     }
 
     @Override
+    public ArcaBoolean tob() {
+        return new ArcaBoolean(Boolean.getBoolean(value) || value.length() != 0);
+    }
+
+    @Override
     public ArcaString plus(ArcaObject o) {
         return new ArcaString(value + o.tos().value);
     }

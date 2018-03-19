@@ -4,26 +4,27 @@ import com.google.common.collect.ImmutableList;
 import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaNull;
 import net.taken.arcanum.lang.ArcaObject;
-import net.taken.arcanum.tree.statements.Statement;
+import net.taken.arcanum.tree.statements.StatementList;
 
 import java.util.List;
 
 public class Program extends Node<ArcaObject> {
 
-    private final List<Statement> statements;
+    private final StatementList statementList;
 
-    public Program(List<Statement> statements) {
-        this.statements = statements;
+    public Program(StatementList statementList) {
+        this.statementList = statementList;
     }
 
     @Override
     public List<Node> getChildren() {
-        return ImmutableList.copyOf(statements);
+        return ImmutableList.of(statementList);
     }
 
     @Override
     public ArcaObject execute(ArcaEnvironment env) {
-        statements.forEach(s -> s.execute(env));
+        statementList.execute(env);
+        // TODO may be return the exit code of the program
         return new ArcaNull();
     }
 }

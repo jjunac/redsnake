@@ -1,12 +1,14 @@
 package net.taken.arcanum.tree;
 
 import com.sun.istack.internal.NotNull;
+import net.taken.arcanum.lang.ArcaEnvironment;
 import net.taken.arcanum.lang.ArcaInteger;
 import net.taken.arcanum.lang.ArcaObject;
 import net.taken.arcanum.parser.ArcanumLexer;
 import net.taken.arcanum.parser.ArcanumParser;
 import net.taken.arcanum.parser.visitors.ASTBuilder;
 import net.taken.arcanum.tree.statements.Statement;
+import net.taken.arcanum.tree.statements.expressions.Assignment;
 import net.taken.arcanum.tree.statements.expressions.Expression;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -23,9 +25,13 @@ public class TestUtils {
     }
 
     public static Expression mockExpression(int value) {
-        Expression left = mock(Expression.class);
-        when(left.execute(any())).thenReturn(new ArcaInteger(value));
-        return left;
+        return mockExpression(new ArcaInteger(value));
+    }
+
+    public static Expression mockExpression(ArcaObject value) {
+        Expression e = mock(Expression.class);
+        when(e.execute(any())).thenReturn(value);
+        return e;
     }
 
     public static Variable mockVariable(String name) {

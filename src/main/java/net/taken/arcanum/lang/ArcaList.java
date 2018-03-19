@@ -45,6 +45,11 @@ public class ArcaList extends ArcaObject {
     }
 
     @Override
+    public ArcaBoolean tob() {
+    return new ArcaBoolean(value.size() != 0);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

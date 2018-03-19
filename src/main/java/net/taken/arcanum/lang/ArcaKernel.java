@@ -20,6 +20,7 @@ public class ArcaKernel {
     }
 
     public ArcaNull exit(List<ArcaObject> l) {
+        // TODO may be too angry, we should exit more smoothly
         if (l.size() == 0) {
             System.exit(0);
         } else {

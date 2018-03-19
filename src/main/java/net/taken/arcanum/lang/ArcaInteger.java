@@ -35,6 +35,11 @@ public class ArcaInteger extends ArcaObject {
     }
 
     @Override
+    public ArcaBoolean tob() {
+        return new ArcaBoolean(value != 0);
+    }
+
+    @Override
     public ArcaInteger plus(ArcaObject o) {
         return new ArcaInteger(value + o.toi().value);
     }
