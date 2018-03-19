@@ -1,4 +1,4 @@
-# Contributing to Arcanum
+# Contributing to Redsnake
 
 ### Table Of Contents
 
@@ -17,11 +17,11 @@
 
 ## Code of Conduct
 
-The Arcanum project is dedicated to providing a harassment-free working environment for all, regardless of gender, sexual orientation, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of any form. All communication should be appropriate for a professional audience including people of many different backgrounds.
+The Redsnake project is dedicated to providing a harassment-free working environment for all, regardless of gender, sexual orientation, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of any form. All communication should be appropriate for a professional audience including people of many different backgrounds.
 
 Sexual language and imagery is not appropriate for any communication and/or talks. Be kind and do not insult or put down others. Behave professionally.
 
-These are the values to which people in the Arcanum community should aspire:
+These are the values to which people in the Redsnake community should aspire:
 
  * Be friendly and welcoming
  * Be patient
@@ -60,7 +60,7 @@ First, make sure you have `Java8` or newer and `Maven` installed.
 Then execute the following command:
 
 ```
-git clone https://github.com/Taken0711/arcanum.git
+git clone https://github.com/Taken0711/redsnake.git
 mvn clean install
 ``` 
 
@@ -71,12 +71,12 @@ Please use this configuration for the ANTLR plugin:
  * Output directory where all output is generated : Blank
  * Location of imported grammars : Blank
  * Grammar file encoding : Blank
- * Package/namescpace for the generated code:  `net.taken.arcanum.parser`
+ * Package/namescpace for the generated code:  `net.taken.redsnake.parser`
  * Language (e.g., Java, Python2, CSharp, ...): `Java`
  * ☑ generate parse tree visitor
 
 To generate and the rules :
- * On **ArcanumParser.g4** Right-click and click on `Generate ANTLR RECOGNIZER` or `CTRL + SHIFT + G`.
+ * On **RedsnakeParser.g4** Right-click and click on `Generate ANTLR RECOGNIZER` or `CTRL + SHIFT + G`.
  * Right-click and click on `Test Rule Program`
 
 
