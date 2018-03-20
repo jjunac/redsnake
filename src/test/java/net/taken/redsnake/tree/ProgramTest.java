@@ -89,4 +89,15 @@ class ProgramTest {
         assertTrue(actual.isNull());
     }
 
+    @Test
+    void shouldUpdateValueWhenAssignConditionallyAVariable() {
+        parseProgram("a = 0\n" +
+            "if true {\n" +
+            "  a = 1\n" +
+            "} else {\n" +
+            "  a = 2\n" +
+            "}\n").execute(env);
+        assertEquals(new RedsInteger(1), env.getVariable("a"));
+    }
+
 }

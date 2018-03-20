@@ -12,8 +12,8 @@ statements
     ;
 
 statement
-    : expression
-    | IF cond=expression thenBody=suite (ELSE elseBody=suite)?
+    : expression                                                    #expressionStatement
+    | IF cond=expression thenBody=suite (ELSE elseBody=suite)?      #ifStatement
     ;
 
 suite

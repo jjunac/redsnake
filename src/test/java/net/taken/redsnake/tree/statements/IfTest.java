@@ -12,6 +12,8 @@ import net.taken.redsnake.tree.statements.expressions.Expression;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static net.taken.redsnake.tree.TestUtils.mockExpression;
 import static net.taken.redsnake.tree.TestUtils.mockVariable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,6 +28,13 @@ class IfTest {
         env = new RedsEnvironment();
     }
 
+    private static If createIfWithAssignments(String variableName, boolean condition, int trueValue) {
+        Variable var = mockVariable(variableName);
+        Expression cond = mockExpression(new RedsBoolean(condition));
+        StatementList thenBody = new StatementList(ImmutableList.of(new Assignment(mockVariable(variableName), mockExpression(trueValue))));
+        return new If(cond, thenBody, Optional.empty());
+    }
+
     private static If createIfWithAssignments(String variableName, boolean condition, int trueValue, int falseValue) {
         Variable var = mockVariable(variableName);
         Expression cond = mockExpression(new RedsBoolean(condition));
@@ -35,10 +44,27 @@ class IfTest {
     }
 
     @Test
-    void shouldExecuteTheGoodBlockWhenExecutingIfWithTrue() {
+    void shouldExecuteTheGoodBlockWhenExecutingIfWithTrueAndElseClause() {
         If anIf = createIfWithAssignments("a", true, 1, 2);
         env.putVariable("a", new RedsInteger(0));
         anIf.execute(env);
         assertEquals(new RedsInteger(1), env.getVariable("a"));
     }
+
+    @Test
+    void shouldNotExecuteThenBlockWhenExecutingIfWithFalseAndNoElseClause() {
+        If anIf = createIfWithAssignments("a", false, 1);
+        env.putVariable("a", new RedsInteger(0));
+        anIf.execute(env);
+        assertEquals(new RedsInteger(0), env.getVariable("a"));
+    }
+
+    @Test
+    void shouldNotExecuteElseBlockWhenExecutingIfWithFalseAndElseClause() {
+        If anIf = createIfWithAssignments("a", false, 1, 2);
+        env.putVariable("a", new RedsInteger(0));
+        anIf.execute(env);
+        assertEquals(new RedsInteger(2), env.getVariable("a"));
+    }
+
 }

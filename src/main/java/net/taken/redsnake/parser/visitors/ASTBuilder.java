@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.parser.RedsnakeLexer;
 import net.taken.redsnake.parser.RedsnakeParser;
 import net.taken.redsnake.parser.RedsnakeParserBaseVisitor;
+import net.taken.redsnake.tree.statements.If;
 import net.taken.redsnake.tree.statements.Statement;
 import net.taken.redsnake.tree.statements.StatementList;
 import net.taken.redsnake.tree.*;
@@ -35,8 +36,13 @@ public class ASTBuilder extends RedsnakeParserBaseVisitor<Node> {
     }
 
     @Override
-    public Node visitStatement(RedsnakeParser.StatementContext ctx) {
+    public Node visitExpressionStatement(RedsnakeParser.ExpressionStatementContext ctx) {
         return visit(ctx.expression());
+    }
+
+    @Override
+    public Node visitIfStatement(RedsnakeParser.IfStatementContext ctx) {
+        return new If((Expression) visit(ctx.cond), (StatementList) visit(ctx.thenBody), visitIfPresent(ctx.elseBody, StatementList.class));
     }
 
     @Override
