@@ -13,10 +13,10 @@ statements
 
 statement
     : expression                                                    #expressionStatement
-    | IF cond=expression thenBody=suite (ELSE elseBody=suite)?      #ifStatement
+    | IF cond=expression thenBody=suiteBlock (ELSE elseBody=suiteBlock)?      #ifStatement
     ;
 
-suite
+suiteBlock
     : ENDL* statement ENDL*
     | ENDL* '{' statements '}' ENDL*
     ;

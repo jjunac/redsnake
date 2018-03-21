@@ -46,7 +46,7 @@ public class ASTBuilder extends RedsnakeParserBaseVisitor<Node> {
     }
 
     @Override
-    public Node visitSuite(RedsnakeParser.SuiteContext ctx) {
+    public Node visitSuiteBlock(RedsnakeParser.SuiteBlockContext ctx) {
         if (ctx.statement() != null) {
             return new StatementList(ImmutableList.of((Statement) visit(ctx.statement())));
         }
