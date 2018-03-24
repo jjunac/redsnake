@@ -1,28 +1,27 @@
-package net.taken.redsnake.tree.designators;
+package net.taken.redsnake.tree.statements.expressions;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsObject;
-import net.taken.redsnake.tree.Call;
 import net.taken.redsnake.tree.Node;
 
 import java.util.List;
 
-public class CallDesignator extends Designator {
+public class SubExpression extends Expression {
 
-    private final Call value;
+    private final Expression subExpression;
 
-    public CallDesignator(Call value) {
-        this.value = value;
+    public SubExpression(Expression subExpression) {
+        this.subExpression = subExpression;
     }
 
     @Override
     public List<Node> getChildren() {
-        return ImmutableList.of(value);
+        return ImmutableList.of(subExpression);
     }
 
     @Override
     public RedsObject execute(RedsEnvironment env) {
-        return value.execute(env);
+        return subExpression.execute(env);
     }
 }

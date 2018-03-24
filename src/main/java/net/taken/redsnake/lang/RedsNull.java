@@ -22,4 +22,9 @@ public class RedsNull extends RedsObject {
     public RedsInteger toi() {
         return new RedsInteger(0);
     }
+
+    @Override
+    public RedsBoolean tob() {
+        return RedsBoolean.FALSE;
+    }
 }

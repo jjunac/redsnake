@@ -36,6 +36,11 @@ public class RedsString extends RedsObject {
     }
 
     @Override
+    public RedsBoolean tob() {
+        return new RedsBoolean(Boolean.getBoolean(value) || value.length() != 0);
+    }
+
+    @Override
     public RedsString plus(RedsObject o) {
         return new RedsString(value + o.tos().value);
     }

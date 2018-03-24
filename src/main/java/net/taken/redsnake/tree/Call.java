@@ -3,7 +3,7 @@ package net.taken.redsnake.tree;
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsObject;
-import net.taken.redsnake.tree.expressions.Expression;
+import net.taken.redsnake.tree.statements.expressions.Expression;
 
 import java.util.List;
 import java.util.stream.Collectors;

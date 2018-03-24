@@ -1,8 +1,8 @@
-package net.taken.redsnake.tree.expressions;
+package net.taken.redsnake.tree.statements.expressions;
 
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
-import net.taken.redsnake.tree.Statement;
+import net.taken.redsnake.tree.statements.Statement;
 import net.taken.redsnake.tree.Variable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,7 +2,7 @@ package net.taken.redsnake.tree;
 
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
-import net.taken.redsnake.tree.expressions.Expression;
+import net.taken.redsnake.tree.statements.expressions.Expression;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

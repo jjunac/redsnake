@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
+import net.taken.redsnake.tree.statements.Statement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -86,6 +87,17 @@ class ProgramTest {
     void shouldReturnNullWhenParsePrint() {
         RedsObject actual = parseProgram("print 875").execute(env);
         assertTrue(actual.isNull());
+    }
+
+    @Test
+    void shouldUpdateValueWhenAssignConditionallyAVariable() {
+        parseProgram("a = 0\n" +
+            "if true {\n" +
+            "  a = 1\n" +
+            "} else {\n" +
+            "  a = 2\n" +
+            "}\n").execute(env);
+        assertEquals(new RedsInteger(1), env.getVariable("a"));
     }
 
 }

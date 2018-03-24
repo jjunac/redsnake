@@ -1,4 +1,4 @@
-package net.taken.redsnake.tree.expressions.literals;
+package net.taken.redsnake.tree.statements.expressions.literals;
 
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsString;

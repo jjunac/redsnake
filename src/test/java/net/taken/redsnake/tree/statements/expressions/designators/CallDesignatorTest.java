@@ -1,4 +1,4 @@
-package net.taken.redsnake.tree.designators;
+package net.taken.redsnake.tree.statements.expressions.designators;
 
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;

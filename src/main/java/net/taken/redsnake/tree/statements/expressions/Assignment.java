@@ -1,4 +1,4 @@
-package net.taken.redsnake.tree.expressions;
+package net.taken.redsnake.tree.statements.expressions;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.lang.RedsEnvironment;

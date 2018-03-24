@@ -6,7 +6,8 @@ import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.parser.RedsnakeLexer;
 import net.taken.redsnake.parser.RedsnakeParser;
 import net.taken.redsnake.parser.visitors.ASTBuilder;
-import net.taken.redsnake.tree.expressions.Expression;
+import net.taken.redsnake.tree.statements.Statement;
+import net.taken.redsnake.tree.statements.expressions.Expression;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -22,9 +23,13 @@ public class TestUtils {
     }
 
     public static Expression mockExpression(int value) {
-        Expression left = mock(Expression.class);
-        when(left.execute(any())).thenReturn(new RedsInteger(value));
-        return left;
+        return mockExpression(new RedsInteger(value));
+    }
+
+    public static Expression mockExpression(RedsObject value) {
+        Expression e = mock(Expression.class);
+        when(e.execute(any())).thenReturn(value);
+        return e;
     }
 
     public static Variable mockVariable(String name) {

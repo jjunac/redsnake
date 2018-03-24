@@ -1,8 +1,8 @@
-package net.taken.redsnake.tree.expressions.literals;
+package net.taken.redsnake.tree.statements.expressions.literals;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.tree.Node;
-import net.taken.redsnake.tree.expressions.Expression;
+import net.taken.redsnake.tree.statements.expressions.Expression;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@ import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.parser.RedsnakeLexer;
 import net.taken.redsnake.parser.RedsnakeParser;
 import net.taken.redsnake.parser.visitors.ASTBuilder;
-import net.taken.redsnake.tree.Statement;
+import net.taken.redsnake.tree.statements.Statement;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;

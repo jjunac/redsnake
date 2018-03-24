@@ -4,14 +4,17 @@ import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.parser.RedsnakeLexer;
 import net.taken.redsnake.parser.RedsnakeParser;
 import net.taken.redsnake.parser.RedsnakeParserBaseVisitor;
+import net.taken.redsnake.tree.statements.If;
+import net.taken.redsnake.tree.statements.Statement;
+import net.taken.redsnake.tree.statements.StatementList;
 import net.taken.redsnake.tree.*;
-import net.taken.redsnake.tree.designators.CallDesignator;
-import net.taken.redsnake.tree.designators.Designator;
-import net.taken.redsnake.tree.designators.VariableDesignator;
-import net.taken.redsnake.tree.expressions.*;
-import net.taken.redsnake.tree.expressions.literals.BooleanLiteral;
-import net.taken.redsnake.tree.expressions.literals.IntegerLiteral;
-import net.taken.redsnake.tree.expressions.literals.StringLiteral;
+import net.taken.redsnake.tree.statements.expressions.designators.CallDesignator;
+import net.taken.redsnake.tree.statements.expressions.*;
+import net.taken.redsnake.tree.statements.expressions.designators.Designator;
+import net.taken.redsnake.tree.statements.expressions.designators.VariableDesignator;
+import net.taken.redsnake.tree.statements.expressions.literals.BooleanLiteral;
+import net.taken.redsnake.tree.statements.expressions.literals.IntegerLiteral;
+import net.taken.redsnake.tree.statements.expressions.literals.StringLiteral;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 
@@ -24,16 +27,30 @@ public class ASTBuilder extends RedsnakeParserBaseVisitor<Node> {
 
     @Override
     public Node visitProgram(RedsnakeParser.ProgramContext ctx) {
-        List<Statement> statements = ImmutableList.of();
-        if (ctx.statements() != null) {
-            statements = visit(ctx.statements().statement(), Statement.class);
-        }
-        return new Program(statements);
+        return new Program((StatementList) visit(ctx.statements()));
     }
 
     @Override
-    public Node visitStatement(RedsnakeParser.StatementContext ctx) {
+    public Node visitStatements(RedsnakeParser.StatementsContext ctx) {
+        return new StatementList(visit(ctx.statement(), Statement.class));
+    }
+
+    @Override
+    public Node visitExpressionStatement(RedsnakeParser.ExpressionStatementContext ctx) {
         return visit(ctx.expression());
+    }
+
+    @Override
+    public Node visitIfStatement(RedsnakeParser.IfStatementContext ctx) {
+        return new If((Expression) visit(ctx.cond), (StatementList) visit(ctx.thenBody), visitIfPresent(ctx.elseBody, StatementList.class));
+    }
+
+    @Override
+    public Node visitSuiteBlock(RedsnakeParser.SuiteBlockContext ctx) {
+        if (ctx.statement() != null) {
+            return new StatementList(ImmutableList.of((Statement) visit(ctx.statement())));
+        }
+        return visit(ctx.statements());
     }
 
     @Override

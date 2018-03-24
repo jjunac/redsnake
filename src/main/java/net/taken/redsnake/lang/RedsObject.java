@@ -67,4 +67,8 @@ public class RedsObject {
         return new RedsInteger(0);
     }
 
+    public RedsBoolean tob() {
+        return RedsBoolean.FALSE;
+    }
+
 }

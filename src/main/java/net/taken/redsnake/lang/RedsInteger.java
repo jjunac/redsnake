@@ -35,6 +35,11 @@ public class RedsInteger extends RedsObject {
     }
 
     @Override
+    public RedsBoolean tob() {
+        return new RedsBoolean(value != 0);
+    }
+
+    @Override
     public RedsInteger plus(RedsObject o) {
         return new RedsInteger(value + o.toi().value);
     }

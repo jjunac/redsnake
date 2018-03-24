@@ -11,7 +11,6 @@
     <properties>
         <antlr4.plugin.version>4.7.1</antlr4.plugin.version>
         <antlr4.version>4.7.1</antlr4.version>
-        <junit.version>4.12</junit.version>
         <junit.jupiter.version>5.1.0</junit.jupiter.version>
         <junit.vintage.version>5.1.0</junit.vintage.version>
         <junit.platform.version>1.1.0</junit.platform.version>
@@ -38,12 +37,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.jupiter.version}</version>
@@ -53,6 +46,13 @@
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
             <version>${junit.vintage.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Only required to run tests in an IDE that bundles an older version -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->

@@ -45,6 +45,11 @@ public class RedsList extends RedsObject {
     }
 
     @Override
+    public RedsBoolean tob() {
+    return new RedsBoolean(value.size() != 0);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

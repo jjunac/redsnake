@@ -8,11 +8,17 @@ program
     ;
 
 statements
-    : statement (ENDL statement?)*
+    : statement? (ENDL statement?)*
     ;
 
 statement
-    : expression
+    : expression                                                    #expressionStatement
+    | IF cond=expression thenBody=suiteBlock (ELSE elseBody=suiteBlock)?      #ifStatement
+    ;
+
+suiteBlock
+    : ENDL* statement ENDL*
+    | ENDL* '{' statements '}' ENDL*
     ;
 
 expression

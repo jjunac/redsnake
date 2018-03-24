@@ -18,7 +18,8 @@ public class RedsKernel {
         return new RedsNull();
     }
 
-    public RedsNull exit(List<RedsObject> l) {
+        // TODO may be too angry, we should exit more smoothly
+        public RedsNull exit(List<RedsObject> l) {
         if (l.size() == 0) {
             System.exit(0);
         } else {

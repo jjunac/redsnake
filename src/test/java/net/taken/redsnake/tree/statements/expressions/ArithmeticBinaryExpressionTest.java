@@ -1,14 +1,14 @@
-package net.taken.redsnake.tree.expressions;
+package net.taken.redsnake.tree.statements.expressions;
 
 import net.taken.redsnake.lang.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
-import net.taken.redsnake.tree.Statement;
+import net.taken.redsnake.tree.statements.Statement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.redsnake.tree.TestUtils.mockExpression;
 import static net.taken.redsnake.tree.TestUtils.parseStatement;
-import static net.taken.redsnake.tree.expressions.ArithmeticBinaryExpression.Type.*;
+import static net.taken.redsnake.tree.statements.expressions.ArithmeticBinaryExpression.Type.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArithmeticBinaryExpressionTest {
