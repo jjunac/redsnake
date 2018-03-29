@@ -14,7 +14,7 @@
             - [Number Types](#number-types)
                 - [Integer Type](#integer-type)
                 - [Floating-Point Type](#floating-point-type)
-            - [Boolean type](#boolean-type)
+                - [Boolean type](#boolean-type)
             - [String type](#string-type)
         - [Type Variables](#type-variables)
             - [Implicit Conversions](#implicit-conversions)
@@ -82,9 +82,9 @@ Mathematical set of integers which value is coded on 32-bits. The value is in th
 
 Single precision floating-type, coded on 32-bit using IEEE 754 format. For more information, please visit [Wikipedia](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
-#### Boolean type
+##### Boolean type
 
-Represents the logical values `true` and `false`.
+Represents the logical values `true` and `false`. Behave like the values 0 and 1 respectively.
 The boolean operations are:
 
 | Operation | Result                      | Priority |
