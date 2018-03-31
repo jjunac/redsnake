@@ -10,15 +10,25 @@
     - [Types and Variables](#types-and-variables)
         - [Kinds of Types and operations](#kinds-of-types-and-operations)
             - [Common operations](#common-operations)
-            - [From string operation](#from-string-operation)
             - [Number Types](#number-types)
                 - [Integer Type](#integer-type)
                 - [Floating-Point Type](#floating-point-type)
                 - [Boolean type](#boolean-type)
             - [String type](#string-type)
+            - [List type](#list-type)
         - [Type Variables](#type-variables)
             - [Implicit Conversions](#implicit-conversions)
+            - [Built-in Implicit Conversion Rules](#built-in-implicit-conversion-rules)
             - [Defining an Implicit Conversion Rule](#defining-an-implicit-conversion-rule)
+    - [Expressions](#expressions)
+        - [Common operations](#common-operations)
+        - [From-string operation](#from-string-operation)
+    - [Statements](#statements)
+        - [If Statement](#if-statement)
+        - [While statement](#while-statement)
+        - [For statement](#for-statement)
+        - [Function statement](#function-statement)
+    - [Operator precedence](#operator-precedence)
 
 ## Grammar and Lexical structure
 
@@ -36,42 +46,26 @@ For now, there are only a limited of types in Redsnake. Operations can be applie
 
 | Operation | Result                         |
 | :-------: | ------------------------------ |
-| `x < y`   | Compare the value of x and y   |
-| `x > y`   | Compare the value of x and y   |
-| `x <= y`  | Compare the value of x and y   |
-| `x >= y`  | Compare the value of x and y   |
 | `x == y`  | Test the equality of x and y   |
 | `x != y`  | Test the inequality of x and y |
-
-#### From string operation
-
-What makes Redsnake singular is its light syntax and very implicit typing. In this way, Redsnake offers a from string operator `$`. That operator try to parse a string into a type, according to the possbiles from-string rules.
-
-For instance, in the code below:
-
-```
-print 1 + $"1"
-```
-
- * The system resolves all the from-string rules and select the suitable one. If there is 2 rules matching, an error is thrown.
- * Here the from-string-to-integer is matching, so the `"1"` is converted to and integer `1`
- * The operation `int + int` can be done
-
-NB: If after the from-string operation the types aren't matching, the system try to do an implicit conversion. For more information see [Implicit Conversions](#implicit-conversions)
 
 #### Number Types
 
 All the numbers types are compatibles, and support the following operations, sorted by ascending priority.
 
-| Operation | Result                                         | Priority |
-| :-------: | ---------------------------------------------- | :------: |
-| `x + y`   | Sum of x and y                                 | 0        |
-| `x - y`   | Difference of x and y                          | 0        |
-| `x * y`   | Product of x and y                             | 1        |
-| `x / y`   | Quotient of x and y                            | 1        |
-| `x % y`   | Remainder of the Euclidean division of x and y | 1        |
-| `-x`      | x negated                                      | 2        |
-| `x ** y`  | x to the power y                               | 3        |
+| Operation | Result                                         |
+| :-------: | ---------------------------------------------- |
+| `x < y`   | Compare the value of x and y                   |
+| `x > y`   | Compare the value of x and y                   |
+| `x <= y`  | Compare the value of x and y                   |
+| `x >= y`  | Compare the value of x and y                   |
+| `x + y`   | Sum of x and y                                 |
+| `x - y`   | Difference of x and y                          |
+| `x * y`   | Product of x and y                             |
+| `x / y`   | Quotient of x and y                            |
+| `x % y`   | Remainder of the Euclidean division of x and y |
+| `-x`      | x negated                                      |
+| `x ** y`  | x to the power y                               |
 
 
 ##### Integer Type
@@ -87,20 +81,34 @@ Single precision floating-type, coded on 32-bit using IEEE 754 format. For more 
 Represents the logical values `true` and `false`. Behave like the values 0 and 1 respectively.
 The boolean operations are:
 
-| Operation | Result                      | Priority |
-| :-------: | --------------------------- | :------: |
-| `x && y`  | Conditionnal-and of x and y | 0        |
-| `x || y`  | Conditionnal-or of x and y  | 0        |
-| `!x`      | Logical complement of       | 1        |
+| Operation | Result                      |
+| :-------: | --------------------------- |
+| `x && y`  | Conditionnal-and of x and y |
+| `x || y`  | Conditionnal-or of x and y  |
+| `!x`      | Logical complement of x     |
 
 #### String type
 
 Sequence of value that represent Unicode characters.
+The string operations are:
 
 | Operation | Result                                             |
 | :-------: | -------------------------------------------------- |
 | `x + y`   | Concatenation of x and y                           |
+| `x << y`  | Same as `+`                                        |
 | `x * y`   | Repeats y times the string x. y must be an integer |
+
+#### List type
+
+A list of items. The items can be of different types. List can lso be used as queue and stack. 
+The list operations are:
+
+| Operation | Result                                           |
+| :-------: | ------------------------------------------------ |
+| `x + y`   | Concatenation of x and y                         |
+| `x - y`   | Remove of x all the items that also appears in y |
+| `x << y`  | Push y at the end of x                           |
+| `x * y`   | Repeats y times the list x. y must be an integer |
 
 ### Type Variables
 
@@ -124,13 +132,79 @@ print 1 + ”1”
      * There is a rule to convert from `int` to `string`
  * The system apply the conversion on `1` and execute the operation `"1" + "1"`
 
-NB: The operation `print "1" + 1` would have given the same result.
+_NB: The operation `print "1" + 1` would have given the same result._
 
 If there isn't a match at one of the steps, an error is thrown.
 
 During the research for the possible conversion between a built-in rule and a user-defined rule, the user-defined one is prioritary. If there is still an ambiguity after that, an error is thrown.
 
+#### Built-in Implicit Conversion Rules
+
+| From       | To        | Description                                                 |
+| :--------: | :-------: | ----------------------------------------------------------- |
+| Any number | `boolean` | The value of the test `x != 0`                              |
+| `int`      | `string`  | String representation of the integer                        |
+| `float`    | `string`  | String representation of the floating-point                 |
+| `boolean`  | `int`     | 1 if the boolean is `true`, 0 otherwise                     |
+| `boolean`  | `string`  | `"true"` or `"false"` according to the value of the boolean |
+| `list`     | `string`  | String representation of the list                           |
+
 #### Defining an Implicit Conversion Rule
 
-*TODO*
+_TODO_
 
+## Expressions
+
+### Common operations
+
+Common operations, as `+`, `*`, _etc_ are decribed in the [type specific section](#kinds-of-types-and-operations)
+
+### From-string operation
+
+What makes Redsnake singular is its light syntax and very implicit typing. In this way, Redsnake offers a from string operator `$`. That operator try to parse a string into a type, according to the possbiles from-string rules.
+
+For instance, in the code below:
+
+```
+print 1 + $"1"
+```
+
+ * The system resolves all the from-string rules and select the suitable one. If there is 2 rules matching, an error is thrown.
+ * Here the from-string-to-integer is matching, so the `"1"` is converted to and integer `1`
+ * The operation `int + int` can be done
+
+NB: If after the from-string operation the types aren't matching, the system try to do an implicit conversion. For more information see [Implicit Conversions](#implicit-conversions)
+
+## Statements
+
+### If Statement
+
+Execute one of the block according to the value on the condition. The value is evaluated as a `boolean`, so [Implicit Conversions](#implicit-conversions) apply.
+
+### While statement
+
+Repeats the statement list until the expression is false. As the [If Statement](#if-statement), the condition is a `boolean` and [Implicit Conversions](#implicit-conversions) also apply.
+
+### For statement
+
+_TODO_
+
+### Function statement
+
+_TODO_
+
+## Operator precedence
+
+| Operator                 | Description                            |
+| :----------------------: | -------------------------------------- |
+| `if`, `else`             | Conditional expression                 |
+| `||`                     | Boolean OR                             |
+| `&&`                     | Boolean AND                            |
+| `<`, `>`, `<=`, `<=`     | Comparisons                            |
+| `==`, `!=`               | Tests                                  |
+| `+`, `-`                 | Addition and susbtraction              |
+| `*`, `/`, `%`            | Multiplication, division and remainder |
+| `-`                      | Negative                               |
+| `**`                     | Exponentiation                         |
+| `x[index]`, `x(args...)` | Subscription and call                  |
+| `[expressions...]`       | List instantiation                     |
