@@ -81,11 +81,11 @@ Single precision floating-type, coded on 32-bit using IEEE 754 format. For more 
 Represents the logical values `true` and `false`. Behave like the values 0 and 1 respectively.
 The boolean operations are:
 
-| Operation | Result                      |
-| :-------: | --------------------------- |
-| `x && y`  | Conditionnal-and of x and y |
-| `x || y`  | Conditionnal-or of x and y  |
-| `!x`      | Logical complement of x     |
+| Operation                     | Result                      |
+| :---------------------------: | --------------------------- |
+| `x && y`                      | Conditionnal-and of x and y |
+| <code>x &#124;&#124; y</code> | Conditionnal-or of x and y  |
+| `!x`                          | Logical complement of x     |
 
 #### String type
 
@@ -95,7 +95,6 @@ The string operations are:
 | Operation | Result                                             |
 | :-------: | -------------------------------------------------- |
 | `x + y`   | Concatenation of x and y                           |
-| `x << y`  | Same as `+`                                        |
 | `x * y`   | Repeats y times the string x. y must be an integer |
 
 #### List type
@@ -107,7 +106,6 @@ The list operations are:
 | :-------: | ------------------------------------------------ |
 | `x + y`   | Concatenation of x and y                         |
 | `x - y`   | Remove of x all the items that also appears in y |
-| `x << y`  | Push y at the end of x                           |
 | `x * y`   | Repeats y times the list x. y must be an integer |
 
 ### Type Variables
@@ -195,16 +193,17 @@ _TODO_
 
 ## Operator precedence
 
-| Operator                 | Description                            |
-| :----------------------: | -------------------------------------- |
-| `if`, `else`             | Conditional expression                 |
-| `||`                     | Boolean OR                             |
-| `&&`                     | Boolean AND                            |
-| `<`, `>`, `<=`, `<=`     | Comparisons                            |
-| `==`, `!=`               | Tests                                  |
-| `+`, `-`                 | Addition and susbtraction              |
-| `*`, `/`, `%`            | Multiplication, division and remainder |
-| `-`                      | Negative                               |
-| `**`                     | Exponentiation                         |
-| `x[index]`, `x(args...)` | Subscription and call                  |
-| `[expressions...]`       | List instantiation                     |
+| Operator                  | Description                            |
+| :-----------------------: | -------------------------------------- |
+| `if`, `else`              | Conditional expression                 |
+| `=`                       | Assignment                            |
+| <code>&#124;&#124;</code> | Boolean OR                             |
+| `&&`                      | Boolean AND                            |
+| `<`, `>`, `<=`, `<=`      | Comparisons                            |
+| `==`, `!=`                | Tests                                  |
+| `+`, `-`                  | Addition and susbtraction              |
+| `*`, `/`, `%`             | Multiplication, division and remainder |
+| `-`                       | Negative                               |
+| `**`                      | Exponentiation                         |
+| `x[index]`, `x(args...)`  | Subscription and call                  |
+| `[expressions...]`        | List instantiation                     |
