@@ -1,7 +1,16 @@
 package net.taken.redsnake;
 
-public interface Type {
+import net.taken.redsnake.lang.RedsObject;
 
-    public abstract String getType();
+public class Type<T extends RedsObject> {
 
+    private final String name;
+
+    public Type(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

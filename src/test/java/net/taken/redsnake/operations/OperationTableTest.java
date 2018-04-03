@@ -1,9 +1,7 @@
 package net.taken.redsnake.operations;
 
-import net.taken.redsnake.BuiltinType;
+import net.taken.redsnake.BuiltInType;
 import org.junit.jupiter.api.BeforeEach;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class OperationTableTest {
 
@@ -15,7 +13,7 @@ class OperationTableTest {
     }
 
     void unarySetUp() {
-        table.registerUnaryOperation(OperatorType.MINUS, BuiltinType.INTEGER, );
+        table.registerUnaryOperation(OperatorType.MINUS, BuiltInType.INTEGER, );
 
     }
 }

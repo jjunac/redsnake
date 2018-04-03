@@ -1,26 +1,20 @@
 package net.taken.redsnake.lang;
 
+import net.taken.redsnake.Type;
 import net.taken.redsnake.reflect.ArcaMetaClass;
 
 public class RedsObject {
 
-    public final ArcaMetaClass metaClass;
+    public final Type type;
 
-    public RedsObject() {
-        this.metaClass = new ArcaMetaClass("Object", null);
+    public RedsObject(Type type) {
+        this.type = type;
     }
 
-    public RedsObject(ArcaMetaClass metaClass) {
-        this.metaClass = metaClass;
-    }
+
 
     public boolean isNull() {
         return false;
-    }
-
-    @Override
-    public String toString() {
-        return metaClass.name;
     }
 
     // =============================
