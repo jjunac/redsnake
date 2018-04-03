@@ -1,5 +1,7 @@
 package net.taken.redsnake;
 
+import net.taken.redsnake.reflect.Type;
+
 public class VariableSymbol extends Symbol {
 
     private final Type type;

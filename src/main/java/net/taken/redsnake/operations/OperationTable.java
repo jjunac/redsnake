@@ -2,7 +2,7 @@ package net.taken.redsnake.operations;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import net.taken.redsnake.Type;
+import net.taken.redsnake.reflect.Type;
 
 import java.util.Map;
 import java.util.Optional;

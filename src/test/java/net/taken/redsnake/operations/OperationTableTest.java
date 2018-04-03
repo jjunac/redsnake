@@ -1,6 +1,6 @@
 package net.taken.redsnake.operations;
 
-import net.taken.redsnake.BuiltInType;
+import net.taken.redsnake.reflect.BuiltInType;
 import org.junit.jupiter.api.BeforeEach;
 
 class OperationTableTest {

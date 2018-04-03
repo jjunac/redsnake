@@ -1,6 +1,6 @@
 package net.taken.redsnake.lang;
 
-import net.taken.redsnake.Type;
+import net.taken.redsnake.reflect.Type;
 import net.taken.redsnake.reflect.ArcaMetaClass;
 
 public class RedsObject {

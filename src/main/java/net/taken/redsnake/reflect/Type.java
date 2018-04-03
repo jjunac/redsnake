@@ -1,4 +1,4 @@
-package net.taken.redsnake;
+package net.taken.redsnake.reflect;
 
 import net.taken.redsnake.lang.RedsObject;
 
