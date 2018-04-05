@@ -1,18 +1,21 @@
 package net.taken.redsnake.lang;
 
-import net.taken.redsnake.reflect.ArcaMetaClass;
+import net.taken.redsnake.reflect.Type;
 
 import java.util.Objects;
 
 public class RedsInteger extends RedsObject {
 
+    public static final Type<RedsInteger> TYPE = new Type<>("integer");
+
     private int value;
 
     public RedsInteger() {
-        super(new ArcaMetaClass("Integer", "Object"));
+        this(0);
     }
 
     public RedsInteger(int value) {
+        super(TYPE);
         this.value = value;
     }
 

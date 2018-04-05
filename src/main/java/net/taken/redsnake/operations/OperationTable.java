@@ -1,7 +1,9 @@
 package net.taken.redsnake.operations;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.reflect.Type;
 
 import java.util.Map;
@@ -9,25 +11,22 @@ import java.util.Optional;
 
 public class OperationTable {
 
-    Table<OperatorType, Type, Operation> unaryOperations;
+    @VisibleForTesting
+    Table<OperatorType, Type<? extends RedsObject>, UnaryOperation> unaryOperations;
 
     public OperationTable() {
         this.unaryOperations = HashBasedTable.create();
     }
 
-    public void registerUnaryOperation(OperatorType operatorType, Type type, Operation operation) {
-        unaryOperations.put(operatorType, type, operation);
+    public <T extends RedsObject> void registerUnaryOperation(OperatorType operatorType, Type<T> type, UnaryOperation<T, RedsObject> function) {
+        unaryOperations.put(operatorType, type, function);
     }
 
-    public void registerBinaryOperation(Operation operation, OperatorType operatorType, boolean isCommutative, Type type1,Type type2) {
-
-    }
-
-    public Optional<Operation> resolveUnaryOperation(OperatorType operatorType, Type type) {
+    public <T extends RedsObject> Optional<UnaryOperation> resolveUnaryOperation(OperatorType operatorType, Type<T> type) {
         return Optional.ofNullable(unaryOperations.row(operatorType).get(type));
     }
 
-    public Map<Type, Operation> typeCompatibleWithUnaryOperation(OperatorType operatorType) {
+    public Map<Type<? extends RedsObject>, UnaryOperation> typeCompatibleWithUnaryOperation(OperatorType operatorType) {
         return unaryOperations.row(operatorType);
     }
 

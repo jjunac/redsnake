@@ -1,17 +1,20 @@
 package net.taken.redsnake.lang;
 
 import net.taken.redsnake.reflect.Type;
-import net.taken.redsnake.reflect.ArcaMetaClass;
 
 public class RedsObject {
 
-    public final Type type;
+    public static final Type<RedsObject> TYPE = new Type<>("object");
+
+    private final Type type;
 
     public RedsObject(Type type) {
         this.type = type;
     }
 
-
+    public Type getType() {
+        return type;
+    }
 
     public boolean isNull() {
         return false;
@@ -54,7 +57,7 @@ public class RedsObject {
     // =============================
 
     public RedsString tos() {
-        return new RedsString(metaClass.name);
+        return new RedsString(type.getName());
     }
 
     public RedsInteger toi() {

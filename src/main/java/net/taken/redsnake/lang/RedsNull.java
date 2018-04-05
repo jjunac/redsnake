@@ -1,11 +1,14 @@
 package net.taken.redsnake.lang;
 
-import net.taken.redsnake.reflect.ArcaMetaClass;
+import net.taken.redsnake.reflect.Type;
 
 public class RedsNull extends RedsObject {
 
+    public static final Type<RedsNull> TYPE = new Type<>("null");
+
+
     public RedsNull() {
-        super(new ArcaMetaClass("Null", "Object"));
+        super(TYPE);
     }
 
     @Override

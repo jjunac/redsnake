@@ -1,11 +1,14 @@
 package net.taken.redsnake.lang;
 
-import net.taken.redsnake.reflect.ArcaMetaClass;
+import net.taken.redsnake.reflect.Type;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class RedsList extends RedsObject {
+
+    public static final Type<RedsList> TYPE = new Type<>("list");
+
 
     private LinkedList<RedsObject> value;
 
@@ -18,7 +21,7 @@ public class RedsList extends RedsObject {
     }
 
     public RedsList(List<RedsObject> value) {
-        super(new ArcaMetaClass("List", "Object"));
+        super(TYPE);
         this.value = new LinkedList<>(value);
     }
 

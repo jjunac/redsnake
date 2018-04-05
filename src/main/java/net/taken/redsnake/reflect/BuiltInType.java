@@ -1,21 +1,20 @@
 package net.taken.redsnake.reflect;
 
 import net.taken.redsnake.lang.RedsInteger;
+import net.taken.redsnake.lang.RedsObject;
 
 public enum BuiltInType {
 
-    INTEGER(new Type<RedsInteger>("integer")),
-    STRING("string"),
-    BOOLEAN("bool");
+    STRING(new Type<RedsInteger>("string")),
+    BOOLEAN(new Type<RedsInteger>("boolean"));
 
-    private final Type type;
+    private final Type<? extends RedsObject> type;
 
-    BuiltInType(Type type) {
+    BuiltInType(Type<? extends RedsObject> type) {
         this.type = type;
     }
 
-    @Override
-    public Type getType() {
+    public Type<? extends RedsObject> getType() {
         return type;
     }
 }
