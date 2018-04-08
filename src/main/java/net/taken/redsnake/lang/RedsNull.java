@@ -1,13 +1,15 @@
 package net.taken.redsnake.lang;
 
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.reflect.Type;
 
 public class RedsNull extends RedsObject {
 
     public static final Type<RedsNull> TYPE = new Type<>("null");
+    public static final Value<RedsNull> VALUE = new Value<>(TYPE, new RedsNull());
 
 
-    public RedsNull() {
+    private RedsNull() {
         super(TYPE);
     }
 

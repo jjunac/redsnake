@@ -1,6 +1,6 @@
 package net.taken.redsnake.tree.statements.expressions.literals;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 
 public class IntegerLiteral extends Literal {

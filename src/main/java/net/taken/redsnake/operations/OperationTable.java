@@ -40,7 +40,7 @@ public class OperationTable {
         binaryOperations.get(operatorType).put(type1, type2, function);
     }
 
-    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
+    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation<T, U, ? extends RedsObject>> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
         return Optional.ofNullable(binaryOperations.get(operatorType).get(type1, type2));
     }
 

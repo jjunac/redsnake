@@ -1,11 +1,16 @@
 package net.taken.redsnake.tree.statements.expressions;
 
 import com.google.common.collect.ImmutableList;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsObject;
+import net.taken.redsnake.operations.BinaryOperation;
+import net.taken.redsnake.operations.OperatorType;
+import net.taken.redsnake.operations.UnaryOperation;
 import net.taken.redsnake.tree.Node;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ArithmeticUnaryExpression extends Expression {
 
@@ -38,12 +43,21 @@ public class ArithmeticUnaryExpression extends Expression {
     }
 
     @Override
-    public RedsObject execute(RedsEnvironment env) {
-        RedsObject v = value.execute(env);
+    public Value execute(RedsEnvironment env) {
+        Value v = value.execute(env);
+        OperatorType operatorType;
+        // TODO same as binary expression
         switch (type){
             case MINUS:
-                return v.uminus();
+                operatorType = OperatorType.MINUS;
+                break;
+            default:
+                throw new IllegalStateException();
         }
-        throw new IllegalStateException();
+        Optional<UnaryOperation> operation = env.resolveUnaryOperation(operatorType, v.getType());
+        if (!operation.isPresent()) {
+            throw new IllegalStateException();
+        }
+        return operation.get().apply(v.getValue());
     }
 }

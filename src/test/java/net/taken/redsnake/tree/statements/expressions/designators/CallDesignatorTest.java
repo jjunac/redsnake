@@ -1,6 +1,6 @@
 package net.taken.redsnake.tree.statements.expressions.designators;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.tree.Call;

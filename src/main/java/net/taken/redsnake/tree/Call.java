@@ -1,14 +1,15 @@
 package net.taken.redsnake.tree;
 
 import com.google.common.collect.ImmutableList;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.tree.statements.expressions.Expression;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Call extends Node<RedsObject> {
+public class Call extends Node<Value> {
 
     private final Variable function;
     private final List<Expression> parameters;
@@ -24,7 +25,7 @@ public class Call extends Node<RedsObject> {
     }
 
     @Override
-    public RedsObject execute(RedsEnvironment env) {
+    public Value execute(RedsEnvironment env) {
         return env.resolveFunction(function.execute(env))
                 .apply(parameters.stream().map(e -> e.execute(env)).collect(Collectors.toList()));
     }

@@ -1,7 +1,8 @@
 package net.taken.redsnake.tree.statements.expressions.literals;
 
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsBoolean;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 
 public class BooleanLiteral extends Literal {
 
@@ -12,7 +13,8 @@ public class BooleanLiteral extends Literal {
     }
 
     @Override
-    public RedsBoolean execute(RedsEnvironment env) {
-        return new RedsBoolean(value);
+    public Value<RedsBoolean> execute(RedsEnvironment env) {
+        // TODO Boolean factory to have only 2 instances of boolean and improve performance
+        return new Value<>(RedsBoolean.TYPE, new RedsBoolean(value));
     }
 }

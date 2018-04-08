@@ -2,12 +2,10 @@ package net.taken.redsnake.tree.statements;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.lang.RedsBoolean;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.tree.Program;
 import net.taken.redsnake.tree.Variable;
-import net.taken.redsnake.tree.statements.If;
-import net.taken.redsnake.tree.statements.StatementList;
 import net.taken.redsnake.tree.statements.expressions.Assignment;
 import net.taken.redsnake.tree.statements.expressions.Expression;
 import org.junit.jupiter.api.BeforeEach;

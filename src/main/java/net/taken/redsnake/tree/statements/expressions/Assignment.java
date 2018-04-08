@@ -1,8 +1,9 @@
 package net.taken.redsnake.tree.statements.expressions;
 
 import com.google.common.collect.ImmutableList;
-import net.taken.redsnake.lang.RedsEnvironment;
-import net.taken.redsnake.lang.RedsObject;
+import net.taken.redsnake.interpretor.RedsEnvironment;
+import net.taken.redsnake.interpretor.Value;
+import net.taken.redsnake.interpretor.VariableSymbol;
 import net.taken.redsnake.tree.Node;
 import net.taken.redsnake.tree.Variable;
 
@@ -24,9 +25,10 @@ public class Assignment extends Expression {
     }
 
     @Override
-    public RedsObject execute(RedsEnvironment env) {
-        RedsObject v = value.execute(env);
-        env.putVariable(name.execute(env), v);
+    public Value execute(RedsEnvironment env) {
+        Value v = value.execute(env);
+        VariableSymbol symbol = new VariableSymbol(name.execute(env), v);
+        env.putVariable(symbol.getName(), symbol);
         return v;
     }
 }

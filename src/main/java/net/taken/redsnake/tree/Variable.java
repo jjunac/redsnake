@@ -1,7 +1,7 @@
 package net.taken.redsnake.tree;
 
 import com.google.common.collect.ImmutableList;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 
 import java.util.List;
 

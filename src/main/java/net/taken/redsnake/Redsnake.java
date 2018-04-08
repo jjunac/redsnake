@@ -1,6 +1,6 @@
 package net.taken.redsnake;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.parser.RedsnakeLexer;
 import net.taken.redsnake.parser.RedsnakeParser;

@@ -1,7 +1,7 @@
 package net.taken.redsnake.tree;
 
 import com.google.common.base.Strings;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.tree.statements.Statement;
