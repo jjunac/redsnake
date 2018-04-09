@@ -44,8 +44,8 @@ public class RedsEnvironment {
         operationTable = new OperationTable();
         // TODO equality problem, super type ?
         // Integers
-        operationTable.registerBinaryOperation(PLUS, RedsInteger.TYPE, RedsInteger.TYPE, new BinaryOperation<>((x, y) -> new RedsInteger(x.getValue() + y.getValue())));
-        operationTable.registerBinaryOperation(MINUS, RedsInteger.TYPE, RedsInteger.TYPE, new BinaryOperation<>((x, y) -> new RedsInteger(x.getValue() - y.getValue())));
+        operationTable.registerBinaryOperation(PLUS, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() + y.getValue())));
+        operationTable.registerBinaryOperation(MINUS, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() - y.getValue())));
     }
 
     public <T extends RedsObject> void registerUnaryOperation(OperatorType operatorType, Type<T> type, UnaryOperation<T, RedsObject> function) {
@@ -56,8 +56,8 @@ public class RedsEnvironment {
         return operationTable.resolveUnaryOperation(operatorType, type);
     }
 
-    public <T extends RedsObject, U extends RedsObject> void registerBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2, BinaryOperation<T, U, RedsObject> function) {
-        operationTable.registerBinaryOperation(operatorType, type1, type2, function);
+    public <T extends RedsObject, U extends RedsObject> void registerBinaryOperation(OperatorType operatorType, BinaryOperation<T, U, RedsObject> function) {
+        operationTable.registerBinaryOperation(operatorType, function);
     }
 
     public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation<T, U, ? extends RedsObject>> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
@@ -68,15 +68,15 @@ public class RedsEnvironment {
         return variables.get(name);
     }
 
-    public void putVariable(String name, VariableSymbol value) {
-        variables.put(name, value);
+    public void putVariable(VariableSymbol value) {
+        variables.put(value.getName(), value);
     }
 
     public Function<List<Value>, Value> resolveFunction(String name) {
         return functions.get(name);
     }
 
-    public void putFunction(String name, Function<List<RedsObject>, Value> function) {
+    public void putFunction(String name, Function<List<Value>, Value> function) {
         functions.put(name, function);
     }
 }

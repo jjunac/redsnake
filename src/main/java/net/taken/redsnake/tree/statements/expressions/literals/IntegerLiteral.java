@@ -1,6 +1,7 @@
 package net.taken.redsnake.tree.statements.expressions.literals;
 
 import net.taken.redsnake.interpretor.RedsEnvironment;
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsInteger;
 
 public class IntegerLiteral extends Literal {
@@ -12,7 +13,7 @@ public class IntegerLiteral extends Literal {
     }
 
     @Override
-    public RedsInteger execute(RedsEnvironment env) {
-        return new RedsInteger(value);
+    public Value<RedsInteger> execute(RedsEnvironment env) {
+        return new Value<>(RedsInteger.TYPE, new RedsInteger(value));
     }
 }

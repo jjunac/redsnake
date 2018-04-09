@@ -58,6 +58,6 @@ public class ArithmeticUnaryExpression extends Expression {
         if (!operation.isPresent()) {
             throw new IllegalStateException();
         }
-        return operation.get().apply(v.getValue());
+        return operation.get().apply(v);
     }
 }

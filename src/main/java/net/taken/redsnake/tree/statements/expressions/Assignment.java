@@ -28,7 +28,7 @@ public class Assignment extends Expression {
     public Value execute(RedsEnvironment env) {
         Value v = value.execute(env);
         VariableSymbol symbol = new VariableSymbol(name.execute(env), v);
-        env.putVariable(symbol.getName(), symbol);
+        env.putVariable(symbol);
         return v;
     }
 }

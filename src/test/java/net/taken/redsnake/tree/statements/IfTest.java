@@ -1,6 +1,8 @@
 package net.taken.redsnake.tree.statements;
 
 import com.google.common.collect.ImmutableList;
+import net.taken.redsnake.interpretor.Value;
+import net.taken.redsnake.interpretor.VariableSymbol;
 import net.taken.redsnake.lang.RedsBoolean;
 import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
@@ -44,7 +46,7 @@ class IfTest {
     @Test
     void shouldExecuteTheGoodBlockWhenExecutingIfWithTrueAndElseClause() {
         If anIf = createIfWithAssignments("a", true, 1, 2);
-        env.putVariable("a", new RedsInteger(0));
+        env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
         assertEquals(new RedsInteger(1), env.getVariable("a"));
     }
@@ -52,7 +54,7 @@ class IfTest {
     @Test
     void shouldNotExecuteThenBlockWhenExecutingIfWithFalseAndNoElseClause() {
         If anIf = createIfWithAssignments("a", false, 1);
-        env.putVariable("a", new RedsInteger(0));
+        env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
         assertEquals(new RedsInteger(0), env.getVariable("a"));
     }
@@ -60,7 +62,7 @@ class IfTest {
     @Test
     void shouldNotExecuteElseBlockWhenExecutingIfWithFalseAndElseClause() {
         If anIf = createIfWithAssignments("a", false, 1, 2);
-        env.putVariable("a", new RedsInteger(0));
+        env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
         assertEquals(new RedsInteger(2), env.getVariable("a"));
     }

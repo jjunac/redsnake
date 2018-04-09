@@ -3,6 +3,7 @@ package net.taken.redsnake.operations;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.reflect.Type;
 
@@ -36,8 +37,8 @@ public class OperationTable {
         return unaryOperations.row(operatorType);
     }
 
-    public <T extends RedsObject, U extends RedsObject> void registerBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2, BinaryOperation<T, U, RedsObject> function) {
-        binaryOperations.get(operatorType).put(type1, type2, function);
+    public <T extends RedsObject, U extends RedsObject, R extends RedsObject> void registerBinaryOperation(OperatorType operatorType, BinaryOperation<T, U, R> function) {
+        binaryOperations.get(operatorType).put(function.getTypeArg1(), function.getTypeArg2(), function);
     }
 
     public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation<T, U, ? extends RedsObject>> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {

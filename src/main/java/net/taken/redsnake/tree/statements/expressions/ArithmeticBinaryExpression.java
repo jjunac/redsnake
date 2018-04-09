@@ -81,6 +81,6 @@ public class ArithmeticBinaryExpression extends Expression {
         if (!operation.isPresent()) {
             throw new IllegalStateException();
         }
-        return operation.get().apply(vl.getValue(), vr.getValue());
+        return operation.get().apply(vl, vr);
     }
 }
