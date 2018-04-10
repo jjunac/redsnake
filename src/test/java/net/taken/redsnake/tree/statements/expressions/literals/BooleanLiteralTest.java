@@ -22,11 +22,11 @@ class BooleanLiteralTest {
     @Test
     void shouldReturnTrueWhenExecutingTrueNode() {
         env = new RedsEnvironment();
-        assertTrue(trueNode.execute(env).getValue());
+        assertTrue(trueNode.execute(env).getValue().getValue());
     }
 
     @Test
     void shouldReturnFalseWhenExecutingFalseNode() {
-        assertFalse(falseNode.execute(env).getValue());
+        assertFalse(falseNode.execute(env).getValue().getValue());
     }
 }

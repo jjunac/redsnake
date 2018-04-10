@@ -1,6 +1,7 @@
 package net.taken.redsnake.tree;
 
 import net.taken.redsnake.interpretor.RedsEnvironment;
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.tree.statements.expressions.Expression;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,14 +32,14 @@ class CallTest {
     @Test
     void shouldReturnCallValueWhenExecuteCallWithoutParams() {
         Call call = createCall("carded");
-        env.putFunction("carded", (x) -> new RedsInteger(500));
-        assertEquals(new RedsInteger(500), call.execute(env));
+        env.putFunction("carded", (x) -> new Value<>(RedsInteger.TYPE, new RedsInteger(500)));
+        assertEquals(new RedsInteger(500), call.execute(env).getValue());
     }
 
     @Test
     void shouldReturnCallValueWhenExecuteCallWithParams() {
         Call call = createCall("zymogene", 383);
-        env.putFunction("zymogene", (x) -> new RedsInteger(576).plus(x.get(0)));
-        assertEquals(new RedsInteger(576 + 383), call.execute(env));
+        env.putFunction("zymogene", (x) -> new Value<>(RedsInteger.TYPE, (new RedsInteger(576).plus(x.get(0).getValue()))));
+        assertEquals(new RedsInteger(576 + 383), call.execute(env).getValue());
     }
 }

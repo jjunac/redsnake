@@ -2,6 +2,7 @@ package net.taken.redsnake.operations;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsBoolean;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
@@ -18,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OperationTableTest {
 
-    static final UnaryOperation<RedsBoolean, RedsObject> booleanMinusOperation = new UnaryOperation<>(x -> new RedsBoolean(!x.getValue()));
-    static final UnaryOperation<RedsInteger, RedsObject> integerMinusOperation = new UnaryOperation<>(x -> new RedsInteger(-x.getValue()));
-    static final BinaryOperation<RedsInteger, RedsInteger, RedsInteger> integersAddOperation = new BinaryOperation<>((x, y) -> new RedsInteger(x.getValue() + y.getValue()));
-    static final BinaryOperation<RedsString, RedsString, RedsString> stringsAddOperation = new BinaryOperation<>((x, y) -> new RedsString(x.getValue() + y.getValue()));
+    static final UnaryOperation<RedsBoolean, RedsBoolean> booleanMinusOperation = new UnaryOperation<>(RedsBoolean.TYPE, RedsBoolean.TYPE, x -> new RedsBoolean(!x.getValue()));
+    static final UnaryOperation<RedsInteger, RedsInteger> integerMinusOperation = new UnaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, x -> new RedsInteger(-x.getValue()));
+    static final BinaryOperation<RedsInteger, RedsInteger, RedsInteger> integersAddOperation = new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() + y.getValue()));
+    static final BinaryOperation<RedsString, RedsString, RedsString> stringsAddOperation = new BinaryOperation<>(RedsString.TYPE, RedsString.TYPE, RedsString.TYPE, (x, y) -> new RedsString(x.getValue() + y.getValue()));
     OperationTable table;
 
     @BeforeEach
@@ -29,12 +30,12 @@ class OperationTableTest {
         table = new OperationTable();
     }
 
-    void unarySetUp() {
+    private void unarySetUp() {
         table.unaryOperations.put(OperatorType.MINUS, RedsInteger.TYPE, integerMinusOperation);
         table.unaryOperations.put(OperatorType.MINUS, RedsBoolean.TYPE, booleanMinusOperation);
     }
 
-    void binarySetUp() {
+    private void binarySetUp() {
         table.binaryOperations.get(OperatorType.PLUS).put(RedsInteger.TYPE, RedsInteger.TYPE, integersAddOperation);
         table.binaryOperations.get(OperatorType.PLUS).put(RedsString.TYPE, RedsString.TYPE, stringsAddOperation);
     }
@@ -67,7 +68,7 @@ class OperationTableTest {
     @Test
     void shouldResolveBinaryOperationWhenTypeIsMatching() {
         binarySetUp();
-        Optional<BinaryOperation> actual = table.resolveBinaryOperation(OperatorType.PLUS, RedsInteger.TYPE, RedsInteger.TYPE);
+        Optional<BinaryOperation<RedsInteger, RedsInteger, RedsInteger>> actual = table.resolveBinaryOperation(OperatorType.PLUS, RedsInteger.TYPE, RedsInteger.TYPE);
         assertTrue(actual.isPresent());
         assertEquals(integersAddOperation, actual.get());
     }

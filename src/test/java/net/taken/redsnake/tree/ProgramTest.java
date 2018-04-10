@@ -80,12 +80,12 @@ class ProgramTest {
     @Test
     void shouldReturnSomethingWhenParsingStmt() {
         Statement stmt = parseStatement("598");
-        assertEquals(new RedsInteger(598), stmt.execute(env));
+        assertEquals(new RedsInteger(598), stmt.execute(env).getValue());
     }
 
     @Test
     void shouldReturnNullWhenParsePrint() {
-        RedsObject actual = parseProgram("print 875").execute(env);
+        RedsObject actual = parseStatement("print 875").execute(env).getValue();
         assertTrue(actual.isNull());
     }
 
