@@ -27,63 +27,63 @@ class ArithmeticBinaryExpressionTest {
     }
 
     @Test
-    void shouldReturnCorrectResultWhenExecuteBinaryExprPower() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprPowerOnInteger() {
         ArithmeticBinaryExpression abe = createBinaryExpression(POWER, 2, 4);
-        assertEquals(new RedsInteger(16), abe.execute(env));
+        assertEquals(new RedsInteger(16), abe.execute(env).getValue());
     }
 
     @Test
-    void shouldReturnCorrectResultWhenExecuteBinaryExprMult() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprMultOnInteger() {
         ArithmeticBinaryExpression abe = createBinaryExpression(MULTIPLY, 4, 2);
-        assertEquals(new RedsInteger(8), abe.execute(env));
+        assertEquals(new RedsInteger(8), abe.execute(env).getValue());
     }
 
     @Test
-    void shouldReturnCorrectResultWhenExecuteBinaryExprDiv() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprDivOnInteger() {
         ArithmeticBinaryExpression abe = createBinaryExpression(DIVIDE, 4, 2);
-        assertEquals(new RedsInteger(2), abe.execute(env));
+        assertEquals(new RedsInteger(2), abe.execute(env).getValue());
     }
 
     @Test
-    void shouldReturnCorrectResultWhenExecuteBinaryExprMod() {
+    void shouldReturnCorrectResultWhenExecuteBinaryExprModOnInteger() {
         ArithmeticBinaryExpression abe = createBinaryExpression(MODULUS, 4, 3);
-        assertEquals(new RedsInteger(1), abe.execute(env));
+        assertEquals(new RedsInteger(1), abe.execute(env).getValue());
     }
 
     @Test
-    void shouldReturnCorrectResultWhenExecuteBinaryPlus() {
+    void shouldReturnCorrectResultWhenExecuteBinaryPlusOnInteger() {
         ArithmeticBinaryExpression abe = createBinaryExpression(ADD, 4, 3);
-        assertEquals(new RedsInteger(7), abe.execute(env));
+        assertEquals(new RedsInteger(7), abe.execute(env).getValue());
     }
 
     @Test
-    void shouldReturnCorrectResultWhenExecuteBinaryMinus() {
+    void shouldReturnCorrectResultWhenExecuteBinaryMinusOnInteger() {
         ArithmeticBinaryExpression abe = createBinaryExpression(SUBTRACT, 4, 3);
-        assertEquals(new RedsInteger(1), abe.execute(env));
+        assertEquals(new RedsInteger(1), abe.execute(env).getValue());
     }
 
     @Test
     void shouldBeRightAssociativeWhenExecuteBinaryExprPow() {
         Statement stmt = parseStatement("2**3**2");
-        assertEquals(new RedsInteger(512), stmt.execute(env));
+        assertEquals(new RedsInteger(512), stmt.execute(env).getValue());
     }
 
     @Test
     void shouldPrioritizeMultiplyDivideAndModuloOverPlusAndMinus() {
         Statement stmt = parseStatement("2+2*3-4/2+5%3");
-        assertEquals(new RedsInteger(8), stmt.execute(env));
+        assertEquals(new RedsInteger(8), stmt.execute(env).getValue());
     }
 
     @Test
     void shouldPrioritizeUnaryMinusOverMultiplyDivideAndModulo() {
         Statement stmt = parseStatement("2*-1/-1*(1%-(-2))");
-        assertEquals(new RedsInteger(2), stmt.execute(env));
+        assertEquals(new RedsInteger(2), stmt.execute(env).getValue());
     }
 
     @Test
     void shouldPrioritizePowerOverUnaryMinus() {
         Statement stmt = parseStatement("-(2)**2");
-        assertEquals(new RedsInteger(-4), stmt.execute(env));
+        assertEquals(new RedsInteger(-4), stmt.execute(env).getValue());
     }
 
 }

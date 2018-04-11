@@ -21,7 +21,7 @@ class IntegerLiteralTest {
 
     @Test
     void shouldReturnIntValueWhenExecuteIntegerLiteral() {
-        assertEquals(255, intNode1.execute(env).getValue());
-        assertEquals(127, intNode2.execute(env).getValue());
+        assertEquals(255, intNode1.execute(env).getValue().getValue());
+        assertEquals(127, intNode2.execute(env).getValue().getValue());
     }
 }

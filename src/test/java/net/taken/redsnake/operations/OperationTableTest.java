@@ -2,7 +2,6 @@ package net.taken.redsnake.operations;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsBoolean;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
@@ -60,15 +59,15 @@ class OperationTableTest {
     @Test
     void shouldRegisterUnaryOperation() {
         unarySetUp();
-        UnaryOperation<RedsInteger, RedsObject> integerPlusOperation = new UnaryOperation<>(x -> new RedsInteger(x.getValue()));
-        table.registerUnaryOperation(OperatorType.PLUS, RedsInteger.TYPE, integerPlusOperation);
+        UnaryOperation<RedsInteger, RedsInteger> integerPlusOperation = new UnaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, x -> new RedsInteger(x.getValue()));
+        table.registerUnaryOperation(OperatorType.PLUS, integerPlusOperation);
         assertEquals(integerPlusOperation, table.unaryOperations.row(OperatorType.PLUS).get(RedsInteger.TYPE));
     }
 
     @Test
     void shouldResolveBinaryOperationWhenTypeIsMatching() {
         binarySetUp();
-        Optional<BinaryOperation<RedsInteger, RedsInteger, RedsInteger>> actual = table.resolveBinaryOperation(OperatorType.PLUS, RedsInteger.TYPE, RedsInteger.TYPE);
+        Optional<BinaryOperation> actual = table.resolveBinaryOperation(OperatorType.PLUS, RedsInteger.TYPE, RedsInteger.TYPE);
         assertTrue(actual.isPresent());
         assertEquals(integersAddOperation, actual.get());
     }
@@ -85,8 +84,8 @@ class OperationTableTest {
     @Test
     void shouldRegisterBinaryOperation() {
         binarySetUp();
-        BinaryOperation<RedsInteger, RedsInteger, RedsObject> integerMinusOperation = new BinaryOperation<>((x, y) -> new RedsInteger(x.getValue() - y.getValue()));
-        table.registerBinaryOperation(OperatorType.MINUS, RedsInteger.TYPE, RedsInteger.TYPE, integerMinusOperation);
+        BinaryOperation<RedsInteger, RedsInteger, RedsInteger> integerMinusOperation = new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() - y.getValue()));
+        table.registerBinaryOperation(OperatorType.MINUS, integerMinusOperation);
         assertEquals(integerMinusOperation, table.binaryOperations.get(OperatorType.MINUS).get(RedsInteger.TYPE, RedsInteger.TYPE));
     }
 }

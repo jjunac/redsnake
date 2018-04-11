@@ -1,7 +1,9 @@
 package net.taken.redsnake.interpretor;
 
+import com.google.common.base.Strings;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
+import net.taken.redsnake.lang.RedsString;
 import net.taken.redsnake.operations.BinaryOperation;
 import net.taken.redsnake.operations.OperationTable;
 import net.taken.redsnake.operations.OperatorType;
@@ -44,12 +46,21 @@ public class RedsEnvironment {
         operationTable = new OperationTable();
         // TODO equality problem, super type ?
         // Integers
+        operationTable.registerBinaryOperation(D_STAR, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger((int) Math.pow(x.getValue(), y.getValue()))));
+        operationTable.registerUnaryOperation(MINUS, new UnaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, x -> new RedsInteger(-x.getValue())));
+        operationTable.registerBinaryOperation(STAR, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() * y.getValue())));
+        operationTable.registerBinaryOperation(SLASH, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() / y.getValue())));
+        operationTable.registerBinaryOperation(PERCENT, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() % y.getValue())));
         operationTable.registerBinaryOperation(PLUS, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() + y.getValue())));
         operationTable.registerBinaryOperation(MINUS, new BinaryOperation<>(RedsInteger.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(x.getValue() - y.getValue())));
+        // String
+        operationTable.registerBinaryOperation(STAR, new BinaryOperation<>(RedsString.TYPE, RedsInteger.TYPE, RedsString.TYPE, (x, y) -> new RedsString(Strings.repeat(x.getValue(), y.getValue()))));
+        operationTable.registerBinaryOperation(PLUS, new BinaryOperation<>(RedsString.TYPE, RedsString.TYPE, RedsString.TYPE, (x, y) -> new RedsString(x.getValue() + y.getValue())));
+
     }
 
-    public <T extends RedsObject> void registerUnaryOperation(OperatorType operatorType, Type<T> type, UnaryOperation<T, RedsObject> function) {
-        operationTable.registerUnaryOperation(operatorType, type, function);
+    public <T extends RedsObject> void registerUnaryOperation(OperatorType operatorType, UnaryOperation<T, RedsObject> function) {
+        operationTable.registerUnaryOperation(operatorType, function);
     }
 
     public <T extends RedsObject> Optional<UnaryOperation> resolveUnaryOperation(OperatorType operatorType, Type<T> type) {
@@ -60,7 +71,7 @@ public class RedsEnvironment {
         operationTable.registerBinaryOperation(operatorType, function);
     }
 
-    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation<T, U, ? extends RedsObject>> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
+    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
         return operationTable.resolveBinaryOperation(operatorType, type1, type2);
     }
 

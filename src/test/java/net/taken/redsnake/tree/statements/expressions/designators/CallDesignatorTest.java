@@ -27,6 +27,6 @@ class CallDesignatorTest {
     @Test
     void shouldReturnCallValueWhenExecuteCallDesignator() {
         CallDesignator callDesignator = createCallDesignator(new RedsInteger(211));
-        assertEquals(new RedsInteger(211), callDesignator.execute(env));
+        assertEquals(new RedsInteger(211), callDesignator.execute(env).getValue());
     }
 }

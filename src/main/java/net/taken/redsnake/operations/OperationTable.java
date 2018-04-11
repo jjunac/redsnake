@@ -25,8 +25,8 @@ public class OperationTable {
         Arrays.stream(OperatorType.values()).forEach(t -> binaryOperations.put(t, HashBasedTable.create()));
     }
 
-    public <T extends RedsObject> void registerUnaryOperation(OperatorType operatorType, Type<T> type, UnaryOperation<T, RedsObject> function) {
-        unaryOperations.put(operatorType, type, function);
+    public <T extends RedsObject, R extends RedsObject> void registerUnaryOperation(OperatorType operatorType, UnaryOperation<T, R> function) {
+        unaryOperations.put(operatorType, function.getTypeArg(), function);
     }
 
     public <T extends RedsObject> Optional<UnaryOperation> resolveUnaryOperation(OperatorType operatorType, Type<T> type) {
@@ -41,7 +41,7 @@ public class OperationTable {
         binaryOperations.get(operatorType).put(function.getTypeArg1(), function.getTypeArg2(), function);
     }
 
-    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation<T, U, ? extends RedsObject>> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
+    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
         return Optional.ofNullable(binaryOperations.get(operatorType).get(type1, type2));
     }
 

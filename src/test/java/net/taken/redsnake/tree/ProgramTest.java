@@ -60,6 +60,7 @@ class ProgramTest {
 
     @Test
     void shouldPrintRightResultWhenDoingOperationOnStrings() {
+        // FIXME will pass with conversion table
         parseProgram("a = \"Gloater\"\n" +
             "a = a * 3\n" +
             "a = a + \"Mafurra\"\n" +
@@ -97,7 +98,7 @@ class ProgramTest {
             "} else {\n" +
             "  a = 2\n" +
             "}\n").execute(env);
-        assertEquals(new RedsInteger(1), env.getVariable("a"));
+        assertEquals(new RedsInteger(1), env.getVariable("a").getValue());
     }
 
 }

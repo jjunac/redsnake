@@ -48,7 +48,7 @@ class IfTest {
         If anIf = createIfWithAssignments("a", true, 1, 2);
         env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
-        assertEquals(new RedsInteger(1), env.getVariable("a"));
+        assertEquals(new RedsInteger(1), env.getVariable("a").getValue());
     }
 
     @Test
@@ -56,7 +56,7 @@ class IfTest {
         If anIf = createIfWithAssignments("a", false, 1);
         env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
-        assertEquals(new RedsInteger(0), env.getVariable("a"));
+        assertEquals(new RedsInteger(0), env.getVariable("a").getValue());
     }
 
     @Test
@@ -64,7 +64,7 @@ class IfTest {
         If anIf = createIfWithAssignments("a", false, 1, 2);
         env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
-        assertEquals(new RedsInteger(2), env.getVariable("a"));
+        assertEquals(new RedsInteger(2), env.getVariable("a").getValue());
     }
 
     @Test
@@ -76,7 +76,7 @@ class IfTest {
             "    a = 2\n" +
             "}");
         program.execute(env);
-        assertEquals(new RedsInteger(1), env.getVariable("a"));
+        assertEquals(new RedsInteger(1), env.getVariable("a").getValue());
     }
 
     @Test
@@ -84,7 +84,7 @@ class IfTest {
         Program program = parseProgram("a = 0\n" +
             "if false a = 1 else a = 2");
         program.execute(env);
-        assertEquals(new RedsInteger(2), env.getVariable("a"));
+        assertEquals(new RedsInteger(2), env.getVariable("a").getValue());
     }
 
 }

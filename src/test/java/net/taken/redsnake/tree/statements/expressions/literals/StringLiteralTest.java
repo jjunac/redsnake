@@ -21,8 +21,8 @@ class StringLiteralTest {
 
     @Test
     void shouldReturnIntValueWhenExecuteIntegerLiteral() {
-        assertEquals("Slaker", stringNode1.execute(env).getValue());
-        assertEquals("Unicell", stringNode2.execute(env).getValue());
+        assertEquals("Slaker", stringNode1.execute(env).getValue().getValue());
+        assertEquals("Unicell", stringNode2.execute(env).getValue().getValue());
     }
 
 }

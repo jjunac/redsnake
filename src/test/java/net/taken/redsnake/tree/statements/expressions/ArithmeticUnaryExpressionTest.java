@@ -25,7 +25,7 @@ class ArithmeticUnaryExpressionTest {
     @Test
     void shouldReturnCorrectResultWhenExecuteUnaryExprUnaryMinus() {
         ArithmeticUnaryExpression aue = createUnaryExpression(ArithmeticUnaryExpression.Type.MINUS, 2);
-        assertEquals(new RedsInteger(-2), aue.execute(env));
+        assertEquals(new RedsInteger(-2), aue.execute(env).getValue());
     }
 
 }
