@@ -60,11 +60,11 @@ class ProgramTest {
 
     @Test
     void shouldPrintRightResultWhenDoingOperationOnStrings() {
-        // FIXME will pass with conversion table
+        // TODO put a from-string operator in one of the multiplication
         parseProgram("a = \"Gloater\"\n" +
             "a = a * 3\n" +
             "a = a + \"Mafurra\"\n" +
-            "a = a * \"3\"\n" +
+            "a = a * 3\n" +
             "print a").execute(env);
         String expected = Strings.repeat("Gloater", 3);
         expected += "Mafurra";
