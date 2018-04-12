@@ -1,6 +1,6 @@
 package net.taken.redsnake.tree;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package net.taken.redsnake.tree.statements.expressions.literals;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class IntegerLiteralTest {
 
     @Test
     void shouldReturnIntValueWhenExecuteIntegerLiteral() {
-        assertEquals(255, intNode1.execute(env).getValue());
-        assertEquals(127, intNode2.execute(env).getValue());
+        assertEquals(255, intNode1.execute(env).getValue().getValue());
+        assertEquals(127, intNode2.execute(env).getValue().getValue());
     }
 }

@@ -1,7 +1,8 @@
 package net.taken.redsnake.tree.statements;
 
 import com.google.common.collect.ImmutableList;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsNull;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.tree.Node;
@@ -35,13 +36,13 @@ public class If extends Statement {
     }
 
     @Override
-    public RedsObject execute(RedsEnvironment env) {
-        if (condition.execute(env).tob().getValue()) {
+    public Value execute(RedsEnvironment env) {
+        if (condition.execute(env).getValue().tob().getValue()) {
             return thenBody.execute(env);
         }
         if (elseBody.isPresent()) {
             return elseBody.get().execute(env);
         }
-        return new RedsNull();
+        return RedsNull.VALUE;
     }
 }

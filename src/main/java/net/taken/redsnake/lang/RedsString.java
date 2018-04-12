@@ -1,19 +1,21 @@
 package net.taken.redsnake.lang;
 
 import com.google.common.base.Strings;
-import net.taken.redsnake.reflect.ArcaMetaClass;
+import net.taken.redsnake.reflect.Type;
 
 import java.util.Objects;
 
 public class RedsString extends RedsObject {
 
+    public static final Type<RedsString> TYPE = new Type<>("string");
     private String value;
 
     public RedsString() {
-        super(new ArcaMetaClass("String", "Object"));
+        this("");
     }
 
     public RedsString(String value) {
+        super(TYPE);
         this.value = value;
     }
 

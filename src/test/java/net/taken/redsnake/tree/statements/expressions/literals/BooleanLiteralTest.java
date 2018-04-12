@@ -1,6 +1,6 @@
 package net.taken.redsnake.tree.statements.expressions.literals;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,11 +22,11 @@ class BooleanLiteralTest {
     @Test
     void shouldReturnTrueWhenExecutingTrueNode() {
         env = new RedsEnvironment();
-        assertTrue(trueNode.execute(env).getValue());
+        assertTrue(trueNode.execute(env).getValue().getValue());
     }
 
     @Test
     void shouldReturnFalseWhenExecutingFalseNode() {
-        assertFalse(falseNode.execute(env).getValue());
+        assertFalse(falseNode.execute(env).getValue().getValue());
     }
 }

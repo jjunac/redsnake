@@ -1,13 +1,13 @@
 package net.taken.redsnake.tree.statements;
 
 import com.google.common.collect.ImmutableList;
+import net.taken.redsnake.interpretor.Value;
+import net.taken.redsnake.interpretor.VariableSymbol;
 import net.taken.redsnake.lang.RedsBoolean;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.tree.Program;
 import net.taken.redsnake.tree.Variable;
-import net.taken.redsnake.tree.statements.If;
-import net.taken.redsnake.tree.statements.StatementList;
 import net.taken.redsnake.tree.statements.expressions.Assignment;
 import net.taken.redsnake.tree.statements.expressions.Expression;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,25 +46,25 @@ class IfTest {
     @Test
     void shouldExecuteTheGoodBlockWhenExecutingIfWithTrueAndElseClause() {
         If anIf = createIfWithAssignments("a", true, 1, 2);
-        env.putVariable("a", new RedsInteger(0));
+        env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
-        assertEquals(new RedsInteger(1), env.getVariable("a"));
+        assertEquals(new RedsInteger(1), env.getVariable("a").getValue());
     }
 
     @Test
     void shouldNotExecuteThenBlockWhenExecutingIfWithFalseAndNoElseClause() {
         If anIf = createIfWithAssignments("a", false, 1);
-        env.putVariable("a", new RedsInteger(0));
+        env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
-        assertEquals(new RedsInteger(0), env.getVariable("a"));
+        assertEquals(new RedsInteger(0), env.getVariable("a").getValue());
     }
 
     @Test
     void shouldNotExecuteElseBlockWhenExecutingIfWithFalseAndElseClause() {
         If anIf = createIfWithAssignments("a", false, 1, 2);
-        env.putVariable("a", new RedsInteger(0));
+        env.putVariable(new VariableSymbol<>("a", RedsInteger.TYPE, new RedsInteger(0)));
         anIf.execute(env);
-        assertEquals(new RedsInteger(2), env.getVariable("a"));
+        assertEquals(new RedsInteger(2), env.getVariable("a").getValue());
     }
 
     @Test
@@ -76,7 +76,7 @@ class IfTest {
             "    a = 2\n" +
             "}");
         program.execute(env);
-        assertEquals(new RedsInteger(1), env.getVariable("a"));
+        assertEquals(new RedsInteger(1), env.getVariable("a").getValue());
     }
 
     @Test
@@ -84,7 +84,7 @@ class IfTest {
         Program program = parseProgram("a = 0\n" +
             "if false a = 1 else a = 2");
         program.execute(env);
-        assertEquals(new RedsInteger(2), env.getVariable("a"));
+        assertEquals(new RedsInteger(2), env.getVariable("a").getValue());
     }
 
 }

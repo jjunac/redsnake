@@ -1,7 +1,7 @@
 package net.taken.redsnake.tree;
 
 import com.google.common.base.Strings;
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.tree.statements.Statement;
@@ -60,10 +60,11 @@ class ProgramTest {
 
     @Test
     void shouldPrintRightResultWhenDoingOperationOnStrings() {
+        // TODO put a from-string operator in one of the multiplication
         parseProgram("a = \"Gloater\"\n" +
             "a = a * 3\n" +
             "a = a + \"Mafurra\"\n" +
-            "a = a * \"3\"\n" +
+            "a = a * 3\n" +
             "print a").execute(env);
         String expected = Strings.repeat("Gloater", 3);
         expected += "Mafurra";
@@ -80,12 +81,12 @@ class ProgramTest {
     @Test
     void shouldReturnSomethingWhenParsingStmt() {
         Statement stmt = parseStatement("598");
-        assertEquals(new RedsInteger(598), stmt.execute(env));
+        assertEquals(new RedsInteger(598), stmt.execute(env).getValue());
     }
 
     @Test
     void shouldReturnNullWhenParsePrint() {
-        RedsObject actual = parseProgram("print 875").execute(env);
+        RedsObject actual = parseStatement("print 875").execute(env).getValue();
         assertTrue(actual.isNull());
     }
 
@@ -97,7 +98,7 @@ class ProgramTest {
             "} else {\n" +
             "  a = 2\n" +
             "}\n").execute(env);
-        assertEquals(new RedsInteger(1), env.getVariable("a"));
+        assertEquals(new RedsInteger(1), env.getVariable("a").getValue());
     }
 
 }

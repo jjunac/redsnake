@@ -1,26 +1,23 @@
 package net.taken.redsnake.lang;
 
-import net.taken.redsnake.reflect.ArcaMetaClass;
+import net.taken.redsnake.reflect.Type;
 
 public class RedsObject {
 
-    public final ArcaMetaClass metaClass;
+    public static final Type<RedsObject> TYPE = new Type<>("object");
 
-    public RedsObject() {
-        this.metaClass = new ArcaMetaClass("Object", null);
+    private final Type type;
+
+    public RedsObject(Type type) {
+        this.type = type;
     }
 
-    public RedsObject(ArcaMetaClass metaClass) {
-        this.metaClass = metaClass;
+    public Type getType() {
+        return type;
     }
 
     public boolean isNull() {
         return false;
-    }
-
-    @Override
-    public String toString() {
-        return metaClass.name;
     }
 
     // =============================
@@ -60,7 +57,7 @@ public class RedsObject {
     // =============================
 
     public RedsString tos() {
-        return new RedsString(metaClass.name);
+        return new RedsString(type.getName());
     }
 
     public RedsInteger toi() {

@@ -193,17 +193,17 @@ _TODO_
 
 ## Operator precedence
 
-| Operator                  | Description                            |
-| :-----------------------: | -------------------------------------- |
-| `if`, `else`              | Conditional expression                 |
-| `=`                       | Assignment                            |
-| <code>&#124;&#124;</code> | Boolean OR                             |
-| `&&`                      | Boolean AND                            |
-| `<`, `>`, `<=`, `<=`      | Comparisons                            |
-| `==`, `!=`                | Tests                                  |
-| `+`, `-`                  | Addition and susbtraction              |
-| `*`, `/`, `%`             | Multiplication, division and remainder |
-| `-`                       | Negative                               |
-| `**`                      | Exponentiation                         |
-| `x[index]`, `x(args...)`  | Subscription and call                  |
-| `[expressions...]`        | List instantiation                     |
+| Operator                  | Description                             |
+| :-----------------------: | --------------------------------------- |
+| `if`, `else`              | Conditional expression                  |
+| `=`                       | Assignment                              |
+| <code>&#124;&#124;</code> | Boolean OR                              |
+| `&&`                      | Boolean AND                             |
+| `<`, `>`, `<=`, `<=`      | Comparisons                             |
+| `==`, `!=`                | Tests                                   |
+| `+`, `-`                  | Addition and susbtraction               |
+| `*`, `/`, `%`             | Multiplication, division and remainder  |
+| `-`     , `$`             | Negative                and from-string |
+| `**`                      | Exponentiation                          |
+| `x[index]`, `x(args...)`  | Subscription and call                   |
+| `[expressions...]`        | List instantiation                      |

@@ -1,6 +1,7 @@
 package net.taken.redsnake.tree;
 
 import com.sun.istack.internal.NotNull;
+import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.parser.RedsnakeLexer;
@@ -28,7 +29,7 @@ public class TestUtils {
 
     public static Expression mockExpression(RedsObject value) {
         Expression e = mock(Expression.class);
-        when(e.execute(any())).thenReturn(value);
+        when(e.execute(any())).thenReturn(new Value(value.getType(), value));
         return e;
     }
 
@@ -40,7 +41,7 @@ public class TestUtils {
 
     public static Call mockCall(RedsObject value) {
         Call call = mock(Call.class);
-        when(call.execute(any())).thenReturn(value);
+        when(call.execute(any())).thenReturn(new Value(value.getType(), value));
         return call;
     }
 

@@ -1,6 +1,6 @@
 package net.taken.redsnake;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.parser.RedsnakeLexer;
 import net.taken.redsnake.parser.RedsnakeParser;
@@ -60,7 +60,8 @@ public class Redsnake {
             while (true) {
                 System.out.print("reds> ");
                 BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
-                RedsObject res = buildAST(CharStreams.fromString(is.readLine())).execute(redsEnvironment);
+                RedsObject res = buildAST(CharStreams.fromString(is.readLine())).execute(redsEnvironment).getValue();
+                // TODO get the type and do a test on it, cleaner
                 if(!res.isNull()) {
                     System.out.println("=> " + res.tos().getValue());
                 }

@@ -1,14 +1,17 @@
 package net.taken.redsnake.lang;
 
-import net.taken.redsnake.reflect.ArcaMetaClass;
+import net.taken.redsnake.reflect.Type;
 
 public class RedsBoolean extends RedsObject {
+
+    public static final Type<RedsBoolean> TYPE = new Type<>("boolean");
+
     public static final RedsBoolean FALSE = new RedsBoolean(false);
     public static final RedsBoolean TRUE = new RedsBoolean(true);
     private boolean value;
 
     public RedsBoolean(boolean value) {
-        super(new ArcaMetaClass("Boolean", "Object"));
+        super(TYPE);
         this.value = value;
     }
 

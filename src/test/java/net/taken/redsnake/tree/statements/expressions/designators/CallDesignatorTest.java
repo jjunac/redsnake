@@ -1,6 +1,6 @@
 package net.taken.redsnake.tree.statements.expressions.designators;
 
-import net.taken.redsnake.lang.RedsEnvironment;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.tree.Call;
@@ -27,6 +27,6 @@ class CallDesignatorTest {
     @Test
     void shouldReturnCallValueWhenExecuteCallDesignator() {
         CallDesignator callDesignator = createCallDesignator(new RedsInteger(211));
-        assertEquals(new RedsInteger(211), callDesignator.execute(env));
+        assertEquals(new RedsInteger(211), callDesignator.execute(env).getValue());
     }
 }
