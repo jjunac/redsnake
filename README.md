@@ -1,6 +1,7 @@
 # Redsnake
 
 [![Build Status](https://travis-ci.org/Taken0711/redsnake.svg?branch=devel)](https://travis-ci.org/Taken0711/redsnake)
+[![codecov](https://codecov.io/gh/Taken0711/redsnake/branch/devel/graph/badge.svg)](https://codecov.io/gh/Taken0711/redsnake)
 
 Redsnake is a scripting language inspired by Ruby and Python.
 
