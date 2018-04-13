@@ -26,11 +26,15 @@ Redsnake is a scripting language inspired by Ruby and Python.
 
  * [ANTLR](https://www.antlr.org/) - Lexer/Parser
  * [Apache Commons CLI](https://commons.apache.org/proper/commons-cli/) - Command-Line Interface
+ * [Codacy](https://www.codacy.com/) - Automated code reviews & code analytics
+ * [Codecov](https://codecov.io/) - Code coverage integration for GitHub
+ * [Dependabot](https://dependabot.com/) - Automated dependency update
  * [Google's Guava](https://github.com/google/guava/wiki) - Core Library
- * [Java](https://www.java.com/) - Programming Language
- * [JUnit](https://junit.org/) - Testing Framework
- * [Maven](https://maven.apache.org/) - Dependency Management
- * [Mockito](http://site.mockito.org/) - Mocking Framework
+ * [Java](https://www.java.com/) - Programming language
+ * [JUnit](https://junit.org/) - Testing framework
+ * [Maven](https://maven.apache.org/) - Dependency management
+ * [Mockito](http://site.mockito.org/) - Mocking framework
+ * [Travis CI](https://travis-ci.org/) - Continuous Integration
 
 ## Contributing
 
