@@ -15,6 +15,6 @@ public class BooleanLiteral extends Literal {
     @Override
     public Value<RedsBoolean> execute(RedsEnvironment env) {
         // TODO Boolean factory to have only 2 instances of boolean and improve performance
-        return new Value<>(RedsBoolean.TYPE, new RedsBoolean(value));
+        return Value.of(RedsBoolean.TYPE, new RedsBoolean(value));
     }
 }

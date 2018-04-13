@@ -37,14 +37,14 @@ class VariableDesignatorTest {
     void shouldReturnVariableValueWhenExecuteVarDesignatorAndFunctionExists() {
         VariableDesignator var = createVariableDesignator("testvar");
         env.putVariable(new VariableSymbol<>("testvar", RedsInteger.TYPE, new RedsInteger(96)));
-        env.putFunction("testvar", list -> new Value<>(RedsInteger.TYPE, new RedsInteger(957)));
+        env.putFunction("testvar", list -> Value.ofInteger(957));
         assertEquals(new RedsInteger(96), var.execute(env).getValue());
     }
 
     @Test
     void shouldCallFunctionWhenExecuteVarDesignatorAndVarDoesntExist() {
         VariableDesignator var = createVariableDesignator("testFunction");
-        env.putFunction("testFunction", list -> new Value<>(RedsInteger.TYPE, new RedsInteger(22)));
+        env.putFunction("testFunction", list -> Value.ofInteger(22));
         assertEquals(new RedsInteger(22), var.execute(env).getValue());
     }
 

@@ -24,7 +24,7 @@ public class UnaryOperation<U extends RedsObject, R extends RedsObject> {
     }
 
     public Value<R> apply(Value<U> arg) {
-        return new Value<>(typeRes, operation.apply(arg.getValue()));
+        return Value.of(typeRes, operation.apply(arg.getValue()));
     }
 
 }

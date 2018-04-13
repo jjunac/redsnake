@@ -14,6 +14,6 @@ public class IntegerLiteral extends Literal {
 
     @Override
     public Value<RedsInteger> execute(RedsEnvironment env) {
-        return new Value<>(RedsInteger.TYPE, new RedsInteger(value));
+        return Value.of(RedsInteger.TYPE, new RedsInteger(value));
     }
 }

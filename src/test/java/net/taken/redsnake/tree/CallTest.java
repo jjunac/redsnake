@@ -32,14 +32,14 @@ class CallTest {
     @Test
     void shouldReturnCallValueWhenExecuteCallWithoutParams() {
         Call call = createCall("carded");
-        env.putFunction("carded", (x) -> new Value<>(RedsInteger.TYPE, new RedsInteger(500)));
+        env.putFunction("carded", (x) -> Value.ofInteger(500));
         assertEquals(new RedsInteger(500), call.execute(env).getValue());
     }
 
     @Test
     void shouldReturnCallValueWhenExecuteCallWithParams() {
         Call call = createCall("zymogene", 383);
-        env.putFunction("zymogene", (x) -> new Value<>(RedsInteger.TYPE, (new RedsInteger(576).plus(x.get(0).getValue()))));
+        env.putFunction("zymogene", (x) -> Value.of(new RedsInteger(576).plus(x.get(0).getValue())));
         assertEquals(new RedsInteger(576 + 383), call.execute(env).getValue());
     }
 }

@@ -14,6 +14,6 @@ public class StringLiteral extends Literal {
 
     @Override
     public Value<RedsString> execute(RedsEnvironment env) {
-        return new Value<>(RedsString.TYPE, new RedsString(value));
+        return Value.of(RedsString.TYPE, new RedsString(value));
     }
 }

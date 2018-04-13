@@ -29,7 +29,7 @@ public class TestUtils {
 
     public static Expression mockExpression(RedsObject value) {
         Expression e = mock(Expression.class);
-        when(e.execute(any())).thenReturn(new Value(value.getType(), value));
+        when(e.execute(any())).thenReturn(Value.of(value));
         return e;
     }
 
@@ -41,7 +41,7 @@ public class TestUtils {
 
     public static Call mockCall(RedsObject value) {
         Call call = mock(Call.class);
-        when(call.execute(any())).thenReturn(new Value(value.getType(), value));
+        when(call.execute(any())).thenReturn(Value.of(value));
         return call;
     }
 

@@ -27,7 +27,7 @@ public class BinaryOperation<U extends RedsObject, V extends RedsObject, R exten
     }
 
     public Value<R> apply(Value<U> arg1, Value<V> arg2) {
-        return new Value<>(typeRes, function.apply(arg1.getValue(), arg2.getValue()));
+        return Value.of(typeRes, function.apply(arg1.getValue(), arg2.getValue()));
     }
 
 }

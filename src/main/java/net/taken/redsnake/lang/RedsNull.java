@@ -6,7 +6,7 @@ import net.taken.redsnake.reflect.Type;
 public class RedsNull extends RedsObject {
 
     public static final Type<RedsNull> TYPE = new Type<>("null");
-    public static final Value<RedsNull> VALUE = new Value<>(TYPE, new RedsNull());
+    public static final Value<RedsNull> VALUE = Value.of(TYPE, new RedsNull());
 
 
     private RedsNull() {
