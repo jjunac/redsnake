@@ -1,6 +1,5 @@
 package net.taken.redsnake.tree;
 
-import com.sun.istack.internal.NotNull;
 import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
@@ -39,13 +38,13 @@ public class TestUtils {
         return var;
     }
 
-    public static Call mockCall(RedsObject value) {
+    public static <E extends RedsObject> Call mockCall(E value) {
         Call call = mock(Call.class);
-        when(call.execute(any())).thenReturn(new Value(value.getType(), value));
+        when(call.execute(any())).thenReturn(new Value<E>(value.getType(), value));
         return call;
     }
 
-    public static Program parseProgram(@NotNull String... s) {
+    public static Program parseProgram(String... s) {
         StringBuilder str = new StringBuilder();
         Arrays.stream(s).forEach(st -> str.append(st).append(System.lineSeparator()));
         CharStream inputStream = CharStreams.fromString(str.toString());
@@ -56,7 +55,7 @@ public class TestUtils {
         return (Program) new ASTBuilder().visit(t);
     }
 
-    public static Statement parseStatement(@NotNull String s) {
+    public static Statement parseStatement(String s) {
         CharStream inputStream = CharStreams.fromString(s);
         RedsnakeLexer redsnakeLexer = new RedsnakeLexer(inputStream);
         TokenStream commonTokenStream = new CommonTokenStream(redsnakeLexer);
