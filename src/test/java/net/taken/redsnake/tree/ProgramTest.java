@@ -12,7 +12,8 @@ import java.io.StringWriter;
 
 import static net.taken.redsnake.tree.TestUtils.parseProgram;
 import static net.taken.redsnake.tree.TestUtils.parseStatement;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProgramTest {
 

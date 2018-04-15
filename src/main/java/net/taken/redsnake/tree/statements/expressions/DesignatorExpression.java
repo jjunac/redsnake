@@ -2,11 +2,9 @@ package net.taken.redsnake.tree.statements.expressions;
 
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.interpretor.RedsEnvironment;
-import net.taken.redsnake.interpretor.Symbol;
 import net.taken.redsnake.interpretor.Value;
-import net.taken.redsnake.lang.RedsObject;
-import net.taken.redsnake.tree.statements.expressions.designators.Designator;
 import net.taken.redsnake.tree.Node;
+import net.taken.redsnake.tree.statements.expressions.designators.Designator;
 
 import java.util.List;
 

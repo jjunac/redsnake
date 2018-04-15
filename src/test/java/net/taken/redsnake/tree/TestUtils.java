@@ -8,7 +8,10 @@ import net.taken.redsnake.parser.RedsnakeParser;
 import net.taken.redsnake.parser.visitors.ASTBuilder;
 import net.taken.redsnake.tree.statements.Statement;
 import net.taken.redsnake.tree.statements.expressions.Expression;
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.Arrays;

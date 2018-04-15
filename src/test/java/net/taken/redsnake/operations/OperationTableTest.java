@@ -4,7 +4,6 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import net.taken.redsnake.lang.RedsBoolean;
 import net.taken.redsnake.lang.RedsInteger;
-import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.lang.RedsString;
 import net.taken.redsnake.reflect.Type;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,10 +1,9 @@
 package net.taken.redsnake.tree.statements;
 
 import com.google.common.collect.ImmutableList;
-import net.taken.redsnake.interpretor.Value;
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.interpretor.VariableSymbol;
 import net.taken.redsnake.lang.RedsBoolean;
-import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.tree.Program;
 import net.taken.redsnake.tree.Variable;

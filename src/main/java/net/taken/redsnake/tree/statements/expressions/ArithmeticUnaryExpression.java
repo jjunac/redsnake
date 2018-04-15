@@ -3,8 +3,6 @@ package net.taken.redsnake.tree.statements.expressions;
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.interpretor.Value;
-import net.taken.redsnake.lang.RedsObject;
-import net.taken.redsnake.operations.BinaryOperation;
 import net.taken.redsnake.operations.OperatorType;
 import net.taken.redsnake.operations.UnaryOperation;
 import net.taken.redsnake.tree.Node;

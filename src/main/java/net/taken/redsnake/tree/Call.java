@@ -3,7 +3,6 @@ package net.taken.redsnake.tree;
 import com.google.common.collect.ImmutableList;
 import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.interpretor.Value;
-import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.tree.statements.expressions.Expression;
 
 import java.util.List;

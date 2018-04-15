@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static net.taken.redsnake.tree.TestUtils.mockExpression;
 import static net.taken.redsnake.tree.TestUtils.parseStatement;
 import static net.taken.redsnake.tree.statements.expressions.ArithmeticBinaryExpression.Type.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ArithmeticBinaryExpressionTest {
 

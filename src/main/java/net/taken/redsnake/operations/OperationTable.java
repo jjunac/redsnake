@@ -3,7 +3,6 @@ package net.taken.redsnake.operations;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.reflect.Type;
 

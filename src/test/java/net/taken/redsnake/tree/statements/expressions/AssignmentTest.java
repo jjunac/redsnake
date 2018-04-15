@@ -3,15 +3,13 @@ package net.taken.redsnake.tree.statements.expressions;
 import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.interpretor.VariableSymbol;
 import net.taken.redsnake.lang.RedsInteger;
-import net.taken.redsnake.tree.statements.Statement;
 import net.taken.redsnake.tree.Variable;
+import net.taken.redsnake.tree.statements.Statement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.redsnake.tree.TestUtils.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AssignmentTest {
 

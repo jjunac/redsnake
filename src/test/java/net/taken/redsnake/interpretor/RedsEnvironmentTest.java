@@ -2,13 +2,11 @@ package net.taken.redsnake.interpretor;
 
 import net.taken.redsnake.lang.RedsInteger;
 import net.taken.redsnake.lang.RedsString;
-import net.taken.redsnake.operations.BinaryOperation;
-import net.taken.redsnake.operations.OperatorType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.taken.redsnake.operations.OperatorType.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RedsEnvironmentTest {
 

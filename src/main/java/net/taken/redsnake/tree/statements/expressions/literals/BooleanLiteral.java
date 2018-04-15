@@ -1,8 +1,8 @@
 package net.taken.redsnake.tree.statements.expressions.literals;
 
+import net.taken.redsnake.interpretor.RedsEnvironment;
 import net.taken.redsnake.interpretor.Value;
 import net.taken.redsnake.lang.RedsBoolean;
-import net.taken.redsnake.interpretor.RedsEnvironment;
 
 public class BooleanLiteral extends Literal {
 
