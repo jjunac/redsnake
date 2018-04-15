@@ -1,9 +1,19 @@
 language: java
 jdk:
- - oraclejdk8
+- oraclejdk8
 cache:
   directories:
-    - $HOME/.m2
-script: mvn clean verify
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+addons:
+  sonarcloud:
+    organization: "taken0711-github"
+    token:
+      secure: rX831UK9EVXt/2UQjJuSJwQIKbf04KJ9sDy7JHBcWNSNa06K5R+T9rfZuqPT9BtTjymGAACjrRR0bs805Mz4BuECAwfpooNzIzknK6Kq2sCuhMNUAfXZwHBkwFJW72+EFixC/1IIa51YzGyYHcA7Pz80Vu4N+9mLRquV9aiUVpupyFyS0VzSkR0wPRNYMFW65Ix508RTr12Wupa8SnFMI6ORdwfFNGk9Dl/Ahw8ms3Hw8UIKldvsvHdyd+lvTgDZmoPMDQYbIs3iYiPq9btjGOrF7XD4/fVxHXEeCXRvHnu+7l1FNlD5BWHnd+up44AtHKEPt5jXKYwLFrYuE3G8kWzesMWOfPSd/DSuatEYN6N8zWdBpN9cyuS2frFDrJFpYl+ncdK4X+YBHooG/30RbvKHjEKf41eLaDRlVokE4WVNrLAhb/yEMZ9e847iCoCiajjIlhJJ/Rg9xUtNxzitSm13BuRCsOhidqSvdYKIVY5tdYt2Hs5mp493rkB6o9gctiVFvEwsZ6Azx1WlGwUgqQjgHCYaUDPxY6ALYJMsZ9ENBEVBdQgNYKtD9kgVeK6uBxizi1210XDxg0aUlmo4ApIQ0kpE28/F43AEQDEU5VikCpVx40lZckQmkFOC79Iaf5ZpK1e74RL9LeLoyE82T0IFFW7jP7SwyjbcG4AOwSY=
+
+script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false
