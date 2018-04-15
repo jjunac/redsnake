@@ -10,6 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.exclusions>gen</sonar.exclusions>
         <versions.antlr4.plugin>4.7.1</versions.antlr4.plugin>
         <versions.antlr4>4.7.1</versions.antlr4>
         <versions.junit.jupiter>5.1.1</versions.junit.jupiter>
