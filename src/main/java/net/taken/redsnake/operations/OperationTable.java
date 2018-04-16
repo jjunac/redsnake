@@ -32,7 +32,7 @@ public class OperationTable {
         return Optional.ofNullable(unaryOperations.get(operatorType, type));
     }
 
-    public Map<Type<? extends RedsObject>, UnaryOperation> typeCompatibleWithUnaryOperation(OperatorType operatorType) {
+    public Map<Type<? extends RedsObject>, UnaryOperation> compatibleTypesWithUnaryOperation(OperatorType operatorType) {
         return unaryOperations.row(operatorType);
     }
 
@@ -44,7 +44,7 @@ public class OperationTable {
         return Optional.ofNullable(binaryOperations.get(operatorType).get(type1, type2));
     }
 
-    public Table<Type<? extends RedsObject>, Type<? extends RedsObject>, BinaryOperation> typeCompatibleWithBinaryOperation(OperatorType operatorType) {
+    public Table<Type<? extends RedsObject>, Type<? extends RedsObject>, BinaryOperation> compatibleTypesWithBinaryOperation(OperatorType operatorType) {
         return binaryOperations.get(operatorType);
     }
 

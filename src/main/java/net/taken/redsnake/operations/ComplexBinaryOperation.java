@@ -15,7 +15,7 @@ public class ComplexBinaryOperation<U extends RedsObject, V extends RedsObject, 
         this.binaryOperation = binaryOperation;
     }
 
-    public class ComplexBinaryOperationBuilder {
+    public static class ComplexBinaryOperationBuilder {
         private final BinaryOperation<V, X, R> binaryOperation;
         private Conversion<U, V> conversionLeft;
         private Conversion<W, X> conversionRight;
@@ -39,7 +39,9 @@ public class ComplexBinaryOperation<U extends RedsObject, V extends RedsObject, 
         }
     }
 
-    public Value<R> apply(U argLeft, W argRight) {
-        
+    public Value<R> apply(Value<U> argLeft, Value<W> argRight) {
+        Value<V> left = conversionLeft == null ? (Value<V>) argLeft : conversionLeft.apply(argLeft);
+        Value<X> right = conversionLeft == null ? (Value<X>) argRight : conversionRight.apply(argRight);
+        return binaryOperation.apply(left, right);
     }
 }

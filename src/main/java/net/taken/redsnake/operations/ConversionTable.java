@@ -6,6 +6,7 @@ import com.google.common.collect.Table;
 import net.taken.redsnake.lang.RedsObject;
 import net.taken.redsnake.reflect.Type;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class ConversionTable {
@@ -23,6 +24,10 @@ public class ConversionTable {
 
     public <T extends RedsObject, R extends RedsObject> Optional<Conversion<T, R>> findConversion(Type<T> typeArg, Type<R> typeRes) {
         return Optional.ofNullable(conversions.get(typeArg, typeRes));
+    }
+
+    public <T extends RedsObject> Map<Type<? extends RedsObject>, Conversion> compatibleTypes(Type<T> typeArg) {
+        return conversions.row(typeArg);
     }
 
 }

@@ -52,7 +52,7 @@ class OperationTableTest {
         HashMap<Type, UnaryOperation> expected = new HashMap<>();
         expected.put(RedsInteger.TYPE, integerMinusOperation);
         expected.put(RedsBoolean.TYPE, booleanMinusOperation);
-        assertEquals(expected, table.typeCompatibleWithUnaryOperation(OperatorType.MINUS));
+        assertEquals(expected, table.compatibleTypesWithUnaryOperation(OperatorType.MINUS));
     }
 
     @Test
@@ -77,7 +77,7 @@ class OperationTableTest {
         Table<Type, Type, BinaryOperation> expected = HashBasedTable.create();
         expected.put(RedsInteger.TYPE, RedsInteger.TYPE, integersAddOperation);
         expected.put(RedsString.TYPE, RedsString.TYPE, stringsAddOperation);
-        assertEquals(expected, table.typeCompatibleWithBinaryOperation(OperatorType.PLUS));
+        assertEquals(expected, table.compatibleTypesWithBinaryOperation(OperatorType.PLUS));
     }
 
     @Test
