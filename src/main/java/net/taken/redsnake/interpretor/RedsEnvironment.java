@@ -64,7 +64,7 @@ public class RedsEnvironment {
     }
 
     public <T extends RedsObject> Optional<UnaryOperation> resolveUnaryOperation(OperatorType operatorType, Type<T> type) {
-        return operationTable.resolveUnaryOperation(operatorType, type);
+        return operationTable.findUnaryOperation(operatorType, type);
     }
 
     public <T extends RedsObject, U extends RedsObject> void registerBinaryOperation(OperatorType operatorType, BinaryOperation<T, U, RedsObject> function) {
@@ -72,7 +72,7 @@ public class RedsEnvironment {
     }
 
     public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
-        return operationTable.resolveBinaryOperation(operatorType, type1, type2);
+        return operationTable.findBinaryOperation(operatorType, type1, type2);
     }
 
     public VariableSymbol getVariable(String name) {

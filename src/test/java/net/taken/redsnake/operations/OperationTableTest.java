@@ -41,7 +41,7 @@ class OperationTableTest {
     @Test
     void shouldResolveUnaryOperationWhenTypeIsMatching() {
         unarySetUp();
-        Optional<UnaryOperation> actual = table.resolveUnaryOperation(OperatorType.MINUS, RedsInteger.TYPE);
+        Optional<UnaryOperation> actual = table.findUnaryOperation(OperatorType.MINUS, RedsInteger.TYPE);
         assertTrue(actual.isPresent());
         assertEquals(integerMinusOperation, actual.get());
     }
@@ -66,7 +66,7 @@ class OperationTableTest {
     @Test
     void shouldResolveBinaryOperationWhenTypeIsMatching() {
         binarySetUp();
-        Optional<BinaryOperation> actual = table.resolveBinaryOperation(OperatorType.PLUS, RedsInteger.TYPE, RedsInteger.TYPE);
+        Optional<BinaryOperation> actual = table.findBinaryOperation(OperatorType.PLUS, RedsInteger.TYPE, RedsInteger.TYPE);
         assertTrue(actual.isPresent());
         assertEquals(integersAddOperation, actual.get());
     }

@@ -25,26 +25,26 @@ class ConversionTableTest {
 
     @Test
     void shouldResolveConversionWhenTypesAreMatching() {
-        Optional<Conversion<RedsInteger, RedsString>> actual = table.resolveConversion(RedsInteger.TYPE, RedsString.TYPE);
+        Optional<Conversion<RedsInteger, RedsString>> actual = table.findConversion(RedsInteger.TYPE, RedsString.TYPE);
         assertTrue(actual.isPresent());
         assertEquals(integerToString, actual.get());
     }
 
     @Test
     void shouldNotResolveConversionWhenArgTypeIsNotMatching() {
-        Optional<Conversion<RedsList, RedsString>> actual = table.resolveConversion(RedsList.TYPE, RedsString.TYPE);
+        Optional<Conversion<RedsList, RedsString>> actual = table.findConversion(RedsList.TYPE, RedsString.TYPE);
         assertFalse(actual.isPresent());
     }
 
     @Test
     void shouldNotResolveConversionWhenResTypeIsNotMatching() {
-        Optional<Conversion<RedsInteger, RedsList>> actual = table.resolveConversion(RedsInteger.TYPE, RedsList.TYPE);
+        Optional<Conversion<RedsInteger, RedsList>> actual = table.findConversion(RedsInteger.TYPE, RedsList.TYPE);
         assertFalse(actual.isPresent());
     }
 
     @Test
     void shouldNotResolveConversionWhenTypesAreNotMatching() {
-        Optional<Conversion<RedsList, RedsNull>> actual = table.resolveConversion(RedsList.TYPE, RedsNull.TYPE);
+        Optional<Conversion<RedsList, RedsNull>> actual = table.findConversion(RedsList.TYPE, RedsNull.TYPE);
         assertFalse(actual.isPresent());
     }
 

@@ -28,7 +28,7 @@ public class OperationTable {
         unaryOperations.put(operatorType, function.getTypeArg(), function);
     }
 
-    public <T extends RedsObject> Optional<UnaryOperation> resolveUnaryOperation(OperatorType operatorType, Type<T> type) {
+    public <T extends RedsObject> Optional<UnaryOperation> findUnaryOperation(OperatorType operatorType, Type<T> type) {
         return Optional.ofNullable(unaryOperations.get(operatorType, type));
     }
 
@@ -40,7 +40,7 @@ public class OperationTable {
         binaryOperations.get(operatorType).put(function.getTypeArg1(), function.getTypeArg2(), function);
     }
 
-    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation> resolveBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
+    public <T extends RedsObject, U extends RedsObject> Optional<BinaryOperation> findBinaryOperation(OperatorType operatorType, Type<T> type1, Type<U> type2) {
         return Optional.ofNullable(binaryOperations.get(operatorType).get(type1, type2));
     }
 

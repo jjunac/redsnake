@@ -21,7 +21,7 @@ public class ConversionTable {
         conversions.put(conversion.getTypeArg(), conversion.getTypeRes(), conversion);
     }
 
-    public <T extends RedsObject, R extends RedsObject> Optional<Conversion<T, R>> resolveConversion(Type<T> typeArg, Type<R> typeRes) {
+    public <T extends RedsObject, R extends RedsObject> Optional<Conversion<T, R>> findConversion(Type<T> typeArg, Type<R> typeRes) {
         return Optional.ofNullable(conversions.get(typeArg, typeRes));
     }
 
