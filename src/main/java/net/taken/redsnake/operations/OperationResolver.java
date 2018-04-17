@@ -29,51 +29,41 @@ public class OperationResolver {
         operationTable.registerUnaryOperation(operatorType, function);
     }
 
-    public <U extends RedsObject, V extends RedsObject, R extends RedsObject> ComplexUnaryOperation<U, V, R> resolveUnaryOperation(OperatorType operatorType, Type<U> type) {
+    public <U extends RedsObject, R extends RedsObject> ComplexUnaryOperation<U, R> resolveUnaryOperation(OperatorType operatorType, Type<U> type) {
         Optional<UnaryOperation> directOperation = operationTable.findUnaryOperation(operatorType, type);
         if (directOperation.isPresent()) {
-            return Optional.of(new ComplexUnaryOperation<>(directOperation.get()));
+            return new ComplexUnaryOperation<>(directOperation.get());
         }
         Map<Type<? extends RedsObject>, Conversion> possibleConversions = conversionTable.compatibleTypes(type);
         Map<Type<? extends RedsObject>, UnaryOperation> compatibleTypes = operationTable.compatibleTypesWithUnaryOperation(operatorType);
-        Sets.SetView<Type<? extends RedsObject>> commonIntermediateTypes = Sets.intersection(possibleConversions.keySet(), compatibleTypes.keySet());
-        if (commonIntermediateTypes.isEmpty()) {
-            throw new IllegalArgumentException(String.format("Cannot resolve operation %s %s", operatorType.toString(), type.getName()));
-        }
-        if (commonIntermediateTypes.size() > 1) {
-            throw new IllegalArgumentException(String.format("Ambiguous operation %s %s, multiple conversions possible.", operatorType.toString(), type.getName()));
-        }
-        Type<V> intermediateType = (Type<V>) commonIntermediateTypes.iterator().next();
-        return new ComplexUnaryOperation<U, V, R>(compatibleTypes.get(intermediateType), possibleConversions.get(intermediateType));
+        Type intermediateType = computeIntermediateType(operatorType, possibleConversions.keySet(), compatibleTypes.keySet());
+        return new ComplexUnaryOperation<U, R>(compatibleTypes.get(intermediateType), possibleConversions.get(intermediateType));
     }
 
     public <T extends RedsObject, U extends RedsObject, R extends RedsObject> void registerBinaryOperation(OperatorType operatorType, BinaryOperation<T, U, R> function) {
         operationTable.registerBinaryOperation(operatorType, function);
     }
 
-    public <U extends RedsObject, V extends RedsObject, W extends RedsObject, X extends RedsObject, R extends RedsObject> Optional<BinaryOperation>
-    resolveBinaryOperation(OperatorType operatorType, Type<U> leftType, Type<W> rightType) {
-        // FIXME
+    public <U extends RedsObject, V extends RedsObject,R extends RedsObject> BinaryOperation<U, V, R>
+    resolveBinaryOperation(OperatorType operatorType, Type<U> leftType, Type<V> rightType) {
         Optional<BinaryOperation> directOperation = operationTable.findBinaryOperation(operatorType, leftType, rightType);
         if (directOperation.isPresent()) {
-            return directOperation;
+            return directOperation.get();
         }
         Map<Type<? extends RedsObject>, Conversion> leftConversions = conversionTable.compatibleTypes(leftType);
-        List<ComplexBinaryOperation<U, V, W, W, R>> operationWithLeftConversion = conversionComposedWithBinaryOperation(operatorType, rightType, leftConversions);
-        Map<Type<? extends RedsObject>, Conversion> rightConversions = conversionTable.compatibleTypes(rightType);
+        Map<Type<? extends RedsObject>, BinaryOperation<? extends RedsObject, V, R>> operationWithInvarientRight = operationTable.
 
     }
 
-    private <U extends RedsObject, V extends RedsObject, W extends RedsObject, X extends RedsObject, R extends RedsObject> List<ComplexBinaryOperation<U, V, W, X, R>>
-    conversionComposedWithBinaryOperation(OperatorType operatorType, Type typeToBeConverted, Map<Type, BinaryOperation> compatibleTypeMap) {
-        Map<Type<? extends RedsObject>, Conversion> possibleConversionMap = conversionTable.compatibleTypes(typeToBeConverted);
-        return compatibleTypeMap.entrySet().stream()
-            .map(e -> {
-                Conversion<U, V> leftConversion = (Conversion<U, V>) possibleConversionMap.get(e.getKey());
-                return leftConversion == null ? null : new ComplexBinaryOperation.ComplexBinaryOperationBuilder(e.getValue()).conversionLeft(leftConversion).build();
-            })
-            .filter(o -> o != null)
-            .collect(Collectors.toList());
+    private Type computeIntermediateType(OperatorType operatorType, Set<Type<? extends RedsObject>> possibleConversions, Set<Type<? extends RedsObject>> compatibleTypes) {
+        Sets.SetView<Type<? extends RedsObject>> commonIntermediateTypes = Sets.intersection(possibleConversions, compatibleTypes);
+        if (commonIntermediateTypes.isEmpty()) {
+            throw new IllegalArgumentException("Cannot resolve operation");
+        }
+        if (commonIntermediateTypes.size() > 1) {
+            throw new IllegalArgumentException("Ambiguous operation, multiple conversions possible.");
+        }
+        return commonIntermediateTypes.iterator().next();
     }
 
 }
