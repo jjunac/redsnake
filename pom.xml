@@ -22,7 +22,7 @@
         <versions.lombok>1.16.20</versions.lombok>
         <versions.build-helper>1.10</versions.build-helper>
         <versions.maven.surefire>2.19.1</versions.maven.surefire>
-        <versions.maven.compiler>3.6.2</versions.maven.compiler>
+        <versions.maven.compiler>3.7.0</versions.maven.compiler>
         <versions.java>1.8</versions.java>
         <versions.jacoco>0.8.1</versions.jacoco>
     </properties>
