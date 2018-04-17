@@ -102,6 +102,13 @@ All Java must adhere to [Twitter's Java Style Guide](https://github.com/twitter/
 Also, make sure to :
  * Name tests as following
  	 * `shouldXXXWhenXXX` instead of `someMethodTest`
+ * Type variables can be name as described in the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+    > #### [5.2.8 Type variable names](https://google.github.io/styleguide/javaguide.html#s5.2.8-type-variable-names)
+    > 
+    > Each type variable is named in one of two styles:
+    >  * A single capital letter, optionally followed by a single numeral (such as E, T, X, T2)
+    >  * A name in the form used for classes (see Section 5.2.2, Class names), followed by the capital letter T (examples: RequestT, FooBarT).
+ 
 
 ### ANTLR Styleguide
 

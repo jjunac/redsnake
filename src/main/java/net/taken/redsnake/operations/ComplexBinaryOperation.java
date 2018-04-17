@@ -15,7 +15,7 @@ public class ComplexBinaryOperation<U extends RedsObject, V extends RedsObject, 
         this.binaryOperation = binaryOperation;
     }
 
-    public static class ComplexBinaryOperationBuilder {
+    public static class ComplexBinaryOperationBuilder<U extends RedsObject, V extends RedsObject, W extends RedsObject, X extends RedsObject, R extends RedsObject> {
         private final BinaryOperation<V, X, R> binaryOperation;
         private Conversion<U, V> conversionLeft;
         private Conversion<W, X> conversionRight;
