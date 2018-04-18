@@ -48,4 +48,12 @@ public class OperationTable {
         return binaryOperations.get(operatorType);
     }
 
+    public Map<Type<? extends RedsObject>, BinaryOperation> compatibleRightTypesWithBinaryOperation(OperatorType operatorType, Type<? extends RedsObject> leftType) {
+        return binaryOperations.get(operatorType).row(leftType);
+    }
+
+    public Map<Type<? extends RedsObject>, BinaryOperation> compatibleLeftTypesWithBinaryOperation(OperatorType operatorType, Type<? extends RedsObject> rightType) {
+        return binaryOperations.get(operatorType).column(rightType);
+    }
+
 }

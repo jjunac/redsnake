@@ -36,7 +36,14 @@ public class OperationResolver {
         }
         Map<Type<? extends RedsObject>, Conversion> possibleConversions = conversionTable.compatibleTypes(type);
         Map<Type<? extends RedsObject>, UnaryOperation> compatibleTypes = operationTable.compatibleTypesWithUnaryOperation(operatorType);
-        Type intermediateType = computeIntermediateType(operatorType, possibleConversions.keySet(), compatibleTypes.keySet());
+        Set<Type<? extends RedsObject>> commonIntermediateTypes = Sets.intersection(possibleConversions.keySet(), compatibleTypes.keySet());
+        if (commonIntermediateTypes.isEmpty()) {
+            throw new IllegalArgumentException("Cannot resolve operation.");
+        }
+        if (commonIntermediateTypes.size() > 1) {
+            throw new IllegalArgumentException("Ambiguous operation, multiple conversions possible.");
+        }
+        Type intermediateType = commonIntermediateTypes.iterator().next();
         return new ComplexUnaryOperation<U, R>(compatibleTypes.get(intermediateType), possibleConversions.get(intermediateType));
     }
 
@@ -44,26 +51,32 @@ public class OperationResolver {
         operationTable.registerBinaryOperation(operatorType, function);
     }
 
-    public <U extends RedsObject, V extends RedsObject,R extends RedsObject> BinaryOperation<U, V, R>
+    public <U extends RedsObject, V extends RedsObject,R extends RedsObject> ComplexBinaryOperation<U, V, R>
     resolveBinaryOperation(OperatorType operatorType, Type<U> leftType, Type<V> rightType) {
         Optional<BinaryOperation> directOperation = operationTable.findBinaryOperation(operatorType, leftType, rightType);
         if (directOperation.isPresent()) {
             return directOperation.get();
         }
         Map<Type<? extends RedsObject>, Conversion> leftConversions = conversionTable.compatibleTypes(leftType);
-        Map<Type<? extends RedsObject>, BinaryOperation<? extends RedsObject, V, R>> operationWithInvarientRight = operationTable.
-
-    }
-
-    private Type computeIntermediateType(OperatorType operatorType, Set<Type<? extends RedsObject>> possibleConversions, Set<Type<? extends RedsObject>> compatibleTypes) {
-        Sets.SetView<Type<? extends RedsObject>> commonIntermediateTypes = Sets.intersection(possibleConversions, compatibleTypes);
-        if (commonIntermediateTypes.isEmpty()) {
-            throw new IllegalArgumentException("Cannot resolve operation");
-        }
-        if (commonIntermediateTypes.size() > 1) {
+        Map<Type<? extends RedsObject>, BinaryOperation> operationWithInvariantRight =
+            operationTable.compatibleLeftTypesWithBinaryOperation(operatorType, rightType);
+        Set<Type<? extends RedsObject>> intermediateLeftType = Sets.intersection(leftConversions.keySet(), operationWithInvariantRight.keySet());
+        if (intermediateLeftType.size() > 1) {
             throw new IllegalArgumentException("Ambiguous operation, multiple conversions possible.");
         }
-        return commonIntermediateTypes.iterator().next();
+        Map<Type<? extends RedsObject>, Conversion> rightConversions = conversionTable.compatibleTypes(rightType);
+        Map<Type<? extends RedsObject>, BinaryOperation> operationWithInvariantLeft =
+            operationTable.compatibleRightTypesWithBinaryOperation(operatorType, leftType);
+        Set<Type<? extends RedsObject>> intermediateRightType = Sets.intersection(rightConversions.keySet(), operationWithInvariantLeft.keySet());
+        if (intermediateRightType.size() + intermediateLeftType.size() > 1) {
+            throw new IllegalArgumentException("Ambiguous operation, multiple conversions possible.");
+        }
+        if (intermediateRightType.size() + intermediateLeftType.size() == 0) {
+            throw new IllegalArgumentException("Cannot resolve operation.");
+        }
+        if (intermediateLeftType.size() == 1) {
+            return
+        }
     }
 
 }
