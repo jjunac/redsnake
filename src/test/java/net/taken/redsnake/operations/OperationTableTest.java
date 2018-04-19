@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
 class OperationTableTest {
 
@@ -72,12 +73,21 @@ class OperationTableTest {
     }
 
     @Test
-    void shouldReturnAllTheTypeCompatibleWithABinaryOperation() {
+    void shouldReturnCompatibleTypesWithBinaryOperation() {
         binarySetUp();
-        Table<Type, Type, BinaryOperation> expected = HashBasedTable.create();
-        expected.put(RedsInteger.TYPE, RedsInteger.TYPE, integersAddOperation);
-        expected.put(RedsString.TYPE, RedsString.TYPE, stringsAddOperation);
-        assertEquals(expected, table.compatibleTypesWithBinaryOperation(OperatorType.PLUS));
+        HashMap<Type, BinaryOperation> expectedLeft = new HashMap<>();
+        BinaryOperation<RedsInteger, RedsString, RedsInteger> integerStringMock = new BinaryOperation<>(RedsInteger.TYPE, RedsString.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(387));
+        table.binaryOperations.get(OperatorType.PLUS).put(RedsInteger.TYPE, RedsString.TYPE, integerStringMock);
+        expectedLeft.put(RedsInteger.TYPE, integerStringMock);
+        expectedLeft.put(RedsString.TYPE, stringsAddOperation);
+        assertEquals(expectedLeft, table.compatibleLeftTypesWithBinaryOperation(OperatorType.PLUS, RedsString.TYPE));
+
+        HashMap<Type, BinaryOperation> expectedRight = new HashMap<>();
+        BinaryOperation<RedsString, RedsInteger, RedsInteger> stringIntegerMock = new BinaryOperation<>(RedsString.TYPE, RedsInteger.TYPE, RedsInteger.TYPE, (x, y) -> new RedsInteger(300));
+        table.binaryOperations.get(OperatorType.PLUS).put(RedsString.TYPE, RedsInteger.TYPE, stringIntegerMock);
+        expectedRight.put(RedsString.TYPE, stringIntegerMock);
+        expectedRight.put(RedsString.TYPE, stringsAddOperation);
+        assertEquals(expectedRight, table.compatibleRightTypesWithBinaryOperation(OperatorType.PLUS, RedsString.TYPE));
     }
 
     @Test

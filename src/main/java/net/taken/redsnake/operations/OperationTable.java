@@ -44,10 +44,6 @@ public class OperationTable {
         return Optional.ofNullable(binaryOperations.get(operatorType).get(type1, type2));
     }
 
-    public Table<Type<? extends RedsObject>, Type<? extends RedsObject>, BinaryOperation> compatibleTypesWithBinaryOperation(OperatorType operatorType) {
-        return binaryOperations.get(operatorType);
-    }
-
     public Map<Type<? extends RedsObject>, BinaryOperation> compatibleRightTypesWithBinaryOperation(OperatorType operatorType, Type<? extends RedsObject> leftType) {
         return binaryOperations.get(operatorType).row(leftType);
     }
