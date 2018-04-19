@@ -5,8 +5,8 @@ import net.taken.redsnake.lang.RedsObject;
 
 public class ComplexUnaryOperation<U extends RedsObject, R extends RedsObject> {
 
-    final UnaryOperation<? extends RedsObject, R> unaryOperation;
-    final Conversion<U, ? extends RedsObject> conversion;
+    private final UnaryOperation<? extends RedsObject, R> unaryOperation;
+    private final Conversion<U, ? extends RedsObject> conversion;
 
     public ComplexUnaryOperation(UnaryOperation<? extends RedsObject, R> unaryOperation, Conversion<U, ? extends RedsObject> conversion) {
         this.unaryOperation = unaryOperation;

@@ -55,7 +55,7 @@ public class OperationResolver {
     resolveBinaryOperation(OperatorType operatorType, Type<U> leftType, Type<V> rightType) {
         Optional<BinaryOperation> directOperation = operationTable.findBinaryOperation(operatorType, leftType, rightType);
         if (directOperation.isPresent()) {
-            return directOperation.get();
+            return new ComplexBinaryOperation.ComplexBinaryOperationBuilder<U, V, R>(directOperation.get()).build();
         }
         Map<Type<? extends RedsObject>, Conversion> leftConversions = conversionTable.compatibleTypes(leftType);
         Map<Type<? extends RedsObject>, BinaryOperation> operationWithInvariantRight =
@@ -75,8 +75,13 @@ public class OperationResolver {
             throw new IllegalArgumentException("Cannot resolve operation.");
         }
         if (intermediateLeftType.size() == 1) {
-            return
+            return new ComplexBinaryOperation.ComplexBinaryOperationBuilder<U, V, R>(directOperation.get())
+                .conversionLeft(leftConversions.get(intermediateLeftType.iterator().next()))
+                .build();
         }
+        return new ComplexBinaryOperation.ComplexBinaryOperationBuilder<U, V, R>(directOperation.get())
+            .conversionRight(rightConversions.get(intermediateRightType.iterator().next()))
+            .build();
     }
 
 }
