@@ -13,7 +13,7 @@
         <sonar.exclusions>file:**/gen/**</sonar.exclusions>
         <versions.antlr4.plugin>4.7.1</versions.antlr4.plugin>
         <versions.antlr4>4.7.1</versions.antlr4>
-        <versions.junit.jupiter>5.1.1</versions.junit.jupiter>
+        <versions.junit.jupiter>5.2.0</versions.junit.jupiter>
         <versions.junit.vintage>5.1.1</versions.junit.vintage>
         <versions.junit.surefire>1.1.1</versions.junit.surefire>
         <versions.mockito>1.10.19</versions.mockito>
