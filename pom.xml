@@ -18,7 +18,7 @@
         <versions.junit.surefire>1.1.1</versions.junit.surefire>
         <versions.mockito>1.10.19</versions.mockito>
         <versions.common-cli>1.4</versions.common-cli>
-        <versions.google.guava>24.1-jre</versions.google.guava>
+        <versions.google.guava>25.0-jre</versions.google.guava>
         <versions.lombok>1.16.20</versions.lombok>
         <versions.build-helper>3.0.0</versions.build-helper>
         <versions.maven.surefire>2.19.1</versions.maven.surefire>
