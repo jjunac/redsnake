@@ -24,7 +24,7 @@
         <versions.maven.surefire>2.19.1</versions.maven.surefire>
         <versions.maven.compiler>3.7.0</versions.maven.compiler>
         <versions.java>1.8</versions.java>
-        <versions.jacoco>0.8.1</versions.jacoco>
+        <versions.jacoco>0.8.2</versions.jacoco>
     </properties>
 
     <dependencies>
