@@ -15,7 +15,7 @@
         <versions.antlr4>4.7.1</versions.antlr4>
         <versions.junit.jupiter>5.1.1</versions.junit.jupiter>
         <versions.junit.vintage>5.1.1</versions.junit.vintage>
-        <versions.junit.surefire>1.1.1</versions.junit.surefire>
+        <versions.junit.surefire>1.3.2</versions.junit.surefire>
         <versions.mockito>1.10.19</versions.mockito>
         <versions.common-cli>1.4</versions.common-cli>
         <versions.google.guava>24.1-jre</versions.google.guava>
