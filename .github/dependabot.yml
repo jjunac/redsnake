@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "07:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: org.projectlombok:lombok
+    versions:
+    - 1.18.16
+    - 1.18.18
+  - dependency-name: org.antlr:antlr4-runtime
+    versions:
+    - 4.9.1
+  - dependency-name: org.antlr:antlr4-maven-plugin
+    versions:
+    - 4.9.1
+  - dependency-name: org.junit.vintage:junit-vintage-engine
+    versions:
+    - 5.7.0
